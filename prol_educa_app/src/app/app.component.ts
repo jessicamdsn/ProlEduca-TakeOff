@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from './pages/login/login.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
