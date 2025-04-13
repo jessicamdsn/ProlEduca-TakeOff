@@ -1,0 +1,142 @@
+<div class="d-flex">
+  <!-- FILTROS -->
+  <div class="filtros-container p-4 rounded shadow-sm bg-white">
+    <h5 class="mb-4 fw-bold fs-6">Filtre os Resultados</h5>
+
+    <!-- INSTITUIÇÃO -->
+    <div class="mb-3">
+      <label class="form-label">Qual instituição?</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtros.instituicao"
+        (change)="filtrarBolsas()"
+      >
+        <option value="">Todas</option>
+        <option *ngFor="let inst of instituicoes" [value]="inst">
+          {{ inst }}
+        </option>
+      </select>
+    </div>
+
+    <!-- ESTADO -->
+    <div class="mb-3">
+      <label class="form-label">Estado?</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtros.estado"
+        (change)="filtrarBolsas()"
+      >
+        <option value="">Todos</option>
+        <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+      </select>
+    </div>
+
+    <!-- CIDADE -->
+    <div class="mb-3">
+      <label class="form-label">Cidade?</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtros.cidade"
+        (change)="filtrarBolsas()"
+      >
+        <option value="">Todas</option>
+        <option *ngFor="let cid of cidade" [value]="cid">{{ cid }}</option>
+      </select>
+    </div>
+
+    <!-- BAIRRO -->
+    <div class="mb-3">
+      <label class="form-label">Bairro?</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtros.bairro"
+        (change)="filtrarBolsas()"
+      >
+        <option value="">Todos</option>
+        <option *ngFor="let b of bairro" [value]="b">{{ b }}</option>
+      </select>
+    </div>
+
+    <!-- CURSO -->
+    <div class="mb-3">
+      <label class="form-label">Curso?</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtros.curso"
+        (change)="filtrarBolsas()"
+      >
+        <option value="">Todos</option>
+        <option *ngFor="let c of cursos" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <!-- TURNOS -->
+    <div class="mb-3">
+      <label class="form-label">Turno?</label>
+      <div
+        class="form-check"
+        *ngFor="let turno of ['Manhã', 'Tarde', 'Noite', 'Integral']"
+      >
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="turnoSelecionado[turno]"
+          (change)="toggleTurno(turnoSelecionado[turno], turno)"
+        />
+
+        <label class="form-check-label">{{ turno }}</label>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="bolsasFiltradas.length === 0" class="text-center mt-5">
+    <img src="assets/no-results.svg" alt="Sem resultados" width="150" class="mb-3">
+    <p class="fs-5 text-muted">Nenhuma bolsa encontrada com os filtros selecionados.</p>
+    <button class="btn btn-outline-primary" (click)="limparFiltros()">Limpar filtros</button>
+  </div>
+
+
+  <!-- CONTAINER DE CARDS -->
+  <div class="container-card-bolsas">
+    <div *ngFor="let bolsa of bolsasFiltradas">
+      <div class="container-card">
+        <div class="container-img">
+          <img
+            style="width: 100px"
+            class="d-flex justify-content-center"
+            [src]="bolsa.logo"
+            alt="{{ bolsa.alt }}"
+          />
+        </div>
+        <div class="box-info">
+          <div class="container-title-bolsas">
+            <strong
+              >{{ bolsa.serie }} - {{ bolsa.curso }} -
+              {{ bolsa.modalidade }}</strong
+            >
+            <p>{{ bolsa.instituicao }}</p>
+          </div>
+          <div class="discount rounded-pill">
+            <p class="p-2 d-flex justify-content-center">
+              Bolsa de {{ bolsa.desconto }}%
+            </p>
+          </div>
+          <p class="color fw-bold text-decoration-line-through fs-6">
+            R${{ bolsa.precoOriginal }},00
+          </p>
+          <p class="fs-6 fw-bold">R${{ bolsa.precoComDesconto }},00/mês</p>
+          <div class="info-bolsa d-flex flex-row text-secondary">
+            <p>Ano da Bolsa: {{ bolsa.ano }}</p>
+            <p>Campos: {{ bolsa.cidade }}</p>
+            <p>Turno: {{ bolsa.turno }}</p>
+          </div>
+          <div class="btn-subcribe d-flex justify-content-center">
+            <button style="width: 40%" class="rounded p-2">
+              Fazer inscrição
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
