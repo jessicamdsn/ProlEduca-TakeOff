@@ -1,0 +1,32 @@
+<div class="carousel-container">
+  <!-- Navigation Arrows -->
+  <button class="nav-arrow prev-arrow" (click)="prevSlide()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+  
+  <button class="nav-arrow next-arrow" (click)="nextSlide()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <!-- Carousel Slides -->
+  <div class="carousel-slides" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+    <div class="carousel-slide" *ngFor="let image of images; let i = index">
+      <img [src]="image" alt="Carousel image" class="carousel-image">
+    </div>
+  </div>
+  
+  <!-- Category Tabs -->
+  <!-- <div class="category-tabs">
+    <button 
+      *ngFor="let category of categories; let i = index" 
+      class="category-tab" 
+      [class.active]="i === activeCategory"
+      (click)="setCategory(i)">
+      {{ category }}
+    </button>
+  </div> -->
+</div>
