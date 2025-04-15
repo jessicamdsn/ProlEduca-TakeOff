@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from './pages/login/login.component';
-import { HeaderComponent } from "./layout/header/header.component";
-import { BolsasListComponent } from "./components/bolsas-list/bolsas-list.component";
+import { ContactSectionComponent } from "./layout/contact-section/contact-section.component";
+import { FooterComponent } from "./layout/footer/footer.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ HeaderComponent, BolsasListComponent],
+  imports: [ContactSectionComponent, FooterComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
