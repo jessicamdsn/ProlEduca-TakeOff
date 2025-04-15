@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { LoginComponent } from './pages/login/login.component';
+// src/app/app.component.ts
 
+import { Component } from '@angular/core';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [LoginComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [HomePageComponent],
+  template: `<app-home></app-home>`,
+  styles: []
 })
-export class AppComponent {
-  title = 'prol_educa_app';
-}
+export class AppComponent {}
