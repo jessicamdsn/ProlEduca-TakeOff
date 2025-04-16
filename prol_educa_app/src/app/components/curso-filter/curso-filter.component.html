@@ -1,0 +1,73 @@
+
+<div class="menu-abas">
+  <button [class.ativo]="abaSelecionada === 'escola'" (click)="selecionarAba('escola')">Ensino Básico</button>
+  <button [class.ativo]="abaSelecionada === 'tecnico'" (click)="selecionarAba('tecnico')">Cursos Técnicos</button>
+  <button [class.ativo]="abaSelecionada === 'graduacao'" (click)="selecionarAba('graduacao')">Graduação</button>
+  <button [class.ativo]="abaSelecionada === 'idioma'" (click)="selecionarAba('idioma')">Idiomas</button>
+</div>
+
+
+<div class="curso-filter-container">
+  <div *ngIf="abaSelecionada" class="filtro-horizontal">
+    <!-- Primeira linha -->
+    <div class="linha-filtros">
+      <div class="filtro-item">
+        <label for="estado">Estado:</label>
+        <select id="estado">
+          <option value="">Selecione</option>
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+      </div>
+  
+      <div class="filtro-item">
+        <label for="cidade">Cidade:</label>
+        <select id="cidade">
+          <option value="">Selecione</option>
+          <option *ngFor="let cidade of cidades" [value]="cidade">{{ cidade }}</option>
+        </select>
+      </div>
+  
+      <div class="filtro-item">
+        <label for="bairro">Bairro:</label>
+        <select id="bairro">
+          <option value="">Selecione</option>
+          <option *ngFor="let bairro of bairros" [value]="bairro">{{ bairro }}</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Segunda linha -->
+    <div class="linha-filtros">
+      <div class="filtro-item">
+        <label for="curso">Qual curso?</label>
+        <select id="curso">
+          <option value="">Selecione</option>
+          <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
+        </select>
+      </div>
+  
+      <div class="filtro-item">
+        <label for="instituicao">Qual instituição?</label>
+        <select id="instituicao">
+          <option value="">Selecione</option>
+          <option *ngFor="let inst of instituicoes" [value]="inst">{{ inst }}</option>
+        </select>
+      </div>
+  
+      <div class="filtro-item modalidade-item">
+        <label>Modalidade:</label>
+        <div class="modalidade">
+          <label><input type="checkbox" [(ngModel)]="modalidadePresencial" /> Presencial</label>
+          <label><input type="checkbox" [(ngModel)]="modalidadeEad" /> EaD</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Botão -->
+    <div class="btn-container">
+      <button class="btn-buscar">Buscar</button>
+    </div>
+  </div>
+  
+
+</div>

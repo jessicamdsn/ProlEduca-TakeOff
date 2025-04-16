@@ -1,0 +1,133 @@
+.curso-filter-container {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.menu-abas {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 0px 0px 8px 8px;
+}
+
+.menu-abas button {
+  background: transparent;
+  border: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-abas button.ativo {
+  border-bottom: 3px solid #2f55ff;
+  color: #2f55ff;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* Abas horizontais */
+.filtro-abas {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+
+  button {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &.ativo {
+      background-color: #007bff;
+      color: white;
+    }
+
+    &:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+  }
+}
+.filtro-horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .linha-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+
+    .filtro-item {
+      flex: 1 1 30%;
+      display: flex;
+      flex-direction: column;
+      min-width: 180px;
+
+      label {
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      select {
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+        }
+      }
+
+      &.modalidade-item {
+        .modalidade {
+          display: flex;
+          gap: 12px;
+          margin-top: 5px;
+
+          label {
+            font-weight: normal;
+          }
+
+          input {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    .btn-buscar {
+      padding: 10px 24px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}

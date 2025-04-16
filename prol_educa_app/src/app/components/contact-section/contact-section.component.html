@@ -1,0 +1,27 @@
+<div class="contact-section">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>Clique e fale com a gente</h3>
+          <a href="https://wa.me/5581991297982" class="whatsapp-link">
+            <div class="whatsapp-button">
+              <i class="whatsapp-icon"></i>
+              {{ whatsappNumber }}
+            </div>
+          </a>
+        </div>
+        
+        <div class="social-media">
+          <h3>Nos siga nas Redes Sociais</h3>
+          <div class="social-icons">
+            <a *ngFor="let social of socialLinks" 
+               [href]="social.url" 
+               class="social-icon-link"
+               [attr.aria-label]="'Visit our ' + social.name">
+              <div class="social-icon {{social.icon}}"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
