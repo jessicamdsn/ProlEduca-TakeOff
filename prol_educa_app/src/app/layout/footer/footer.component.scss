@@ -1,1 +1,83 @@
+.footer-section {
+  background-image: url('/assets/banner-footer.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
 
+  img {
+    filter: brightness(0) invert(1);
+  }
+}
+
+.text {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.mg {
+  margin-top: 21px;
+}
+
+.bi-person-circle {
+  font-size: 80px;
+  color: #fff;
+}
+
+.user {
+  padding-top:18px ;
+}
+
+a {
+  text-decoration: none;
+}
+
+.links {
+  ul > li {
+    list-style: none;
+  }
+
+  ul > li > a {
+    text-decoration: none;
+    text-align: end;
+  }
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  text-align: center;
+
+  div {
+    min-width: 150px;
+  }
+
+  .title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.3rem;
+  }
+
+  a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      transition: 0.3s;
+      color: #0000ff;
+    }
+  }
+}
