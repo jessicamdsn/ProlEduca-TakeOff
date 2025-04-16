@@ -1,0 +1,102 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h3>Dados da Instituição:</h3>
+  <div class="grid-container">
+    <!-- Dados da Instituição -->
+    <div class="mb-3">
+      <label for="cnpj" class="form-label">CNPJ:</label>
+      <input type="text" formControlName="cnpj" class="form-control" id="cnpj" placeholder="Digite o CNPJ da instituição">
+    </div>
+
+    <div class="mb-3">
+      <label for="complemento" class="form-label">Complemento:</label>
+      <input type="text" formControlName="complemento" class="form-control" id="complemento" placeholder="Digite o complemento">
+    </div>
+
+    <div class="mb-3">
+      <label for="razaoSocial" class="form-label">Razão Social:</label>
+      <input type="text" formControlName="razaoSocial" class="form-control" id="razaoSocial" placeholder="Digite a razão social">
+    </div>
+
+    <div class="mb-3">
+      <label for="cep" class="form-label">CEP:</label>
+      <input type="text" formControlName="cep" class="form-control" id="cep" placeholder="Digite o CEP">
+    </div>
+    <div class="mb-3">
+      <label for="numero" class="form-label">Número:</label>
+      <input type="text" formControlName="numero" class="form-control" id="numero" placeholder="Digite o número">
+    </div>
+
+
+    <div class="mb-3">
+      <label for="cidade" class="form-label">Cidade:</label>
+      <input type="text" formControlName="cidade" class="form-control" id="cidade" placeholder="Digite a cidade">
+    </div>
+
+    <div class="mb-3">
+      <label for="rua" class="form-label">Rua:</label>
+      <input type="text" formControlName="rua" class="form-control" id="rua" placeholder="Digite a rua">
+    </div>
+
+    <div class="mb-3">
+      <label for="estado" class="form-label">Estado:</label>
+      <input type="text" formControlName="estado" class="form-control" id="estado" placeholder="Digite o estado">
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Status:</label>
+      <input type="text" formControlName="status" class="form-control" id="status" placeholder="Digite o status">
+    </div>
+
+    <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo:</label>
+      <input type="text" formControlName="tipo" class="form-control" id="tipo" placeholder="Digite o tipo de instituição">
+    </div>
+
+    <!-- Upload da logo -->
+    <div class="file-upload">
+      <button type="button" (click)="fileInput.click()" class="btn btn-outline-primary">
+        <i class="fas fa-cloud-upload-alt me-2"></i> Upload da Logo
+      </button>
+      <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)" />
+    </div>
+    
+  </div>
+
+  <hr />
+
+  <!-- Dados do Responsável -->
+  <fieldset>
+    <h3>Dados do responsável:</h3>
+    <div class="responsible-grid">
+      <div class="mb-3">
+        <label for="nomeResponsavel" class="form-label">Nome:</label>
+        <input type="text" formControlName="nomeResponsavel" class="form-control" id="nomeResponsavel" placeholder="Digite o nome do responsável">
+      </div>
+
+      <div class="mb-3">
+        <label for="emailResponsavel" class="form-label">Email:</label>
+        <input type="email" formControlName="emailResponsavel" class="form-control" id="emailResponsavel" placeholder="Digite o email do responsável">
+      </div>
+
+      <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="tel" formControlName="telefoneResponsavel" class="form-control" id="telefoneResponsavel" placeholder="Digite o telefone">
+      </div>
+
+      <div class="mb-3">
+        <label for="senhaResponsavel" class="form-label">Senha:</label>
+        <input type="password" formControlName="senhaResponsavel" class="form-control" id="senhaResponsavel" placeholder="Digite a senha de acesso">
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="button-group">
+    <button type="button" (click)="onCancel()">Cancelar</button>
+    <button type="submit">Salvar alteração</button>
+  </div>
+</form>
