@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,10 +10,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./curso-filter.component.scss']
 })
 export class CursoFilterComponent {
-  abaSelecionada = 'graduacao';
+  abaSelecionada = 'escola';
+
+  @Output() abaSelecionadaChange = new EventEmitter<string>();
 
   selecionarAba(aba: string) {
     this.abaSelecionada = aba;
+    this.abaSelecionadaChange.emit(aba);
   }
 
   estados = ['PE', 'SP', 'RJ'];
@@ -22,6 +25,6 @@ export class CursoFilterComponent {
   cursos = ['Engenharia', 'Administração', 'Design'];
   instituicoes = ['UFPE', 'USP', 'UFRJ'];
 
-  modalidadePresencial = true;
+  modalidadePresencial = false;
   modalidadeEad = false;
 }

@@ -1,0 +1,51 @@
+.container-card-bolsas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem ;
+}
+
+.container-card{
+  display: flex;
+  flex-direction: row;
+  width: 800px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  gap: 1rem;
+  padding: 34px;
+}
+
+img{
+  width: 150px;
+  height: auto;
+}
+
+.container-title-bolsas > p {
+  font-size: x-large;
+  font-weight: bold;
+  margin-top: 7px;
+}
+
+strong {
+  font-size: x-large;
+}
+
+.discount{
+  background-color: #14D73E;
+  color: #fff;
+  border-radius: 10px;
+  width: 8rem;
+}
+.color{
+  color: #757575;
+}
+
+.info-bolsa > p {
+  padding: 5px;
+}
+
+.btn-subcribe > button{
+  padding: 8px 12px;
+  border: 1px solid #03509C;
+  background-color: #0A0A5A;
+  color: #fff;
+}
