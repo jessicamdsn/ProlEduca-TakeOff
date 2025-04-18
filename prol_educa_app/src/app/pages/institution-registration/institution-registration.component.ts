@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { InstitutionFormComponent } from '../../components/institution-form/institution-form.component';
+import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
 
 @Component({
-  selector: 'app-institution-registration',
   standalone: true,
-  imports: [InstitutionFormComponent],
+  selector: 'app-institution-registration',
   templateUrl: './institution-registration.component.html',
+  styleUrls: ['./institution-registration.component.scss'],
+  imports: [SidebarMenuComponent, InstitutionFormComponent], // por exemplo
 })
 export class InstitutionRegistrationComponent {
   dadosIniciais = {

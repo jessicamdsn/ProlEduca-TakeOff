@@ -1,6 +1,12 @@
 // Importa Montserrat se ainda não estiver sendo usado
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+form {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+}
+
 h3 {
   font-family: 'Montserrat', sans-serif;
   margin-top: 1.5rem;
@@ -12,14 +18,14 @@ label {
 }
 
 hr {
-  width: 80%;
+  width: 50%;
 }
 // Container geral dos inputs da instituição
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  max-width: 70%;
+  max-width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -33,7 +39,7 @@ hr {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  max-width: 70%;
+  max-width: 100%;
 }
 
 // Botões
