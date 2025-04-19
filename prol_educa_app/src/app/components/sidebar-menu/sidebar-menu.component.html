@@ -39,5 +39,16 @@
           <span class="label" *ngIf="!isCollapsed">{{ item.label }}</span>
         </a>
       </li>
+      <li class="logout" (click)="logout()">
+        <a href="javascript:void(0)">
+          <span class="icon">
+            <i class="material-icons">logout</i>
+          </span>
+          <span class="label" *ngIf="!isCollapsed">Sair</span>
+        </a>
+      </li>
     </ul>
+
+      <!-- Item de Logout -->
+    
   </div>

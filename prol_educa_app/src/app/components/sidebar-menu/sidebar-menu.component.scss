@@ -5,8 +5,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: width 0.3s ease;
     overflow-x: hidden;
-    display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; // ou o valor real da sua sidebar
+    height: 100vh;
+    z-index: 999;
   
     &.collapsed {
       width: 70px;
@@ -176,6 +181,22 @@
           transition: opacity 0.3s ease, transform 0.3s ease;
         }
       }
+      li.logout {
+        margin-top: auto; // Empurra o botão de logout para o final
+        border-top: 1px solid #eee;
+    
+        a {
+          color: #d32f2f;
+    
+          &:hover {
+            background-color: rgba(211, 47, 47, 0.1);
+          }
+    
+          .icon i {
+            color: #d32f2f;
+          }
+        }
     }
   }
+}
   
