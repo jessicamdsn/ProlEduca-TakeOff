@@ -31,4 +31,12 @@ export class SidebarMenuComponent implements OnInit {
   setActiveMenuItem(itemId: string): void {
     this.activeMenuItem = itemId;
   }
+
+  logout() {
+    // Aqui você pode limpar o token, redirecionar, etc.
+    console.log('Usuário deslogado');
+    // Exemplo:
+    // this.authService.logout();
+    // this.router.navigate(['/login']);
+  }
 }
