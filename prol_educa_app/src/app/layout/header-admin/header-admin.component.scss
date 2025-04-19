@@ -1,0 +1,45 @@
+header {
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .container-header {
+    margin: 16px 40px 6px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  img {
+    width: 60%;
+    height: 60%;
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+  .container-nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+  
+    nav {
+      margin-right: 20px;
+    }
+  
+    .logout-button {
+      background-color: transparent;
+      color: #3c3a3a;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background-color: #f0f0f0;
+        color: #555;
+        border-color: #bbb;
+      }
+    }
+  }
+  
