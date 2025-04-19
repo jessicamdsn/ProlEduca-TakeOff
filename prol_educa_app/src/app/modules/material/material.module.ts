@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,19 +13,24 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MATERIAL_MODULES = [
- MatButtonModule,
- MatIconModule,
- MatToolbarModule,
- MatCardModule,
- MatInputModule,
-MatFormFieldModule,
-MatDialogModule,
-MatSnackBarModule,
-MatProgressSpinnerModule
+  MatButtonModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
-declarations: [],
-exports: MATERIAL_MODULES
+  declarations: [],
+  imports: [CommonModule, ReactiveFormsModule], // Opcional (caso vá usar componentes no MaterialModule)
+  exports: [
+    CommonModule,
+    ReactiveFormsModule, // <-- ESSENCIAL para liberar formGroup no seu app
+    ...MATERIAL_MODULES
+  ]
 })
 export class MaterialModule { }

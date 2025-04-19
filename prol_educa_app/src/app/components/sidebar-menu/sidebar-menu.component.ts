@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Adicione esta importação
+
+@Component({
+  selector: 'app-sidebar-menu',
+  templateUrl: './sidebar-menu.component.html',
+  styleUrls: ['./sidebar-menu.component.scss'],
+  standalone: true, // Se estiver usando componentes standalone
+  imports: [CommonModule] // Adicione esta linha para componentes standalone
+})
+export class SidebarMenuComponent implements OnInit {
+  isCollapsed = false;
+  activeMenuItem = 'instituicoes';
+  
+  menuItems = [
+    { id: 'instituicoes', label: 'Instituições cadastradas', icon: 'school' },
+    { id: 'alunos', label: 'Alunos cadastrados', icon: 'person' },
+    { id: 'cursos', label: 'Cursos Cadastrados', icon: 'book' },
+    { id: 'usuarios', label: 'Usuários Administradores', icon: 'admin_panel_settings' }
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  toggleSidebar(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  setActiveMenuItem(itemId: string): void {
+    this.activeMenuItem = itemId;
+  }
+}
