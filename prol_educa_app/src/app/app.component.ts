@@ -1,13 +1,13 @@
-// src/app/app.component.ts
-
 import { Component } from '@angular/core';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CourseRegistrationComponent } from './pages/course-registration/course-registration.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomePageComponent],
-  template: `<app-home></app-home>`,
+  imports: [CourseRegistrationComponent],
+  template: `<app-course-registration></app-course-registration>`,
   styles: []
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'prol_educa_app';
+}

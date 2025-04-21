@@ -1,0 +1,108 @@
+$form-color-primary: #6200ea;
+$form-color-secondary: #ccc;
+$form-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+.form-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: $form-font;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h1 {
+    font-size: 24px;
+    color: $form-color-primary;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    color: $form-color-primary;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+
+  .logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid $form-color-secondary;
+  }
+
+  .btn-alterar-logo {
+    padding: 8px 12px;
+    border: 1px solid $form-color-primary;
+    background-color: transparent;
+    color: $form-color-primary;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid $form-color-secondary;
+      font-size: 14px;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+
+  .btn-salvar {
+    background-color: $form-color-primary;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-cancelar {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}

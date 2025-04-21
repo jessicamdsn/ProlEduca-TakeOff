@@ -6,8 +6,6 @@ import { ProfileAvatarComponent } from '../../components/profile-avatar/profile-
   standalone: true,
   imports: [ProfileAvatarComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss'] // Corrigido aqui
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent { }

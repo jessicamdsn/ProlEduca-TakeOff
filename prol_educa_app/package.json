@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/platform-server": "^17.3.0",
-    "@angular/router": "^17.3.0",
+    "@angular/router": "^17.3.12",
     "@angular/ssr": "^17.3.11",
     "@coreui/angular": "^4.7.3",
     "@coreui/icons": "^3.0.1",

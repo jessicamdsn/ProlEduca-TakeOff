@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
+    font-family: Arial, sans-serif;
+  }
+  
+  .titulos {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  
+  .titulos h1 {
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 30px;
+  }
+  
+  
+  .titulos p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: start; /* muda de center para start para subir mais */
+    padding-top: 60px; /* sobe a caixa para o topo */
+    min-height: 100vh;
+    background-color: #f3f3f3; /* Igual ao fundo do body */
+  }
+  /*essa parte aqui tambem*/
+  
+  /*EU TOU MEXENDO AQUI*/
+  .form-box {
+    background: white;
+    padding: 30px;
+    border: 3px solid #8ba2d0db; /* borda azul */
+    border-radius: 15px; /* cantos arredondados */
+    width: 90%; /* um pouco mais largo */
+    max-width: 1100px; /* aumenta o limite de largura */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15); /* um pouco mais de sombra */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  
+  /*QUALQUER COISA RETORNAR AQUI*/
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  
+  .circle {
+    width: 30px;
+    height: 20px;
+    padding:20px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    font-weight: bold;
+    z-index: 2;
+  }
+  
+  .circle.blue {
+    background: #0899ece1;
+    color: white;
+  }
+  
+  .line {
+    height: 4px;
+    width: 200px;
+    background: #e0e0e0;
+    margin: 0 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .line.azul-metade::before {
+    content: "";
+    position: absolute;
+    width: 54px;
+    height: 4px;
+    background: #6cb3ee;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  
+  .step-labels {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 30px;
+  }
+  
+  .step-label {
+    font-size: 12px;
+    color: #444;
+    text-align: center;
+    margin-top: 5px;
+    width: 80px;
+  }
+  
+  .form-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+    align-self: flex-start;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="tel"],
+  .form-group input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .sou-bolsista {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+  }
+  
+  .sou-bolsista label {
+    font-weight: normal;
+  }
+  
+  .sou-bolsista input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0057ff;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .cancelar {
+    padding: 10px 20px;
+    border: 1px solid #888;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .cancelar:hover {
+    background-color: #e8e8e8;
+  } 
+
+
+  .cancelar:active {
+    background-color: #dcdcdc;
+  } 
+
+  .proximo {
+    padding: 10px 20px;
+    border: none;
+    background: #0b059a;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+
+  .proximo:hover {
+    background-color: #0a0489;
+  }
+
+  .proximo:active {
+    background-color: #080370;
+  }
+
+  
