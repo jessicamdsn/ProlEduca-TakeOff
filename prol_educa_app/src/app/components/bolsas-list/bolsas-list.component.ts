@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BolsasService } from '../../services/bolsas-services/bolsas.service';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 
 interface Filtros {
   instituicao: string;
@@ -18,7 +18,7 @@ interface Filtros {
 @Component({
   selector: 'app-bolsas-list',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf],
+  imports: [FormsModule, NgFor, NgIf, NgClass],
   templateUrl: './bolsas-list.component.html',
   styleUrl: './bolsas-list.component.scss',
 })
@@ -34,6 +34,9 @@ export class BolsasListComponent implements OnInit {
 
   bolsas: any[] = [];
   bolsasFiltradas: any[] = [];
+
+  paginaAtual: number = 1;
+  itensPorPagina: number = 4;
 
   filtros: Filtros = {
     instituicao: '',
@@ -76,25 +79,37 @@ export class BolsasListComponent implements OnInit {
     this.filtros[tipo] = valor;
     this.filtrarBolsas();
   }
-
   filtrarBolsas() {
+    this.paginaAtual = 1;
+
     this.bolsasFiltradas = this.bolsas.filter((bolsa) => {
+      const normalizar = (valor: string) =>
+        valor?.toLowerCase().trim() || '';
+
       return (
         (!this.filtros.instituicao ||
-          bolsa.instituicao === this.filtros.instituicao) &&
-        (!this.filtros.estado || bolsa.estado === this.filtros.estado) &&
-        (!this.filtros.cidade || bolsa.cidade === this.filtros.cidade) &&
-        (!this.filtros.bairro || bolsa.bairro === this.filtros.bairro) &&
-        (!this.filtros.curso || bolsa.curso === this.filtros.curso) &&
+          normalizar(bolsa.instituicao) === normalizar(this.filtros.instituicao)) &&
+        (!this.filtros.estado ||
+          normalizar(bolsa.estado) === normalizar(this.filtros.estado)) &&
+        (!this.filtros.cidade ||
+          normalizar(bolsa.cidade) === normalizar(this.filtros.cidade)) &&
+        (!this.filtros.bairro ||
+          normalizar(bolsa.bairro) === normalizar(this.filtros.bairro)) &&
+        (!this.filtros.curso ||
+          normalizar(bolsa.curso) === normalizar(this.filtros.curso)) &&
         (this.filtros.turno.length === 0 ||
           this.filtros.turno.includes(bolsa.turno)) &&
         (!this.filtros.modalidade ||
-          bolsa.modalidade === this.filtros.modalidade) &&
-        (!this.filtros.serie || bolsa.serie === this.filtros.serie) &&
-        (!this.filtros.alt || bolsa.alt === this.filtros.alt)
+          normalizar(bolsa.modalidade) === normalizar(this.filtros.modalidade)) &&
+        (!this.filtros.serie ||
+          normalizar(bolsa.serie) === normalizar(this.filtros.serie)) &&
+        (!this.filtros.alt ||
+          normalizar(bolsa.alt) === normalizar(this.filtros.alt))
       );
     });
   }
+
+
 
   toggleTurno(selecionado: boolean, turno: string) {
     if (selecionado) {
@@ -117,6 +132,49 @@ export class BolsasListComponent implements OnInit {
       alt: '',
       serie: '',
     };
+
+    this.turnoSelecionado = {
+      Manhã: false,
+      Tarde: false,
+      Noite: false,
+      Integral: false,
+    };
+
     this.filtrarBolsas();
   }
+
+
+
+  get totalPaginas(): number {
+    return Math.ceil(this.bolsasFiltradas.length / this.itensPorPagina);
+  }
+
+  get bolsasPaginadas(): any[] {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    return this.bolsasFiltradas.slice(inicio, fim);
+  }
+
+  mudarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaAtual = pagina;
+    }
+  }
+
+  ordemPrecoAsc = true;
+
+
+  ordenarPorPreco() {
+    this.ordemPrecoAsc = !this.ordemPrecoAsc;
+
+    this.bolsasFiltradas.sort((a, b) => {
+      const precoA = parseFloat(String(a.precoComDesconto).replace(',', '.'));
+      const precoB = parseFloat(String(b.precoComDesconto).replace(',', '.'));
+      return this.ordemPrecoAsc ? precoA - precoB : precoB - precoA;
+    });
+
+    this.paginaAtual = 1;
+  }
+
+
 }

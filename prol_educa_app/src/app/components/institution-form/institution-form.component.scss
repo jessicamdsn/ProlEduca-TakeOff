@@ -1,0 +1,82 @@
+// Importa Montserrat se ainda não estiver sendo usado
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+form {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 500;
+}
+
+hr {
+  width: 50%;
+}
+// Container geral dos inputs da instituição
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+// Inputs individuais
+.mb-3 {
+  width: 100%;
+}
+
+// Grid dos dados do responsável
+.responsible-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+// Botões
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:first-child {
+      background-color: #ffffff;
+    }
+
+    &:last-child {
+      background-color: #007bff;
+      color: #fff;
+    }
+  }
+}
+
+// Estilo do botão de upload
+.file-upload {
+  grid-column: span 2;
+
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    color: rgb(89, 89, 89);
+    border: 1px solid;
+    border-color: #434343;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}

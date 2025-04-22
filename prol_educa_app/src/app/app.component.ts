@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { CourseRegistrationComponent } from './pages/course-registration/course-registration.component';
+import { CustomerInterfaceComponent } from './pages/customer-interface/customer-interface.component';
+import { HomePageComponent } from "./pages/home-page/home-page.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CourseRegistrationComponent],
-  template: `<app-course-registration></app-course-registration>`,
+  imports: [HomePageComponent],
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {
