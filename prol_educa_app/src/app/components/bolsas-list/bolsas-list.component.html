@@ -1,6 +1,9 @@
 <div class="d-flex justify-content-lg-around">
   <!-- FILTROS -->
-  <div class="filtros-container p-4 rounded shadow-sm bg-white" style="height: 625px;">
+  <div
+    class="filtros-container p-4 rounded shadow-sm bg-white"
+    style="height: 625px"
+  >
     <h5 class="mb-4 fw-bold fs-6">Filtre os Resultados</h5>
 
     <div class="mb-3">
@@ -17,7 +20,6 @@
       </select>
     </div>
 
-
     <div class="mb-3">
       <label class="form-label">Estado?</label>
       <select
@@ -29,7 +31,6 @@
         <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
       </select>
     </div>
-
 
     <div class="mb-3">
       <label class="form-label">Cidade?</label>
@@ -43,7 +44,6 @@
       </select>
     </div>
 
-
     <div class="mb-3">
       <label class="form-label">Bairro?</label>
       <select
@@ -56,7 +56,6 @@
       </select>
     </div>
 
-
     <div class="mb-3">
       <label class="form-label">Curso?</label>
       <select
@@ -68,7 +67,6 @@
         <option *ngFor="let c of cursos" [value]="c">{{ c }}</option>
       </select>
     </div>
-
 
     <div class="mb-3">
       <label class="form-label">Turno?</label>
@@ -89,14 +87,27 @@
   </div>
 
   <div *ngIf="bolsasFiltradas.length === 0" class="text-center mt-5">
-    <p class="fs-5 text-muted">Nenhuma bolsa encontrada com os filtros selecionados.</p>
-    <button class="btn btn-outline-primary" (click)="limparFiltros()">Limpar filtros</button>
+    <p class="fs-5 text-muted">
+      Nenhuma bolsa encontrada com os filtros selecionados.
+    </p>
+    <button class="btn btn-outline-primary" (click)="limparFiltros()">
+      Limpar filtros
+    </button>
   </div>
-
 
   <!-- CONTAINER DE CARDS -->
   <div class="container-card-bolsas">
-    <div *ngFor="let bolsa of bolsasFiltradas">
+    <div class="d-flex justify-content-end mb-1" *ngIf="bolsasFiltradas.length > 0">
+      <button class=" btn btn-orden mb-3" (click)="ordenarPorPreco()">
+        Ordenar por preço
+        <i
+          class="bi"
+          [ngClass]="ordemPrecoAsc ? 'bi-arrow-down': 'bi-arrow-up' "
+        ></i>
+      </button>
+    </div>
+
+    <div *ngFor="let bolsa of bolsasPaginadas">
       <div class="container-card">
         <div class="container-img">
           <img
@@ -130,11 +141,52 @@
           </div>
           <div class="btn-subcribe d-flex justify-content-center">
             <button style="width: 40%" class="rounded p-2">
-              <a class="text-decoration-none text-white" href="#">Fazer inscrição</a>
+              <a class="text-decoration-none text-white" href="#"
+                >Fazer inscrição</a
+              >
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Paginação -->
+    <nav
+      *ngIf="bolsasFiltradas.length > 0"
+      aria-label="Page navigation"
+      class="mt-4 d-flex justify-content-center"
+    >
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="paginaAtual === 1">
+          <button
+            class="page-link d-flex align-items-center gap-1"
+            (click)="mudarPagina(paginaAtual - 1)"
+          >
+            <i class="bi bi-chevron-left"></i>
+            <span>Anterior</span>
+          </button>
+        </li>
+
+        <ng-container
+          *ngFor="let pagina of [].constructor(totalPaginas); let i = index"
+        >
+          <li class="page-item" [class.active]="paginaAtual === i + 1">
+            <button class="page-link" (click)="mudarPagina(i + 1)">
+              {{ i + 1 }}
+            </button>
+          </li>
+        </ng-container>
+
+        <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+          <button
+            class="page-link d-flex align-items-center gap-1"
+            (click)="mudarPagina(paginaAtual + 1)"
+          >
+            <span>Próximo</span>
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
