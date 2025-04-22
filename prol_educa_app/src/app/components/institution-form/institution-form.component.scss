@@ -1,10 +1,22 @@
 // Importa Montserrat se ainda não estiver sendo usado
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-form {
-  max-width: 1200px;
+app-app-card-instituicao {
   width: 100%;
-  padding: 2rem;
+}
+
+.main-container {
+  padding-top: 5.1rem;
+  width: 100%;  
+  
+}
+
+
+form {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  
+
 }
 
 h3 {
@@ -25,7 +37,6 @@ hr {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  max-width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -69,6 +80,7 @@ hr {
 // Estilo do botão de upload
 .file-upload {
   grid-column: span 2;
+  margin-top: 1.5rem;
 
   button {
     padding: 0.5rem 1rem;

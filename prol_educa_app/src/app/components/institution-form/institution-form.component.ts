@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.component';
 @Component({
   selector: 'app-institution-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CardInstituicaoComponent],
   templateUrl:'./institution-form.component.html',
   styleUrls: ['./institution-form.component.scss']
 })
