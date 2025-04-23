@@ -20,7 +20,7 @@ import { FooterComponent } from '../../layout/footer/footer.component';
     </div>
 
     <app-contact-section></app-contact-section>
-    <app-footer></app-footer>
+    <app-footer ngSkipHydration></app-footer>
   `,
   styles: [`
     .container {
@@ -41,7 +41,7 @@ export class HomePageComponent {
   };
 
   ngOnInit() {
-    this.carouselImages = this.imagensPorAba['escola']; // default
+    this.carouselImages = this.imagensPorAba['escola']; 
   }
 
   trocarImagens(aba: string) {

@@ -1,0 +1,29 @@
+.registration-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; // Garante altura total da viewport
+    overflow: hidden; // evita scroll duplo
+  }
+  .main-content {
+    flex: 1;
+    overflow-y: auto; // scroll só no conteúdo, se necessário
+    height: 100vh;
+    // box-sizing: border-box;
+  }
+  
+  
+  
+  app-header-admin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  app-course-form {
+    margin: 2rem;
+    padding: 20px;
+    width: 100%;
+  }
+  
