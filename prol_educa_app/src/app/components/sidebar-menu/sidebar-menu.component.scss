@@ -6,12 +6,9 @@
     transition: width 0.3s ease;
     overflow-x: hidden;
     flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px; // ou o valor real da sua sidebar
-    height: 100vh;
+    position: relative; // ✅ Ou nem precisa setar, já é o default
     z-index: 999;
+    top: 0;
   
     &.collapsed {
       width: 70px;

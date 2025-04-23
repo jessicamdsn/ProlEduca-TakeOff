@@ -1,5 +1,7 @@
 header {
     border-bottom: 2px solid #ddd;
+    background-color: #ffffff;
+    display: flow-root;
   }
   
   .container-header {
@@ -26,7 +28,7 @@ header {
     }
   
     .logout-button {
-      background-color: transparent;
+      background-color: #f0f0f0;
       color: #3c3a3a;
       border: 1px solid #ccc;
       border-radius: 5px;

@@ -1,0 +1,77 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<div class="main-container">
+  <app-card-instituicao titulo="Cadastrar Novo Curso"></app-card-instituicao>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h3></h3>
+    <div class="grid-container">
+        <!-- Dados da Instituição -->
+        <div class="mb-3">
+            <label for="instituicaoAssociada" class="form-label">Instituição Associada:</label>
+            <select formControlName="instituicaoAssociada" class="form-control" id="instituicaoAssociada">
+              <option value="" disabled selected>Selecione a instituição</option>
+              <option value="Instituicao A">Instituição A</option>
+              <option value="Instituicao B">Instituição B</option>
+              <option value="Instituicao C">Instituição C</option>
+            </select>
+          </div>
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome:</label>
+          <input type="text" formControlName="nome" class="form-control" id="nome" placeholder="Digite o nome da instituição">
+        </div>
+      
+        <div class="mb-3">
+          <label for="bolsaPercentual" class="form-label">Percentual da Bolsa:</label>
+          <input type="text" formControlName="bolsaPercentual" class="form-control" id="bolsaPercentual" placeholder="Digite o percentual da bolsa">
+        </div>
+      
+        <div class="mb-3">
+          <label for="vagas" class="form-label">Vagas:</label>
+          <input type="text" formControlName="vagas" class="form-control" id="vagas" placeholder="Digite a quantidade de vagas">
+        </div>
+        <div class="mb-3">
+          <label for="descontoEntrada" class="form-label">Desconto na Entrada:</label>
+          <input type="text" formControlName="descontoEntrada" class="form-control" id="descontoEntrada" placeholder="Digite o valor do desconto de entrada">
+        </div>
+        
+        
+        <div class="mb-3">
+            <label for="valorOriginal" class="form-label">Valor Original:</label>
+            <input type="text" formControlName="valorOriginal" class="form-control" id="valorOriginal" placeholder="Digite o valor original">
+        </div>
+        <div class="mb-3">
+            <label for="turno" class="form-label">Turno:</label>
+            <select formControlName="turno" class="form-control" id="turno">
+              <option value="" disabled selected>Selecione o turno</option>
+              <option value="Manhã">Manhã</option>
+              <option value="Tarde">Tarde</option>
+              <option value="Noite">Noite</option>
+              <option value="Integral">Integral</option>
+            </select>
+          </div>
+        
+        <div class="mb-3">
+            <label for="valorDesconto" class="form-label">Valor com Desconto:</label>
+            <input type="text" formControlName="valorDesconto" class="form-control" id="valorDesconto" placeholder="Digite o valor com desconto">
+        </div>
+        
+        <div class="mb-3">
+            <label for="status" class="form-label">Status:</label>
+            <select formControlName="status" class="form-control" id="status">
+              <option value="" disabled selected>Selecione o status</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </div>
+      
+      </div>
+      
+      <div class="button-group">
+        <button type="button" (click)="onCancel()">Cancelar</button>
+        <button type="submit">Salvar alteração</button>
+      </div>
+      
+  </form>
+</div>
