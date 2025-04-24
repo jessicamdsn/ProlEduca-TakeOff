@@ -104,14 +104,24 @@
     }
   }
 
+
   @media (max-width: 768px) {
     .contact-wrapper {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
     }
-
-    .contact-info, .social-media {
+  
+    .social-media {
+      text-align: center;
       width: 100%;
-      margin-bottom: 15px;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
   }
+  
