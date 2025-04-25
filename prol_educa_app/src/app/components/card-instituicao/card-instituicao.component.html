@@ -1,5 +1,14 @@
-<div class="card-container">
-    <img src="..\assets\document-icon.svg" alt="Ícone de documento" class="icon">
+<div class="card-container d-flex justify-content-between align-items-center">
+  <div>
+    <img
+      src="..\assets\document-icon.svg"
+      alt="Ícone de documento"
+      class="icon"
+    />
     <span class="titulo">{{ titulo }}</span>
+  </div>
+
+  <div class="card-content" *ngIf="isAliveBtnAdd">
+    <app-btn-add routes="admin-registration"></app-btn-add>
+  </div>
 </div>
-  
