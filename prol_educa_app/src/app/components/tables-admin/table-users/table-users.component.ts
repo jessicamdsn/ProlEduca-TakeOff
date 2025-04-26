@@ -1,15 +1,17 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {
   UsersService,
   User,
 } from '../../../services/admin-services/users/users.service';
 
 import { MatDialog } from '@angular/material/dialog';
+
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
-import { error } from 'console';
+import { EditUserDialogComponent } from './../../../shared/edit-user-dialog/edit-user-dialog.component';
+
 
 @Component({
   selector: 'app-table-users',
@@ -32,7 +34,11 @@ export class TableUsersComponent implements OnInit {
   totalPaginas = 0;
   paginas: number[] = [];
 
-  constructor(private dialog: MatDialog,  private userService: UsersService) {}
+  constructor(
+    private dialog: MatDialog,
+    private dialogEditModal: MatDialog,
+    private userService: UsersService
+  ) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe((users) => {
@@ -84,73 +90,65 @@ export class TableUsersComponent implements OnInit {
     this.atualizarPaginacao();
   }
 
-  // Modal de edição
-  modalAberto = false;
 
-  abrirModal(usuario: User) {
-    this.usuarioSelecionado = { ...usuario };
-    this.modalAberto = true;
-  }
+  // btn Update
+  openDialogUpdate(user: User) {
+    const dialogRef = this.dialogEditModal.open(EditUserDialogComponent, {
+      width: '500px',
+      data: user,
+    });
 
-  fecharModal() {
-    this.modalAberto = false;
-  }
-
-
-  salvarEdicao(form: NgForm) {
-    if (form.invalid) return;
-
-    this.userService.updateUser(this.usuarioSelecionado).subscribe({
-      next: (usuarioAtualizado) => {
-        const index = this.usuariosFiltrados.findIndex(
-          (u: User) => u.trackingId === (usuarioAtualizado as User).trackingId
-        );
-        if (index !== -1) {
-          this.usuariosFiltrados[index] = usuarioAtualizado;
-        }
-
-        this.fecharModal();
-
-        this.atualizarPaginacao();
-
-      },
-      error: (erro) => {
-        console.error('Erro ao salvar:', erro);
-        alert('Erro ao salvar os dados. Tente novamente.');
-      },
+    dialogRef.afterClosed().subscribe((usuarioAtualizado: User | undefined) => {
+      if (usuarioAtualizado) {
+        this.userService.updateUser(usuarioAtualizado).subscribe({
+          next: (updatedUser) => {
+            const index = this.usuariosFiltrados.findIndex(
+              (u: User) => u.trackingId === (updatedUser as User).trackingId
+            );
+            if (index !== -1) {
+              this.usuariosFiltrados[index] = updatedUser;
+            }
+            this.atualizarPaginacao();
+          },
+          error: (erro) => {
+            console.error('Erro ao salvar:', erro);
+            alert('Erro ao salvar os dados. Tente novamente.');
+          }
+        });
+      }
     });
   }
 
   // btn Deletar
 
-  openDialogDelete(user: User){
+  openDialogDelete(user: User) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        mensagem: 'Você tem certeza que deseja excluir o usuário ' + user.nome + '?',
-      }
+        mensagem:
+          'Você tem certeza que deseja excluir o usuário ' + user.nome + '?',
+      },
     });
 
-    dialogRef.afterClosed().subscribe((confirm: boolean)=> {
-      if(confirm){
-        this.deleteUser(user)
+    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.deleteUser(user);
       }
     });
-  };
+  }
 
-  deleteUser(user: User){
+  deleteUser(user: User) {
     this.userService.deleteUser(user.trackingId).subscribe({
-      next: ()=> {
-        this.usuariosFiltrados = this.usuariosFiltrados.filter((u: User) => u.trackingId !== user.trackingId);
+      next: () => {
+        this.usuariosFiltrados = this.usuariosFiltrados.filter(
+          (u: User) => u.trackingId !== user.trackingId
+        );
         this.atualizarPaginacao();
       },
       error: (error) => {
         console.error('Erro ao deletar o usuário', error);
         alert('Erro ao deletar o usuário. Tente novamente.');
-      }
-    })
+      },
+    });
   }
-
-
-
 }

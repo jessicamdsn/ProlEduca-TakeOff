@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Editar usuário</h2>
+
+<form (ngSubmit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="user.nome" name="nome" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput [(ngModel)]="user.cpf" name="cpf" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.email" name="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contato</mat-label>
+        <input matInput [(ngModel)]="user.contato" name="contato" required />
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-footer" align="end">
+    <button mat-button class="btn btn-secondary" type="button" (click)="cancel()">Cancelar</button>
+    <button mat-button class="btn btn-standard" type="submit">Salvar</button>
+  </mat-dialog-actions>
+</form>

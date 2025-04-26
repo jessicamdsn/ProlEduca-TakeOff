@@ -34,7 +34,7 @@
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.contato }}</td>
         <td class="text-center">
-          <button class="btn btn-link text-primary p-0 me-2" (click)="abrirModal(usuario)">
+          <button class="btn btn-link text-primary p-0 me-2" (click)="openDialogUpdate(usuario)">
             <i class="bi bi-pencil-square"></i>
           </button>
           <button class="btn btn-link text-danger p-0" (click)="openDialogDelete(usuario)">
@@ -72,40 +72,5 @@
       </li>
     </ul>
   </nav>
-
-<!-- Modal -->
-<div class="modal-overlay" *ngIf="modalAberto">
-  <div class="modal-custom">
-    <form #editarForm="ngForm" (ngSubmit)="salvarEdicao(editarForm)">
-      <div class="modal-header">
-        <h5>Editar usuário</h5>
-        <button type="button" class="btn-close" (click)="fecharModal()">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label>Nome</label>
-          <input [(ngModel)]="usuarioSelecionado.nome" name="nome" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label>CPF</label>
-          <input [(ngModel)]="usuarioSelecionado.cpf" name="cpf" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label>Email</label>
-          <input [(ngModel)]="usuarioSelecionado.email" name="email" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label>Contato</label>
-          <input [(ngModel)]="usuarioSelecionado.contato" name="contato" class="form-control" required />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" (click)="fecharModal()">Cancelar</button>
-        <button class="btn btn-primary" type="submit">Salvar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
 
 </div>
