@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscrição - Prol Educa</title>
+  <link rel="stylesheet" href="course-registration-two.component.scss" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <app-header></app-header>
+
+    <section class="title-section">
+      <h1>Complete sua Inscrição em poucos cliques</h1>
+      <p>Precisaremos de mais algumas informações para completar o seu cadastro na bolsa escolhida.</p>
+    </section>
+
+    <section class="form-card">
+      <form class="form">
+        <!--vai se alterar aqui dentro -->
+        <div class="progress-bar">
+          <div class="step completed">
+            <div class="circle">1</div>
+            <p>Dados do cliente</p>
+          </div>
+          <div class="line"></div>
+          <div class="step active">
+            <div class="circle active">2</div>
+            <p>Dados do bolsista</p>
+          </div>
+        </div>
+        <!--ate aqui -->
+
+        <fieldset>
+          <legend>DADOS BOLSISTA:</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" placeholder="Mãos Unidas" required />
+            </div>
+
+            <div class="form-group">
+              <label for="data-nasc">Data de nascimento</label>
+              <input type="date" id="data-nasc" placeholder="Data de nascimento" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input type="text" id="cpf" placeholder="CPF" required />
+            </div>
+
+            <div class="form-group">
+              <label for="raca">Raça</label>
+              <select id="raca" required>
+                <option value="" disabled selected hidden>Selecione sua raça</option>
+                <option value="pardo">Pardo</option>
+                <option value="branco">Branco</option>
+                <option value="indigena">Indígena</option>
+                <option value="amarelo">Amarelo</option>
+                <option value="negro">Negro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="necessidades">Necessidades Especiais</label>
+              <select id="necessidades" required>
+                <option value="" disabled selected hidden>Selecione uma opção</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="regras">
+          <p><strong>Regras e Observações:</strong></p>
+          <ul>
+            <li>A bolsa é válida durante toda a etapa de formação...</li>
+            <li>O Pagamento da taxa de adesão isenta o pagamento da primeira mensalidade...</li>
+            <li>O valor com desconto da bolsa é válido apenas para pagamentos até o vencimento.</li>
+            <li>O aluno não pode ter vínculo com a instituição da qual ele pretende obter a vaga.</li>
+            <li>O aluno que já teve vínculo com a instituição que pretende obter a vaga, será encaminhado para análise.</li>
+            <li>Em caso de atraso no pagamento o benefício fica suspenso até sua regularização...</li>
+            <li>Não cumulativo com outros benefícios ou descontos.</li>
+            <li>Vagas limitadas, podendo sofrer alterações de valores e quantidades a qualquer tempo.</li>
+            <li>Em caso de não formação de turmas o valor pago, a título de taxa de adesão será devolvido integralmente.</li>
+            <li>Necessário passar por etapas: seleção ou teste de nível na instituição...</li>
+            <li>O candidato interessado que tem vínculo com a instituição parceira do programa do ano vigente será encaminhado para análise.</li>
+          </ul>
+        </div>
+
+        <div class="form-buttons">
+          <button type="button" class="btn cancel">Cancelar</button>
+          <button type="submit" class="btn confirm">Confirmar</button>
+        </div>
+      </form>
+    </section>
+
+</body>
+</html>
