@@ -1,0 +1,111 @@
+<div class="container mt-5">
+  <!-- Input de Pesquisa -->
+  <div class="mb-4">
+    <input
+      style="width: 25%;"
+      type="text"
+      class="form-control"
+      placeholder="Pesquisar pelo nome"
+      [(ngModel)]="termoPesquisa"
+      (input)="filtrarUsuarios()"
+    />
+  </div>
+
+  <!-- Tabela -->
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Tracking ID</th>
+        <th>CPF</th>
+        <th (click)="ordenarPorNome()" style="cursor: pointer;">
+          Nome
+          <i [ngClass]="ordenacaoAsc ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'"></i>
+        </th>
+        <th>Email</th>
+        <th>Contato</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosPaginados">
+        <td>#{{ usuario.trackingId }}</td>
+        <td>{{ usuario.cpf }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.contato }}</td>
+        <td class="text-center">
+          <button class="btn btn-link text-primary p-0 me-2" (click)="abrirModal(usuario)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-link text-danger p-0">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <nav *ngIf="totalPaginas > 1" class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="paginaAtual === 1">
+        <button class="page-link" (click)="mudarPagina(paginaAtual - 1)">
+          Previous
+        </button>
+      </li>
+
+      <li
+        *ngFor="let pagina of paginas"
+        class="page-item"
+        [class.active]="paginaAtual === pagina"
+      >
+        <button class="page-link" (click)="mudarPagina(pagina)">
+          {{ pagina }}
+        </button>
+      </li>
+
+      <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+        <button class="page-link" (click)="mudarPagina(paginaAtual + 1)">
+          Next
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="modalAberto">
+  <div class="modal-custom">
+    <form #editarForm="ngForm" (ngSubmit)="salvarEdicao(editarForm)">
+      <div class="modal-header">
+        <h5>Editar usuário</h5>
+        <button type="button" class="btn-close" (click)="fecharModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label>Nome</label>
+          <input [(ngModel)]="usuarioSelecionado.nome" name="nome" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label>CPF</label>
+          <input [(ngModel)]="usuarioSelecionado.cpf" name="cpf" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label>Email</label>
+          <input [(ngModel)]="usuarioSelecionado.email" name="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label>Contato</label>
+          <input [(ngModel)]="usuarioSelecionado.contato" name="contato" class="form-control" required />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="fecharModal()">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+</div>
