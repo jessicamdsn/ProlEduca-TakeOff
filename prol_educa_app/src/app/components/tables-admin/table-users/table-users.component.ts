@@ -7,7 +7,9 @@ import {
   User,
 } from '../../../services/admin-services/users/users.service';
 
-import * as bootstrap from 'bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
+import { error } from 'console';
 
 @Component({
   selector: 'app-table-users',
@@ -30,7 +32,7 @@ export class TableUsersComponent implements OnInit {
   totalPaginas = 0;
   paginas: number[] = [];
 
-  constructor(private userService: UsersService) {}
+  constructor(private dialog: MatDialog,  private userService: UsersService) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe((users) => {
@@ -118,4 +120,37 @@ export class TableUsersComponent implements OnInit {
       },
     });
   }
+
+  // btn Deletar
+
+  openDialogDelete(user: User){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        mensagem: 'Você tem certeza que deseja excluir o usuário ' + user.nome + '?',
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirm: boolean)=> {
+      if(confirm){
+        this.deleteUser(user)
+      }
+    });
+  };
+
+  deleteUser(user: User){
+    this.userService.deleteUser(user.trackingId).subscribe({
+      next: ()=> {
+        this.usuariosFiltrados = this.usuariosFiltrados.filter((u: User) => u.trackingId !== user.trackingId);
+        this.atualizarPaginacao();
+      },
+      error: (error) => {
+        console.error('Erro ao deletar o usuário', error);
+        alert('Erro ao deletar o usuário. Tente novamente.');
+      }
+    })
+  }
+
+
+
 }
