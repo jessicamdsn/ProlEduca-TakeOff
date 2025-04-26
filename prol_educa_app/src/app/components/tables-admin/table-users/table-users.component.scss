@@ -44,3 +44,22 @@
   display: flex;
   justify-content: space-between;
 }
+
+
+.pagination .page-link {
+  color: #495057;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.pagination .page-link:hover {
+  color: #fff;
+  background-color: #0A0A5A;
+  border-color: #0A0A5A;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #0A0A5A;
+  border-color: #0A0A5A;
+  color: #fff;
+}

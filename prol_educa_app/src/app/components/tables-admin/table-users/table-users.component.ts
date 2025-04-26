@@ -31,7 +31,7 @@ export class TableUsersComponent implements OnInit {
 
   paginaAtual = 1;
   itensPorPagina = 5;
-  totalPaginas = 0;
+  totalPaginas: number = 0;
   paginas: number[] = [];
 
   constructor(
@@ -44,8 +44,8 @@ export class TableUsersComponent implements OnInit {
     this.userService.getUsers().subscribe((users) => {
       this.user = users;
       this.usuariosFiltrados = users;
-      this.usuariosPaginados = users.slice(0, this.itensPorPagina);
       this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
+      this.atualizarPaginacao();
     });
   }
 
@@ -71,17 +71,14 @@ export class TableUsersComponent implements OnInit {
     this.atualizarPaginacao();
   }
 
-  atualizarPaginacao() {
-    this.totalPaginas = Math.ceil(
-      this.usuariosFiltrados.length / this.itensPorPagina
-    );
-    this.paginas = Array(this.totalPaginas)
-      .fill(0)
-      .map((_, i) => i + 1);
 
+  atualizarPaginacao() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
     const fim = inicio + this.itensPorPagina;
     this.usuariosPaginados = this.usuariosFiltrados.slice(inicio, fim);
+
+    this.totalPaginas = Math.ceil(this.usuariosFiltrados.length / this.itensPorPagina);
+    this.paginas = Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
   }
 
   mudarPagina(pagina: number) {
