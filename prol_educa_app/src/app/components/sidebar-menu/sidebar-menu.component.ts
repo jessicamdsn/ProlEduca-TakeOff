@@ -26,14 +26,17 @@ export class SidebarMenuComponent implements OnInit {
   ngOnInit(): void {
     const url = this.router.url;
 
-    if (url.includes('admin-users')) {
-      this.activeMenuItem = 'alunos';
-    } else if (url.includes('instituicoes')) {
-      this.activeMenuItem = 'instituicoes';
-    } else if (url.includes('cursos')) {
-      this.activeMenuItem = 'cursos';
-    } else if (url.includes('usuarios-admin')) {
-      this.activeMenuItem = 'usuarios';
+    const routeMap: any = {
+      'users': 'alunos',
+      'instituicoes': 'instituicoes',
+      'cursos': 'cursos',
+      'manager': 'usuarios'
+    };
+
+    const matchedKey = Object.keys(routeMap).find(key => url.includes(key));
+
+    if (matchedKey) {
+      this.activeMenuItem = routeMap[matchedKey];
     }
   }
 
