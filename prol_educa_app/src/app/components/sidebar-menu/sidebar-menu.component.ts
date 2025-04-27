@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Adicione esta importação
 import { Router } from '@angular/router';
 
@@ -36,10 +36,11 @@ export class SidebarMenuComponent implements OnInit {
       this.activeMenuItem = 'usuarios';
     }
   }
+  @Output() collapsedChange = new EventEmitter<boolean>();
 
-
-  toggleSidebar(): void {
+  toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+    this.collapsedChange.emit(this.isCollapsed); // ✅ Emite o estado atualizado
   }
 
   setActiveMenuItem(itemId: string): void {

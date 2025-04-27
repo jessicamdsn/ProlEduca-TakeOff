@@ -15,8 +15,6 @@ app-app-card-instituicao {
 form {
   padding-left: 2rem;
   padding-right: 2rem;
-  
-
 }
 
 h3 {
@@ -100,5 +98,67 @@ hr {
     border-color: #434343;
     border-radius: 4px;
     cursor: pointer;
+  }
+}
+// iPads e tablets (768px ou menos)
+@media (max-width: 768px) {
+  .main-container {
+    margin-left: 70px;
+    width: auto;
+  }
+
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); // 2 colunas em vez de 4
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .responsible-grid {
+    grid-template-columns: 1fr; // uma coluna para os campos do responsável
+    padding: 0 1rem;
+  }
+
+  form {
+    padding: 1rem !important;
+  }
+
+  .button-group {
+    flex-direction: column; // empilha os botões
+    align-items: stretch;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .file-upload {
+    grid-column: span 2; // continua ocupando duas colunas
+    margin-top: 1rem;
+  }
+}
+
+// Celulares (576px ou menos)
+@media (max-width: 576px) {
+  .grid-container {
+    grid-template-columns: 1fr; // tudo empilhado
+  }
+
+  .file-upload {
+    grid-column: span 1;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  label,
+  input,
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 0.95rem;
   }
 }
