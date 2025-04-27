@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { EditUserDialogComponent } from './../../../shared/edit-user-dialog/edit-user-dialog.component';
+import { AlertService } from '../../../shared/services/alert/alert.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class TableUsersComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private alertService: AlertService,
     private dialogEditModal: MatDialog,
     private userService: UsersService
   ) {}
@@ -106,10 +108,11 @@ export class TableUsersComponent implements OnInit {
               this.usuariosFiltrados[index] = updatedUser;
             }
             this.atualizarPaginacao();
+            this.alertService.success('Usuário atualizado com sucesso!');
           },
           error: (erro) => {
             console.error('Erro ao salvar:', erro);
-            alert('Erro ao salvar os dados. Tente novamente.');
+           this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
           }
         });
       }
@@ -141,10 +144,11 @@ export class TableUsersComponent implements OnInit {
           (u: User) => u.trackingId !== user.trackingId
         );
         this.atualizarPaginacao();
+        this.alertService.success('Usuário deletado com sucesso!');
       },
       error: (error) => {
         console.error('Erro ao deletar o usuário', error);
-        alert('Erro ao deletar o usuário. Tente novamente.');
+        this.alertService.error('Erro ao deletar o usuário. Tente novamente.');
       },
     });
   }

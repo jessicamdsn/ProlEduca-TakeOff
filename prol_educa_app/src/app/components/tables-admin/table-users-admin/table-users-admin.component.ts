@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { AlertService } from '../../../shared/services/alert/alert.service';
 
 @Component({
   selector: 'app-table-users-admin',
@@ -32,6 +33,7 @@ export class TableUsersAdminComponent {
 
   constructor(
     private dialog: MatDialog,
+    private alertService: AlertService,
     private dialogEditModal: MatDialog,
     private userAdminService: UsersAdminService,
   ) {}
@@ -102,10 +104,11 @@ export class TableUsersAdminComponent {
               this.usuariosFiltrados[index] = updatedUser;
             }
             this.atualizarPaginacao();
+            this.alertService.success('Usuário salvo com sucesso!');
           },
           error: (erro) => {
             console.error('Erro ao salvar:', erro);
-            alert('Erro ao salvar os dados. Tente novamente.');
+            this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
           }
         });
       }
@@ -137,10 +140,11 @@ export class TableUsersAdminComponent {
           (u: User) => u.trackingId !== user.trackingId
         );
         this.atualizarPaginacao();
+        this.alertService.success('Usuário deletado com sucesso!');
       },
       error: (error) => {
         console.error('Erro ao deletar o usuário', error);
-        alert('Erro ao deletar o usuário. Tente novamente.');
+        this.alertService.error('Erro ao deletar o usuário. Tente novamente.');
       },
     });
   }
