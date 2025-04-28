@@ -94,7 +94,10 @@ export class TableUsersComponent implements OnInit {
   openDialogUpdate(user: User) {
     const dialogRef = this.dialogEditModal.open(EditUserDialogComponent, {
       width: '500px',
-      data: user,
+      data: {
+        tipo: 'usuario',
+        dados: user,
+      },
     });
 
     dialogRef.afterClosed().subscribe((usuarioAtualizado: User | undefined) => {

@@ -25,7 +25,6 @@ export class TablesCoursesComponent {
   cursoSelecionado: Course | null = null;
   instituicoes: string[] = [];
 
-  // Filtros
   filtroInstituicao: string = '';
   filtroNome: string = '';
   filtroTurno: string = '';
@@ -73,7 +72,6 @@ export class TablesCoursesComponent {
     this.atualizarPaginacao();
   }
 
-  // Ordenação por nome
   ordenarPorNome() {
     this.ordenacaoAsc = !this.ordenacaoAsc;
     this.cursosFiltrados.sort((a, b) => {
@@ -122,8 +120,8 @@ export class TablesCoursesComponent {
     const dialogRef = this.dialogEditModal.open(EditUserDialogComponent, {
       width: '500px',
       data: {
-        tipo: 'curso', // Passando 'curso' aqui para indicar que é um curso
-        dados: curso, // Passando os dados do curso
+        tipo: 'curso',
+        dados: curso,
       },
     });
 
