@@ -1,27 +1,23 @@
+import { Component } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  UsersService,
-  User,
-} from '../../../services/admin-services/users/users.service';
+
+import { User } from '../../../services/admin-services/users/users.service';
+import { UsersAdminService } from '../../../services/admin-services/users-admin/users-admin.service';
+import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 import { MatDialog } from '@angular/material/dialog';
-
-import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
-import { EditUserDialogComponent } from './../../../shared/edit-user-dialog/edit-user-dialog.component';
+import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../shared/services/alert/alert.service';
 
-
 @Component({
-  selector: 'app-table-users',
+  selector: 'app-table-users-admin',
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, FormsModule, HttpClientModule],
-  templateUrl: './table-users.component.html',
-  styleUrl: './table-users.component.scss',
+  imports: [NgFor, NgIf,NgClass,FormsModule],
+  templateUrl: './table-users-admin.component.html',
+  styleUrl: './table-users-admin.component.scss'
 })
-export class TableUsersComponent implements OnInit {
+export class TableUsersAdminComponent {
   user: User[] = [];
   usuariosFiltrados: any[] = [];
   usuariosPaginados: any[] = [];
@@ -39,11 +35,11 @@ export class TableUsersComponent implements OnInit {
     private dialog: MatDialog,
     private alertService: AlertService,
     private dialogEditModal: MatDialog,
-    private userService: UsersService
+    private userAdminService: UsersAdminService,
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe((users) => {
+    this.userAdminService.getUsers().subscribe((users) => {
       this.user = users;
       this.usuariosFiltrados = users;
       this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
@@ -102,7 +98,7 @@ export class TableUsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((usuarioAtualizado: User | undefined) => {
       if (usuarioAtualizado) {
-        this.userService.updateUser(usuarioAtualizado).subscribe({
+        this.userAdminService.updateUser(usuarioAtualizado).subscribe({
           next: (updatedUser) => {
             const index = this.usuariosFiltrados.findIndex(
               (u: User) => u.trackingId === (updatedUser as User).trackingId
@@ -111,11 +107,11 @@ export class TableUsersComponent implements OnInit {
               this.usuariosFiltrados[index] = updatedUser;
             }
             this.atualizarPaginacao();
-            this.alertService.success('Usuário atualizado com sucesso!');
+            this.alertService.success('Usuário salvo com sucesso!');
           },
           error: (erro) => {
             console.error('Erro ao salvar:', erro);
-           this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
+            this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
           }
         });
       }
@@ -141,7 +137,7 @@ export class TableUsersComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user.trackingId).subscribe({
+    this.userAdminService.deleteUser(user.trackingId).subscribe({
       next: () => {
         this.usuariosFiltrados = this.usuariosFiltrados.filter(
           (u: User) => u.trackingId !== user.trackingId

@@ -1,0 +1,45 @@
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 250px;
+  z-index: 1055;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+
+  &.alert-error {
+    background-color: #f8d7da;
+    color: #842029;
+  }
+
+  &.alert-info {
+    background-color: #cff4fc;
+    color: #055160;
+  }
+}
+
+.btn-close-custom {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #003366;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+
+  &:hover {
+    color: #001f4d;
+    transform: scale(1.1);
+  }
+}
