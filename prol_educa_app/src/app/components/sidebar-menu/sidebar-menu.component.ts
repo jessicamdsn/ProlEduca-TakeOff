@@ -29,7 +29,7 @@ export class SidebarMenuComponent implements OnInit {
     const routeMap: any = {
       'users': 'alunos',
       'instituicoes': 'instituicoes',
-      'cursos': 'cursos',
+      'courses': 'cursos',
       'manager': 'usuarios'
     };
 
