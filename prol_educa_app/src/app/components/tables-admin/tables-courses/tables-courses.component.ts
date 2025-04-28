@@ -50,11 +50,12 @@ export class TablesCoursesComponent {
       this.cursos = courses;
       this.cursosFiltrados = [...courses];
       this.totalPaginas = Math.ceil(courses.length / this.itensPorPagina);
-      this.instituicoes = [...new Set(this.cursos.map(c => c.codInstituicao))];
+      this.instituicoes = [
+        ...new Set(this.cursos.map((c) => c.codInstituicao)),
+      ];
       this.atualizarPaginacao();
     });
   }
-
 
   filtrarCursos() {
     this.cursosFiltrados = this.cursos.filter((curso) => {
@@ -85,7 +86,6 @@ export class TablesCoursesComponent {
     this.atualizarPaginacao();
   }
 
-
   atualizarPaginacao() {
     this.totalPaginas = Math.ceil(
       this.cursosFiltrados.length / this.itensPorPagina
@@ -97,12 +97,10 @@ export class TablesCoursesComponent {
     );
   }
 
-
   mudarPagina(pagina: number) {
     this.paginaAtual = pagina;
     this.atualizarPaginacao();
   }
-
 
   limparFiltros() {
     this.filtroInstituicao = '';
@@ -114,54 +112,59 @@ export class TablesCoursesComponent {
     this.atualizarPaginacao();
   }
 
-  // btn Update
-  openDialogUpdate(course: Course) {
-    const dialogRef = this.dialogEditModal.open(EditUserDialogComponent, {
-      width: '500px',
-      data: course,
-    });
-
-    dialogRef
-      .afterClosed()
-      .subscribe((cursosAtualizado: Course | undefined) => {
-        if (cursosAtualizado) {
-          this.coursesService.updateCourse(cursosAtualizado).subscribe({
-            next: (updateCourse) => {
-              const index = this.cursosFiltrados.findIndex(
-                (c: Course) =>
-                  c.trackingId === (updateCourse as Course).trackingId
-              );
-              if (index !== -1) {
-                this.cursosFiltrados[index] = updateCourse as Course;
-              }
-              this.atualizarPaginacao();
-              this.alertService.success('Curso atualizado com sucesso!');
-            },
-            error: (erro) => {
-              console.error('Erro ao salvar:', erro);
-              this.alertService.error(
-                'Erro ao salvar o curso. Tente novamente.'
-              );
-            },
-          });
-        }
-      });
+  capitalizarNome(text: string): string {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
-  // btn Deletar
+  // btn Update
+  openDialogUpdate(curso: Course) {
+    const dialogRef = this.dialogEditModal.open(EditUserDialogComponent, {
+      width: '500px',
+      data: {
+        tipo: 'curso', // Passando 'curso' aqui para indicar que é um curso
+        dados: curso, // Passando os dados do curso
+      },
+    });
 
-  openDialogDelete(course: Course) {
+    dialogRef.afterClosed().subscribe((cursoAtualizado: Course | undefined) => {
+      if (cursoAtualizado) {
+        this.coursesService.updateCourse(cursoAtualizado).subscribe({
+          next: (updateCourse) => {
+            const index = this.cursosFiltrados.findIndex(
+              (c: Course) =>
+                c.trackingId === (updateCourse as Course).trackingId
+            );
+            if (index !== -1) {
+              this.cursosFiltrados[index] = updateCourse as Course;
+            }
+            this.atualizarPaginacao();
+            this.alertService.success('Curso atualizado com sucesso!');
+          },
+          error: (erro) => {
+            console.error('Erro ao salvar:', erro);
+            this.alertService.error('Erro ao salvar o curso. Tente novamente.');
+          },
+        });
+      }
+    });
+  }
+
+  // btn Delete
+  openDialogDelete(curso: Course) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         mensagem:
-          'Você tem certeza que deseja excluir o curso ' + course.nome + '?',
+          'Você tem certeza que deseja excluir o curso ' +
+          this.capitalizarNome(curso.nome) +
+          '?',
       },
     });
 
     dialogRef.afterClosed().subscribe((confirm: boolean) => {
       if (confirm) {
-        this.deleteUser(course);
+        this.deleteUser(curso);
       }
     });
   }

@@ -1,26 +1,18 @@
-<h2 mat-dialog-title>Editar usuário</h2>
+<h2 mat-dialog-title>Editar {{ tipo === 'usuario' ? 'Usuário' : 'Curso' }}</h2>
 
 <form (ngSubmit)="save()">
   <mat-dialog-content class="mat-typography">
     <div class="form-grid">
-      <mat-form-field appearance="outline">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="user.nome" name="nome" required />
-      </mat-form-field>
+      <mat-form-field appearance="outline" *ngFor="let campo of campos">
+        <mat-label>{{ campo.label }}</mat-label>
+        <input
+          matInput
+          [type]="campo.type"
+          [(ngModel)]="dados[campo.name]"
+          [name]="campo.name"
+          required
+        />
 
-      <mat-form-field appearance="outline">
-        <mat-label>CPF</mat-label>
-        <input matInput [(ngModel)]="user.cpf" name="cpf" required />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="user.email" name="email" required />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Contato</mat-label>
-        <input matInput [(ngModel)]="user.contato" name="contato" required />
       </mat-form-field>
     </div>
   </mat-dialog-content>
