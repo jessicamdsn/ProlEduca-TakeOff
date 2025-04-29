@@ -4,3 +4,8 @@
     min-height: 100vh;  /* Para garantir que o fundo cubra toda a área abaixo do cabeçalho */
   }
   
+  app-header {
+    .navbar-section {
+      display: none;
+    }
+  }
