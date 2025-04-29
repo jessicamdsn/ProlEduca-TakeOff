@@ -73,6 +73,14 @@ export class TableUsersComponent implements OnInit {
     this.atualizarPaginacao();
   }
 
+  limparPesquisa(): void {
+    this.termoPesquisa = '';
+    this.usuariosFiltrados = this.user;
+    this.paginaAtual = 1;
+    this.atualizarPaginacao();
+  }
+
+
 
   atualizarPaginacao() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
