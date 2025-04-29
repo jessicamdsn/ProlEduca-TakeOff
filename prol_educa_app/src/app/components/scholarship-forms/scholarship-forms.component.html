@@ -1,0 +1,113 @@
+<app-alert 
+  *ngIf="alertMessage" 
+  [message]="alertMessage" 
+  [type]="alertType">
+</app-alert>
+
+
+<div class="main-container">
+  <div class="titulos">
+    <h1>Complete a sua inscrição em poucos cliques</h1>
+    <p>Precisaremos de mais algumas informações para completar o seu cadastro na bolsa escolhida.</p>
+  </div>
+
+  <div class="form-container">   
+    <div class="form-box">
+      <div class="step-indicator">
+        <div class="step-block" [ngClass]="{'active': currentStep === 1}">
+          <div class="circle" [ngClass]="{'blue': currentStep === 1}">1</div>
+          <p class="step-label">Dados do Cliente</p>
+        </div>
+        <div class="line" [ngClass]="{'blue': currentStep > 1}"></div>
+        <div class="step-block" [ngClass]="{'active': currentStep === 2}">
+          <div class="circle" [ngClass]="{'blue': currentStep === 2}">2</div>
+          <p class="step-label">Dados do Bolsista</p>
+        </div>
+      </div>
+      <!-- Formulário de Dados do Cliente -->
+      <form [formGroup]="formStep1" *ngIf="currentStep === 1">
+        <h2>Dados do Cliente</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome">Nome completo:*</label>
+            <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome">
+          </div>
+          <div class="form-group">
+            <label for="cpf">CPF:*</label>
+            <input type="text" id="cpf" formControlName="cpf" placeholder="Digite seu CPF">
+          </div>
+          <div class="form-group">
+            <label for="nascimento">Data de Nascimento:*</label>
+            <input type="date" id="nascimento" formControlName="nascimento">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail:*</label>
+            <input type="email" id="email" formControlName="email" placeholder="Digite seu email">
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone:*</label>
+            <input type="tel" id="telefone" formControlName="telefone" placeholder="Ex: (81)9999-8888">
+          </div>
+          <div class="form-group">
+            <label for="endereco">Endereço:*</label>
+            <input type="text" id="endereco" formControlName="endereco" placeholder="Digite seu endereço">
+          </div>
+          <div *ngIf="bolsistaControl" class="switch-container">
+            <label for="bolsista" class="switch-label">Sou o bolsista</label>
+            <label class="switch">
+              <input type="checkbox" id="bolsista" [formControl]="bolsistaControl" (change)="onBolsistaChange($event)">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="buttons">
+          <button type="button" class="proximo" (click)="goToNextStep()">Próximo</button>
+        </div>
+      </form>
+      
+
+      <!-- Formulário de Dados do Bolsista -->
+      <form *ngIf="currentStep === 2" [formGroup]="formStep2">
+        <h2>Dados do Bolsista</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nomeBolsista">Nome completo do bolsista:</label>
+            <input type="text" id="nomeBolsista" formControlName="nomeBolsista" placeholder="Digite o nome do bolsista">
+          </div>
+          <div class="form-group">
+            <label for="cpfBolsista">CPF do Bolsista:</label>
+            <input type="text" id="cpfBolsista" formControlName="cpfBolsista" placeholder="Digite o nome do CPF do bolsista">
+          </div>
+          <div class="form-group">
+            <label for="dataNascimentoBolsista">Data de Nascimento:</label>
+            <input type="date" id="dataNascimentoBolsista" formControlName="dataNascimentoBolsista">
+          </div>
+          <div class="form-group">
+            <label for="necessidadesEspeciais">Possui necessidades especiais?</label>
+            <select id="necessidadesEspeciais" formControlName="necessidadesEspeciais">
+              <option value="">Selecione</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="racaCor">Selecione sua identificação étnica:</label>
+            <select id="racaCor" formControlName="racaCor">
+              <option value="">Selecione</option>
+              <option value="branco">Branco</option>
+              <option value="pardo">Pardo</option>
+              <option value="amarelo">Amarelo</option>
+              <option value="preto">Preto</option>
+              <option value="indigena">Indígena</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="cancelar" (click)="goToPreviousStep()">Voltar</button>
+          <button type="button" class="proximo" (click)="finalizarCadastro()">Finalizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

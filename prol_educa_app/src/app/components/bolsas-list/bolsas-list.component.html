@@ -1,32 +1,43 @@
-<div class="d-flex justify-content-lg-around">
-  <!-- FILTROS -->
-  <div
-    class="filtros-container p-4 rounded shadow-sm bg-white"
-    style="height: 625px"
+<!-- BOTÃO FILTRAR (MOBILE) -->
+<div class="d-lg-none w-100 d-flex justify-content-between align-items-center px-3 mb-3 gap-4">
+  <!-- Botão Filtrar com visual de dropdown -->
+  <button
+    class="btn botao-filtro-mobile"
+    data-bs-toggle="modal"
+    data-bs-target="#filtroModal"
   >
+    Filtrar
+  </button>
+
+  <!-- Botão Ordenar (já existente, adaptado para ficar na mesma linha) -->
+  <div class="d-flex justify-content-end" *ngIf="bolsasFiltradas.length > 0">
+    <button class=" btn btn-orden" (click)="ordenarPorPreco()">
+      Ordenar por preço
+      <i
+        class="bi"
+        [ngClass]="ordemPrecoAsc ? 'bi-arrow-down': 'bi-arrow-up' "
+      ></i>
+    </button>
+  </div>
+</div>
+
+<div class="d-flex justify-content-lg-around flex-column flex-lg-row">
+
+  <!-- FILTROS (DESKTOP) -->
+  <div class="filtros-container p-4 rounded shadow-sm bg-white d-none d-lg-block" style="height: 625px">
     <h5 class="mb-4 fw-bold fs-6">Filtre os Resultados</h5>
 
     <div class="mb-3">
       <label class="form-label">Qual instituição?</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filtros.instituicao"
-        (change)="filtrarBolsas()"
-      >
+      <select class="form-select" [(ngModel)]="filtros.instituicao" (change)="filtrarBolsas()">
         <option value="">Todas</option>
-        <option *ngFor="let inst of instituicoes" [value]="inst">
-          {{ inst }}
-        </option>
+        <option *ngFor="let inst of instituicoes" [value]="inst">{{ inst }}</option>
       </select>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Estado?</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filtros.estado"
-        (change)="filtrarBolsas()"
-      >
+      <select class="form-select" [(ngModel)]="filtros.estado" (change)="filtrarBolsas()">
         <option value="">Todos</option>
         <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
       </select>
@@ -34,11 +45,7 @@
 
     <div class="mb-3">
       <label class="form-label">Cidade?</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filtros.cidade"
-        (change)="filtrarBolsas()"
-      >
+      <select class="form-select" [(ngModel)]="filtros.cidade" (change)="filtrarBolsas()">
         <option value="">Todas</option>
         <option *ngFor="let cid of cidade" [value]="cid">{{ cid }}</option>
       </select>
@@ -46,11 +53,7 @@
 
     <div class="mb-3">
       <label class="form-label">Bairro?</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filtros.bairro"
-        (change)="filtrarBolsas()"
-      >
+      <select class="form-select" [(ngModel)]="filtros.bairro" (change)="filtrarBolsas()">
         <option value="">Todos</option>
         <option *ngFor="let b of bairro" [value]="b">{{ b }}</option>
       </select>
@@ -58,11 +61,7 @@
 
     <div class="mb-3">
       <label class="form-label">Curso?</label>
-      <select
-        class="form-select"
-        [(ngModel)]="filtros.curso"
-        (change)="filtrarBolsas()"
-      >
+      <select class="form-select" [(ngModel)]="filtros.curso" (change)="filtrarBolsas()">
         <option value="">Todos</option>
         <option *ngFor="let c of cursos" [value]="c">{{ c }}</option>
       </select>
@@ -70,35 +69,90 @@
 
     <div class="mb-3">
       <label class="form-label">Turno?</label>
-      <div
-        class="form-check"
-        *ngFor="let turno of ['Manhã', 'Tarde', 'Noite', 'Integral']"
-      >
-        <input
-          class="form-check-input"
-          type="checkbox"
+      <div class="form-check" *ngFor="let turno of ['Manhã', 'Tarde', 'Noite', 'Integral']">
+        <input class="form-check-input" type="checkbox"
           [(ngModel)]="turnoSelecionado[turno]"
-          (change)="toggleTurno(turnoSelecionado[turno], turno)"
-        />
-
+          (change)="toggleTurno(turnoSelecionado[turno], turno)" />
         <label class="form-check-label">{{ turno }}</label>
       </div>
     </div>
   </div>
 
-  <div *ngIf="bolsasFiltradas.length === 0" class="text-center mt-5">
-    <p class="fs-5 text-muted">
-      Nenhuma bolsa encontrada com os filtros selecionados.
-    </p>
-    <button class="btn btn-outline-primary" (click)="limparFiltros()">
-      Limpar filtros
-    </button>
+  <!-- MODAL DE FILTROS (MOBILE) -->
+  <div class="modal fade" id="filtroModal" tabindex="-1" aria-labelledby="filtroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filtroModalLabel">Filtrar Resultados</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+
+          <!-- Mesmo conteúdo do filtro -->
+          <div class="mb-3">
+            <label class="form-label">Qual instituição?</label>
+            <select class="form-select" [(ngModel)]="filtros.instituicao" (change)="filtrarBolsas()">
+              <option value="">Todas</option>
+              <option *ngFor="let inst of instituicoes" [value]="inst">{{ inst }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Estado?</label>
+            <select class="form-select" [(ngModel)]="filtros.estado" (change)="filtrarBolsas()">
+              <option value="">Todos</option>
+              <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Cidade?</label>
+            <select class="form-select" [(ngModel)]="filtros.cidade" (change)="filtrarBolsas()">
+              <option value="">Todas</option>
+              <option *ngFor="let cid of cidade" [value]="cid">{{ cid }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bairro?</label>
+            <select class="form-select" [(ngModel)]="filtros.bairro" (change)="filtrarBolsas()">
+              <option value="">Todos</option>
+              <option *ngFor="let b of bairro" [value]="b">{{ b }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Curso?</label>
+            <select class="form-select" [(ngModel)]="filtros.curso" (change)="filtrarBolsas()">
+              <option value="">Todos</option>
+              <option *ngFor="let c of cursos" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Turno?</label>
+            <div class="form-check" *ngFor="let turno of ['Manhã', 'Tarde', 'Noite', 'Integral']">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="turnoSelecionado[turno]"
+                (change)="toggleTurno(turnoSelecionado[turno], turno)" />
+              <label class="form-check-label">{{ turno }}</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary w-100" data-bs-dismiss="modal" (click)="filtrarBolsas()">
+            Aplicar filtros
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- CONTAINER DE CARDS -->
   <div class="container-card-bolsas">
     <div class="d-flex justify-content-end mb-1" *ngIf="bolsasFiltradas.length > 0">
-      <button class=" btn btn-orden mb-3" (click)="ordenarPorPreco()">
+      <button class=" btn btn-orden-normal mb-3" (click)="ordenarPorPreco()">
         Ordenar por preço
         <i
           class="bi"
@@ -140,7 +194,7 @@
             <p>Turno: {{ bolsa.turno }}</p>
           </div>
           <div class="btn-subcribe d-flex justify-content-center">
-            <button style="width: 40%" class="rounded p-2">
+            <button style="width: 60%" class="rounded p-2">
               <a class="text-decoration-none text-white" href="#"
                 >Fazer inscrição</a
               >

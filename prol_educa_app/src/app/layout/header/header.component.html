@@ -13,19 +13,19 @@
     <!-- Container de navegação -->
     <div class="container-nav" [class.open]="isMenuOpen">    
       <!-- Menu principal -->
-      <nav class="navbar-section">
+      <div class="navbar-section" *ngIf="!esconderNavbar">
         <ul>
           <li><a class="nav-links" href="#">Bolsa de Estudos</a></li>
           <li><a class="nav-links" href="#">Contato</a></li>
         </ul>
-      </nav>
+      </div>
     
       <!-- Avatar do perfil (visível apenas no desktop) -->
       <app-profile-avatar></app-profile-avatar>
     </div>
     
     <!-- Menu mini/hamburger (visível apenas no mobile) -->
-    <div class="menu-mini" (click)="toggleMenu()">
+    <div class="menu-mini" (click)="toggleMenu()" *ngIf="!esconderNavbar">
       <a href="javascript:void(0)"><img src="assets/Menu.svg" alt="Menu Prol Educa" /></a>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, HostListener, Input } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ProfileAvatarComponent } from '../../components/profile-avatar/profile-avatar.component';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
   screenWidth = 0; // Inicializa com 0 em vez de window.innerWidth
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  @Input() esconderNavbar = false;
+
 
   ngOnInit() {
     // Verifica se estamos no navegador antes de acessar window

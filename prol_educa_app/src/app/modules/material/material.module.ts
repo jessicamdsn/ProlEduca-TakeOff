@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { HttpClientModule } from '@angular/common/http';
 const MATERIAL_MODULES = [
   MatButtonModule,
   MatIconModule,
@@ -26,10 +26,11 @@ const MATERIAL_MODULES = [
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ReactiveFormsModule], // Opcional (caso vá usar componentes no MaterialModule)
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule], // Opcional (caso vá usar componentes no MaterialModule)
   exports: [
     CommonModule,
     ReactiveFormsModule, // <-- ESSENCIAL para liberar formGroup no seu app
+    HttpClientModule,
     ...MATERIAL_MODULES
   ]
 })
