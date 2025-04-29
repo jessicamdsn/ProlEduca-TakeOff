@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Editar {{ tipo === 'usuario' ? 'Usuário' : 'Curso' }}</h2>
+
+<form (ngSubmit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" *ngFor="let campo of campos">
+        <mat-label>{{ campo.label }}</mat-label>
+        <input
+          matInput
+          [type]="campo.type"
+          [(ngModel)]="dados[campo.name]"
+          [name]="campo.name"
+          required
+        />
+
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-footer" align="end">
+    <button mat-button class="btn btn-secondary" type="button" (click)="cancel()">Cancelar</button>
+    <button mat-button class="btn btn-standard" type="submit">Salvar</button>
+  </mat-dialog-actions>
+</form>

@@ -26,4 +26,10 @@ export class InstitutionRegistrationComponent {
   handleFormSubmit(data: any) {
     console.log('Dados recebidos no cadastro:', data);
   }
+
+  isSidebarCollapsed = false;
+
+  onSidebarCollapseChange(collapsed: boolean): void {
+    this.isSidebarCollapsed = collapsed;
+  }
 }

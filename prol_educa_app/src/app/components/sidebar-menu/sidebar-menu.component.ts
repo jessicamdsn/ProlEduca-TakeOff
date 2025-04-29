@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Adicione esta importação
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common'; // Adicione esta importação
 export class SidebarMenuComponent implements OnInit {
   isCollapsed = false;
   activeMenuItem = 'instituicoes';
-  
+
+
   menuItems = [
     { id: 'instituicoes', label: 'Instituições cadastradas', icon: 'school' },
     { id: 'alunos', label: 'Alunos cadastrados', icon: 'person' },
@@ -19,13 +21,29 @@ export class SidebarMenuComponent implements OnInit {
     { id: 'usuarios', label: 'Usuários Administradores', icon: 'admin_panel_settings' }
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-  }
+    const url = this.router.url;
 
-  toggleSidebar(): void {
+    const routeMap: any = {
+      'users': 'alunos',
+      'instituicoes': 'instituicoes',
+      'courses': 'cursos',
+      'manager': 'usuarios'
+    };
+
+    const matchedKey = Object.keys(routeMap).find(key => url.includes(key));
+
+    if (matchedKey) {
+      this.activeMenuItem = routeMap[matchedKey];
+    }
+  }
+  @Output() collapsedChange = new EventEmitter<boolean>();
+
+  toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+    this.collapsedChange.emit(this.isCollapsed); // ✅ Emite o estado atualizado
   }
 
   setActiveMenuItem(itemId: string): void {
