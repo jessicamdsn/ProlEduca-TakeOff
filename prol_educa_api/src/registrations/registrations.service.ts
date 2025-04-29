@@ -17,6 +17,8 @@ export class RegistrationsService {
     const newRegistration = await this.repository.save({
       registration_date: createRegistrationDto.registration_date,
       status: createRegistrationDto.status,
+      scholar: createRegistrationDto.scholar,
+      course: createRegistrationDto.course,
         });
         return newRegistration;
   }

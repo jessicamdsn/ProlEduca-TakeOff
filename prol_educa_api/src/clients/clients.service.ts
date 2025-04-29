@@ -21,7 +21,7 @@ export class ClientsService {
       cpf: createClientDto.cpf,
       birth_date: createClientDto.birth_date,
       is_active: createClientDto.is_active,
-      // scholars: createClientDto.scholars,
+      scholars: createClientDto.scholars,
     });
     return newClient;
   }

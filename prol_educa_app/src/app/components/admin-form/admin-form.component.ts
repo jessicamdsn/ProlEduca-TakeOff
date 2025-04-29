@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.component';
+import { AdmService } from '../../services/adm.service';
 
 
 @Component({
@@ -12,36 +13,56 @@ import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.c
   styleUrl: './admin-form.component.scss'
 })
 export class AdminFormComponent {
-  form!: FormGroup;
   
-  constructor(private fb: FormBuilder) {}
-  
-  ngOnInit(): void {
-    // Inicializar o formulário com todos os controles necessários
+form!: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private admService: AdmService
+  ) {}
+
+  ngOnInit() {
     this.form = this.fb.group({
-      // Dados da Instituição
       nome: ['', Validators.required],
-      email: ['', Validators.required],
-      senha: ['', Validators.required],      
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
+      confirmarSenha: ['', Validators.required]
     });
   }
 
-
-  onCancel(): void {
-    this.form.reset();
-    // Ou navegue para outra página se necessário
-  }
-  
-  onSubmit(): void {
+  onSubmit() {
     if (this.form.valid) {
-      console.log('Formulário enviado:', this.form.value);
-      // Lógica para enviar os dados do formulário
-    } else {
-      // Marcar todos os campos como touched para mostrar erros de validação
-      Object.keys(this.form.controls).forEach(key => {
-        const control = this.form.get(key);
-        control?.markAsTouched();
+      const { nome, email, senha, confirmarSenha } = this.form.value;
+
+      if (senha !== confirmarSenha) {
+        alert('As senhas não coincidem!');
+        return;
+      }
+
+      this.admService.createNewAdm(nome, email, senha).subscribe({
+        next: (response) => {
+          console.log('Administrador criado:', response);
+          alert('Administrador criado com sucesso!');
+          this.form.reset();
+        },
+        error: (error) => {
+          console.error('Erro ao criar administrador:', error);
+          alert('Erro ao criar administrador.');
+        }
       });
+    } else {
+      // Object.keys(this.form.controls).forEach(key => {
+      //           const control = this.form.get(key);
+      //           control?.markAsTouched();
+      //         });
+      alert('Preencha todos os campos corretamente.');
     }
   }
-}
+
+  onCancel() {
+    this.form.reset();
+  }
+
+
+
+ }

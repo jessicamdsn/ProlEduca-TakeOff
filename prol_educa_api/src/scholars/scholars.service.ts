@@ -20,6 +20,8 @@ export class ScholarsService {
       has_disabilities: createScholarDto.has_disabilities,
       cpf: createScholarDto.cpf,
       ethnicity: createScholarDto.ethnicity,
+      registrations: createScholarDto.registrations,
+      client: createScholarDto.client,
     });
     return newScholar;
   }

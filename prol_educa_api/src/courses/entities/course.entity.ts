@@ -8,8 +8,8 @@ export class Course {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToOne(() => Institution, institution => institution.courses, { onDelete: 'CASCADE' })
-  // institution: Institution;
+  @ManyToOne(() => Institution, institution => institution.courses, { onDelete: 'CASCADE' })
+  institution: Institution;
 
   @Column()
   name: string;
@@ -38,6 +38,6 @@ export class Course {
   @Column({ default: true })
   is_active: boolean;
 
-  // @OneToMany(() => Registration, registration => registration.course)
-  // registrations: Registration[];
+  @OneToMany(() => Registration, registration => registration.course)
+  registrations: Registration[];
 }

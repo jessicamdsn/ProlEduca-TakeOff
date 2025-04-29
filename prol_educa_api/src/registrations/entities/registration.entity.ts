@@ -8,11 +8,11 @@ export class Registration {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToOne(() => Scholar, scholar => scholar.registrations, { onDelete: 'CASCADE' })
-  // scholar: Scholar;
+  @ManyToOne(() => Scholar, scholar => scholar.registrations, { onDelete: 'CASCADE' })
+  scholar: Scholar;
 
-  // @ManyToOne(() => Course, course => course.registrations, { onDelete: 'CASCADE' })
-  // course: Course;
+  @ManyToOne(() => Course, course => course.registrations, { onDelete: 'CASCADE' })
+  course: Course;
 
   @Column({ type: 'date', default: () => 'CURRENT_DATE' })
   registration_date: Date;

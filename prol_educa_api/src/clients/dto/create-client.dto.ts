@@ -7,5 +7,5 @@ export class CreateClientDto {
   cpf: string;
   birth_date: Date;
   is_active: boolean;
-  // scholars: Scholar[];
+  scholars: Scholar[];
 }
