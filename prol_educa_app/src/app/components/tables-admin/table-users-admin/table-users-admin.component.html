@@ -11,6 +11,7 @@
     />
   </div>
 
+  <ng-container *ngIf="usuariosFiltrados.length > 0; else nenhumResultado">
   <!-- Tabela -->
   <table class="table table-hover align-middle"  *ngIf="usuariosPaginados.length > 0">
     <thead class="table-light">
@@ -74,5 +75,12 @@
       </li>
     </ul>
   </nav>
+</ng-container>
 
+  <ng-template #nenhumResultado>
+    <div class="text-center mt-5">
+      <p class="fs-5 text-muted">Nenhum adminstrador encontrado.</p>
+      <button class="btn btn-outline-primary" (click)="limparPesquisa()"></button>
+   </div>
+  </ng-template>
 </div>
