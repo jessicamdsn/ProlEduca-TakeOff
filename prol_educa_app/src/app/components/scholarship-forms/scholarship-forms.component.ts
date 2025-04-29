@@ -3,29 +3,41 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ScholarshipService } from '../../services/scholarship-service/scholarship.service'; 
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-scholarship-forms',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent],
   templateUrl: './scholarship-forms.component.html',
   styleUrls: ['./scholarship-forms.component.scss']
 })
 export class ScholarshipFormsComponent {
+
+  alertMessage: string | null = null;
+  alertType: 'success' | 'error' | 'info' = 'info';
+
+  mostrarAlerta(mensagem: string, tipo: 'success' | 'error' | 'info' = 'info') {
+    this.alertMessage = mensagem;
+    this.alertType = tipo;
+    setTimeout(() => this.alertMessage = null, 5000); // some após 5s
+  }
+
   currentStep: number = 1;
   formStep1: FormGroup;
   formStep2: FormGroup;
 
  constructor(private fb: FormBuilder, private scholarshipService: ScholarshipService) {
   this.formStep1 = this.fb.group({
-    nome: [''],
-    cpf: [''],
-    nascimento: [''],
-    email: [''],
-    telefone: [''],
-    endereco: [''],
+    nome: ['', Validators.required],
+    cpf: ['', Validators.required],
+    nascimento: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    telefone: ['', Validators.required],
+    endereco: ['', Validators.required],
     bolsista: this.fb.control(false)
   });
+  
 
   this.formStep2 = this.fb.group({
     nomeBolsista: [''],
@@ -53,9 +65,10 @@ isCurrentFormValid(): boolean {
     if (this.formStep1.valid) {
       this.currentStep = 2;
     } else {
-      alert("Por favor, preencha todos os campos obrigatórios.");
+      this.mostrarAlerta("Por favor, preencha todos os campos obrigatórios.", 'error');
     }
-    }
+  }
+  
   
 
 goToPreviousStep() {
@@ -100,15 +113,15 @@ finalizarCadastro() {
     this.scholarshipService.cadastrarCliente(payload).subscribe({
       next: (response) => {
         console.log('Cadastro realizado com sucesso:', response);
-        alert('Cadastro finalizado com sucesso!');
+        this.mostrarAlerta('Cadastro finalizado com sucesso!', 'success');
       },
       error: (error) => {
         console.error('Erro ao finalizar cadastro:', error);
-        alert('Erro ao finalizar cadastro. Tente novamente.');
+        this.mostrarAlerta('Erro ao finalizar cadastro. Tente novamente.', 'error');
       }
     });
   } else {
-    alert('Preencha corretamente os dados do bolsista antes de finalizar.');
+    this.mostrarAlerta('Preencha corretamente os dados do bolsista antes de finalizar.', 'error');
   }
 }
 
