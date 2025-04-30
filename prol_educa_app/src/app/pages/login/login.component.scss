@@ -5,6 +5,13 @@ link-voltar-site {
 
 h4{
   color: #07075b;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+img.logo-edupass {
+  width: 20%; // ou o tamanho que preferir
+  height: auto; // mantém a proporção
 }
 
 button{
@@ -16,4 +23,39 @@ button{
 a{
   font-size: 0.9rem;
   color: #4F46E5;
+}
+
+
+
+@media (max-width: 768px) {
+  img {
+    width: 50% !important;
+    max-width: 30%;
+    min-width: 40%;
+  }
+  .mini {
+    flex: 0.4;
+  }
+}
+
+/* Novidade: ajustes para iPads */
+@media (min-width: 768px) and (max-width: 1024px) {
+  img {
+    width: 50% !important;
+    max-width: 30%;
+    min-width: 40%;
+  }
+  .mini {
+    width: 100% !important;
+    max-width: 500px;
+    padding: 0 1rem;
+  }
+
+  .mini input {
+    width: 100%;
+  }
+
+  .mini button {
+    width: 50%;
+  }
 }

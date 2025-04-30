@@ -1,0 +1,20 @@
+.btn-add {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 5px 10px 17px -14px rgba(0,0,0,0.59);
+  box-shadow: 5px 10px 17px -14px rgba(0,0,0,0.59);
+  border-radius: 2px;
+  padding: 10px 20px;
+  font-size: 12px;
+  color: #0a0a5a;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  gap: .5rem;
+}
+.btn-add:hover {
+  color: #0a0a5a;
+  border: 1px solid #0a0a5a;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}

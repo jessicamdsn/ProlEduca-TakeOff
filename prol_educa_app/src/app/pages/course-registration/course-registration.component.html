@@ -1,0 +1,7 @@
+<div class="registration-container" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <app-sidebar-menu (collapsedChange)="onSidebarCollapseChange($event)"></app-sidebar-menu>
+    <div class="main-content">
+      <app-header-admin></app-header-admin>
+      <app-course-form></app-course-form>
+    </div>
+  </div>

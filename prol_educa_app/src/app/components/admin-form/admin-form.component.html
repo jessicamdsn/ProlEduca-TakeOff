@@ -1,0 +1,35 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<div class="main-container">
+  <app-card-instituicao titulo="Cadastrar Administrador"></app-card-instituicao>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h3>Dados do Administrador:</h3>
+    <div class="grid-container">
+        <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" formControlName="nome" class="form-control" id="nome" placeholder="Digite seu nome completo">
+        </div>
+    
+        <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Digite seu email">
+        </div>
+    
+        <div class="mb-3">
+        <label for="senha" class="form-label">Senha:</label>
+        <input type="password" formControlName="senha" class="form-control" id="senha" placeholder="Digite sua senha">
+        </div>
+
+        <div class="mb-3">
+            <label for="senha" class="form-label">Insira a senha novamente:</label>
+            <input type="password" formControlName="senha" class="form-control" id="senha" placeholder="Digite sua senha novamente">
+        </div>
+    </div>
+    <div class="button-group">
+      <button type="button" (click)="onCancel()">Cancelar</button>
+      <button type="submit">Salvar alteração</button>
+    </div>
+  </form>
+</div>

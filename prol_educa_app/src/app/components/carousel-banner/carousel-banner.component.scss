@@ -113,3 +113,35 @@
       height: 32px;
     }
   }
+
+  @media (max-width: 768px) {
+  .carousel-slides {
+    height: 250px; /* reduz altura em telas menores */
+  }
+
+  .nav-arrow {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .category-tab {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-slides {
+    height: 180px;
+  }
+
+  .carousel-container {
+    border-radius: 12px;
+  }
+
+  .nav-arrow {
+    width: 24px;
+    height: 24px;
+  }
+}

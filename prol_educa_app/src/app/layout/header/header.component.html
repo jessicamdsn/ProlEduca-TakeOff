@@ -1,19 +1,32 @@
 <header>
   <div class="container-header">
+    <!-- Logo principal (visível apenas no desktop) -->
     <div class="logo">
-      <a href="#"><img src="assets/logo-edupass.png" alt="logo Prol Educa" /></a>
+      <a href="#"><img src="assets/logo-edupass.svg" alt="logo Prol Educa" /></a>
     </div>
-    <div class="container-nav">
-      <nav class="navbar-section">
+    
+    <!-- Logo mini (visível apenas no mobile) -->
+    <div class="logo-mini">
+      <a href="#"><img src="assets/SIMBOLOEDUPASS.svg" alt="logo Prol Educa" /></a>
+    </div>
+    
+    <!-- Container de navegação -->
+    <div class="container-nav" [class.open]="isMenuOpen">    
+      <!-- Menu principal -->
+      <div class="navbar-section" *ngIf="!esconderNavbar">
         <ul>
-          <!-- <li><a class="nav-links" href="#">Produtos</a></li> -->
           <li><a class="nav-links" href="#">Bolsa de Estudos</a></li>
           <li><a class="nav-links" href="#">Contato</a></li>
-          <!-- <li><a class="nav-links" href="#">Sobre nós</a></li> -->
         </ul>
-      </nav>
+      </div>
+    
+      <!-- Avatar do perfil (visível apenas no desktop) -->
       <app-profile-avatar></app-profile-avatar>
+    </div>
+    
+    <!-- Menu mini/hamburger (visível apenas no mobile) -->
+    <div class="menu-mini" (click)="toggleMenu()" *ngIf="!esconderNavbar">
+      <a href="javascript:void(0)"><img src="assets/Menu.svg" alt="Menu Prol Educa" /></a>
     </div>
   </div>
 </header>
-

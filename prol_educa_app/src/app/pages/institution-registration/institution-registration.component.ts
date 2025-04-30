@@ -3,13 +3,18 @@ import { InstitutionFormComponent } from '../../components/institution-form/inst
 import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
 // import { HeaderComponent } from '../../layout/header/header.component';
 import { HeaderAdminComponent } from "../../layout/header-admin/header-admin.component";
+import { CardInstituicaoComponent } from '../../components/card-instituicao/card-instituicao.component';
 
 @Component({
   standalone: true,
   selector: 'app-institution-registration',
   templateUrl: './institution-registration.component.html',
   styleUrls: ['./institution-registration.component.scss'],
-  imports: [SidebarMenuComponent, InstitutionFormComponent, HeaderAdminComponent], // por exemplo
+  imports: [
+    SidebarMenuComponent,
+    InstitutionFormComponent,
+    HeaderAdminComponent,
+  ]
 })
 export class InstitutionRegistrationComponent {
   dadosIniciais = {
@@ -20,5 +25,11 @@ export class InstitutionRegistrationComponent {
 
   handleFormSubmit(data: any) {
     console.log('Dados recebidos no cadastro:', data);
+  }
+
+  isSidebarCollapsed = false;
+
+  onSidebarCollapseChange(collapsed: boolean): void {
+    this.isSidebarCollapsed = collapsed;
   }
 }

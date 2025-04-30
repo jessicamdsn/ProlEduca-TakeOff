@@ -1,0 +1,142 @@
+// Importa Montserrat se ainda não estiver sendo usado
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+app-app-card-instituicao {
+  width: 100%;
+}
+
+.main-container {
+  padding-top: 5.1rem;
+  width: 100%;  
+  
+}
+
+
+form {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  
+
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+label {
+  font-weight: 500;
+}
+
+hr {
+  width: 50%;
+}
+// Container geral dos inputs da instituição
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+// Inputs individuais
+.mb-3 {
+  width: 100%;
+}
+
+// Grid dos dados do responsável
+.responsible-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+// Botões
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  
+    button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid #bcbcbc;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  
+      &:first-child {
+        background-color: #ffffff;
+  
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+  
+      &:last-child {
+        background-color: #007bff;
+        color: #fff;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-container {
+      margin-left: 70px;
+      width: auto;
+    }
+  
+  
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); // 2 colunas em vez de 4
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+  
+    .responsible-grid {
+      grid-template-columns: 1fr; // uma coluna para os campos do responsável
+      padding: 0 1rem;
+    }
+  
+    form {
+      padding: 1rem !important;
+    }
+  
+    .button-group {
+      flex-direction: column; // empilha os botões
+      align-items: stretch;
+  
+      button {
+        width: 100%;
+      }
+    }
+  
+  }
+  
+  // Celulares (576px ou menos)
+  @media (max-width: 576px) {
+    .grid-container {
+      grid-template-columns: 1fr; // tudo empilhado
+    }
+    
+  
+    h3 {
+      font-size: 1.2rem;
+    }
+  
+    label,
+    .form-control {
+      font-size: 0.95rem;
+    }
+  
+    button {
+      font-size: 0.95rem;
+    }
+  }
+  
