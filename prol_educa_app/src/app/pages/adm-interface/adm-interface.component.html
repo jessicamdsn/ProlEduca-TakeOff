@@ -1,6 +1,5 @@
-<div class="adm-wrapper" [class.collapsed]="isSidebarCollapsed">
-  <app-sidebar-menu (collapseChange)="handleSidebarCollapse($event)"></app-sidebar-menu>
-
+<div class="registration-container" [class.collapsed]="isSidebarCollapsed">
+  <app-sidebar-menu (collapsedChange)="onSidebarCollapseChange($event)"></app-sidebar-menu>
   <div class="main-content">
     <app-header-admin></app-header-admin>
     <app-welcome-card [isCollapsed]="isSidebarCollapsed"></app-welcome-card>

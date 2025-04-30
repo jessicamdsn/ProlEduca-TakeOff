@@ -20,8 +20,8 @@ import { HeaderAdminComponent } from '../../layout/header-admin/header-admin.com
 })
 export class AdmInterfaceComponent {
   isSidebarCollapsed = false;
-
-  handleSidebarCollapse(collapsed: boolean) {
+  
+  onSidebarCollapseChange(collapsed: boolean): void {
     this.isSidebarCollapsed = collapsed;
   }
 
@@ -50,4 +50,5 @@ export class AdmInterfaceComponent {
     { nome: '5º Ano - Fundamental I', avaliacao: '0 avaliações' },
     { nome: '6º Ano - Fundamental II', avaliacao: '0 avaliações' }
   ];
+
 }

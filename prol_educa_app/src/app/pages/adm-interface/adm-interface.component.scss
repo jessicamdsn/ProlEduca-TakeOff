@@ -1,24 +1,16 @@
-.adm-wrapper {
+.registration-container {
   display: flex;
-
-  app-sidebar-menu {
-    width: 250px;
-    transition: width 0.3s ease;
-  }
-
-  &.collapsed {
-    app-sidebar-menu {
-      width: 80px;
-    }
-  }
-
-  .main-content {
-    flex-grow: 1;
-    width: 100%;
-    transition: all 0.3s ease;
-    padding: 0 0 0 0;
-  }
+  flex-direction: row;
+  height: 100vh; 
+  overflow: hidden; 
 }
+
+.main-content {
+    flex: 1;
+    overflow-y: auto; // scroll só no conteúdo, se necessário
+    height: 100vh;
+}
+
 .cards-container {
   display: flex;
   justify-content: center;
@@ -33,7 +25,7 @@
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .table-card {
@@ -52,6 +44,15 @@
   font-size: 16px;
 }
 
+app-header-admin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -68,5 +69,24 @@ tbody tr:nth-child(even) {
 }
 
 
-
-
+@media (max-width: 768px) {
+  /* Quando o sidebar NÃO estiver collapsed */
+    .registration-container:not(.collapsed) .main-content::after {
+    content: "";
+    position: fixed; /* Fixa o fundo no viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Cor da sombra */
+    z-index: 1; /* Coloca a sombra sobre o conteúdo, mas atrás do conteúdo da sidebar */
+  }
+  
+  /* Certificar que o conteúdo real fica acima da sombra */
+  .registration-container .main-content {
+    position: relative;
+    z-index: 2; /* Conteúdo acima da sombra */
+    margin-left: 4rem;
+    
+  }
+}

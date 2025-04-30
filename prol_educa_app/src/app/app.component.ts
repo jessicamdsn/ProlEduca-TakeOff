@@ -14,8 +14,6 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [AdmInterfaceComponent, CommonModule],
   templateUrl: './app.component.html',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {}

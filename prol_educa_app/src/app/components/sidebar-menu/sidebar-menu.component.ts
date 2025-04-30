@@ -1,23 +1,18 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Adicione esta importação
 import { Router } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
-  standalone: true,
-  imports: [CommonModule]
+  standalone: true, // Se estiver usando componentes standalone
+  imports: [CommonModule] // Adicione esta linha para componentes standalone
 })
 export class SidebarMenuComponent implements OnInit {
   isCollapsed = false;
   activeMenuItem = 'instituicoes';
 
-
-
-  @Output() collapseChange = new EventEmitter<boolean>(); // <-- aqui está o emissor!
 
   menuItems = [
     { id: 'instituicoes', label: 'Instituições cadastradas', icon: 'school' },
@@ -27,7 +22,6 @@ export class SidebarMenuComponent implements OnInit {
   ];
 
   constructor(private router: Router) { }
-  constructor() {}
 
   ngOnInit(): void {
     const url = this.router.url;
@@ -48,12 +42,8 @@ export class SidebarMenuComponent implements OnInit {
   @Output() collapsedChange = new EventEmitter<boolean>();
 
   toggleSidebar() {
-  ngOnInit(): void {}
-
-  toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
     this.collapsedChange.emit(this.isCollapsed); // ✅ Emite o estado atualizado
-    this.collapseChange.emit(this.isCollapsed); // <-- notifica o componente pai!
   }
 
   setActiveMenuItem(itemId: string): void {
@@ -61,8 +51,10 @@ export class SidebarMenuComponent implements OnInit {
   }
 
   logout() {
+    // Aqui você pode limpar o token, redirecionar, etc.
     console.log('Usuário deslogado');
+    // Exemplo:
+    // this.authService.logout();
+    // this.router.navigate(['/login']);
   }
 }
-
-
