@@ -28,8 +28,7 @@ const MATERIAL_MODULES = [
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule], // Opcional (caso vá usar componentes no MaterialModule)
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatCardModule], // Opcional (caso vá usar componentes no MaterialModule)
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatCardModule, HttpClientModule], // Opcional (caso vá usar componentes no MaterialModule)
   exports: [
     CommonModule,
     ReactiveFormsModule, // <-- ESSENCIAL para liberar formGroup no seu app

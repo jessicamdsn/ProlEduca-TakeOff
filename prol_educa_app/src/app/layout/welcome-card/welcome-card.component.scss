@@ -1,4 +1,5 @@
 .welcome-card {
+  margin-top: 6rem;
   background-color: #f5f5f5; // cinza claro como no Figma
   padding: 16px 24px;
   border-radius: 4px;
@@ -9,6 +10,7 @@
     margin: 0;
     font-size: 1.5rem;
     color: #333;
+    font-family: 'Montserrat', sans-serif;
   }
 
   p {
@@ -18,9 +20,7 @@
   }
 
   // QUANDO O SIDEBAR ESTÁ ABERTO, adiciona margem à esquerda
-  &:not(.collapsed) {
-    margin-left: 40px; // ou 250px - 80px, dependendo do seu layout
-  }
+
 
   // QUANDO ESTÁ COLAPSADO, volta à posição normal
   &.collapsed {
