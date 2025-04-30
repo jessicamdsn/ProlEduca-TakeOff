@@ -1,0 +1,60 @@
+<div class="registration-container" [class.collapsed]="isSidebarCollapsed">
+  <app-sidebar-menu (collapsedChange)="onSidebarCollapseChange($event)"></app-sidebar-menu>
+  <div class="main-content">
+    <app-header-admin></app-header-admin>
+    <app-welcome-card [isCollapsed]="isSidebarCollapsed"></app-welcome-card>
+
+    <div class="cards-container">
+      <app-data-card label="Instituições Ativas" value="703" icon="apartment"></app-data-card>
+      <app-data-card label="Alunos Cadastrados" value="800" icon="groups"></app-data-card>
+      <app-data-card label="Cursos Ativos" value="30" icon="account_tree"></app-data-card>
+    </div>
+    <div class="tables-container">
+      <div class="table-card">
+        <div class="table-header">Top 10 Instituições</div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Instituição</th>
+              <th>Avaliação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inst of topInstituicoes; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ inst.nome }}</td>
+              <td>{{ inst.avaliacao }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-card">
+        <div class="table-header">Top 10 Cursos</div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Curso</th>
+              <th>Avaliação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let curso of topCursos; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ curso.nome }}</td>
+              <td>{{ curso.avaliacao }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
