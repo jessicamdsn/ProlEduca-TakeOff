@@ -8,8 +8,8 @@ export class Scholar {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToOne(() => Client, client => client.scholars, { onDelete: 'CASCADE' })
-  // client: Client;
+  @ManyToOne(() => Client, client => client.scholars, { onDelete: 'CASCADE' })
+  client: Client;
 
   @Column()
   full_name: string;
@@ -26,6 +26,6 @@ export class Scholar {
   @Column({ nullable: true })
   ethnicity: string;
 
-  // @OneToMany(() => Registration, registration => registration.scholar)
-  // registrations: Registration[];
+  @OneToMany(() => Registration, registration => registration.scholar)
+  registrations: Registration[];
 }

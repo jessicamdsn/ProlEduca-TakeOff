@@ -24,6 +24,8 @@ export class CoursesService {
       image_url: createCourseDto.image_url,
       enrollment_discount: createCourseDto.enrollment_discount,
       is_active: createCourseDto.is_active,
+      institution: createCourseDto.institution,
+      registrations: createCourseDto.registrations,
     });
     return newCourse;
   }

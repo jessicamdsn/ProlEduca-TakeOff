@@ -29,10 +29,8 @@ export class CourseFormComponent {
       turno: ['', Validators.required],
       status: [''],
       descontoEntrada: ['', Validators.required],
-      
     });
   }
-
 
   onCancel(): void {
     this.form.reset();

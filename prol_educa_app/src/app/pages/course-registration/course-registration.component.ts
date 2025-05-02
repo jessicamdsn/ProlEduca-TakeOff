@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CourseFormComponent } from '../../components/course-form/course-form.component';
-import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
 import { HeaderAdminComponent } from "../../layout/header-admin/header-admin.component";
+import { SidebarMenuComponent } from '../../layout/sidebar-menu/sidebar-menu.component';
+import { CourseFormComponent } from '../../components/course-form/course-form.component';
 
 @Component({
   selector: 'app-course-registration',

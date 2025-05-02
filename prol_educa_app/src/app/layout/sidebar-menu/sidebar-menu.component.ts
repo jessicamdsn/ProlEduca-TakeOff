@@ -18,7 +18,7 @@ export class SidebarMenuComponent implements OnInit {
     { id: 'instituicoes', label: 'Instituições cadastradas', icon: 'school' },
     { id: 'alunos', label: 'Alunos cadastrados', icon: 'person' },
     { id: 'cursos', label: 'Cursos Cadastrados', icon: 'book' },
-    { id: 'usuarios', label: 'Usuários Administradores', icon: 'admin_panel_settings' }
+    { id: 'admin', label: 'Usuários Administradores', icon: 'admin_panel_settings' }
   ];
 
   constructor(private router: Router) { }
@@ -27,10 +27,10 @@ export class SidebarMenuComponent implements OnInit {
     const url = this.router.url;
 
     const routeMap: any = {
-      'users': 'alunos',
+      'bolsistas': 'alunos',
       'instituicoes': 'instituicoes',
-      'courses': 'cursos',
-      'manager': 'usuarios'
+      'cursos': 'cursos',
+      'admin': 'admin'
     };
 
     const matchedKey = Object.keys(routeMap).find(key => url.includes(key));

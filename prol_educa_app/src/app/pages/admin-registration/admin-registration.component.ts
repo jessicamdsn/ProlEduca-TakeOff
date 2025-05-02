@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminFormComponent } from '../../components/admin-form/admin-form.component'; 
-import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
+import { SidebarMenuComponent } from '../../layout/sidebar-menu/sidebar-menu.component';
 import { HeaderAdminComponent } from "../../layout/header-admin/header-admin.component";
 
 @Component({

@@ -25,6 +25,6 @@ export class Client {
   @Column({ default: true })
   is_active: boolean;
 
-  // @OneToMany(() => Scholar, scholar => scholar.client)
-  // scholars: Scholar[];
+  @OneToMany(() => Scholar, scholar => scholar.client)
+  scholars: Scholar[];
 }
