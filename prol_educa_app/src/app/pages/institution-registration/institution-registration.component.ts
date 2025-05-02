@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { InstitutionFormComponent } from '../../components/institution-form/institution-form.component';
-import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
+import { SidebarMenuComponent } from '../../layout/sidebar-menu/sidebar-menu.component';
 // import { HeaderComponent } from '../../layout/header/header.component';
 import { HeaderAdminComponent } from "../../layout/header-admin/header-admin.component";
 import { CardInstituicaoComponent } from '../../components/card-instituicao/card-instituicao.component';
@@ -25,5 +25,11 @@ export class InstitutionRegistrationComponent {
 
   handleFormSubmit(data: any) {
     console.log('Dados recebidos no cadastro:', data);
+  }
+
+  isSidebarCollapsed = false;
+
+  onSidebarCollapseChange(collapsed: boolean): void {
+    this.isSidebarCollapsed = collapsed;
   }
 }

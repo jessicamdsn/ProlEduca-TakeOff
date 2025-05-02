@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <!-- Input de Pesquisa -->
+  <div class="mb-4">
+    <input
+      style="width: 25%;"
+      type="text"
+      class="form-control"
+      placeholder="Pesquisar pelo nome"
+      [(ngModel)]="termoPesquisa"
+      (input)="filtrarUsuarios()"
+    />
+  </div>
+
+  <ng-container *ngIf="usuariosFiltrados.length > 0; else nenhumResultado">
+  <!-- Tabela -->
+  <table class="table table-hover align-middle"  *ngIf="usuariosPaginados.length > 0">
+    <thead class="table-light">
+      <tr>
+        <th>Tracking ID</th>
+        <th>CPF</th>
+        <th (click)="ordenarPorNome()" style="cursor: pointer;">
+          Nome
+          <i [ngClass]="ordenacaoAsc ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'"></i>
+        </th>
+        <th>Email</th>
+        <th>Contato</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosPaginados">
+        <td>#{{ usuario.trackingId }}</td>
+        <td>{{ usuario.cpf }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.contato }}</td>
+        <td class="text-center">
+          <button class="btn btn-link text-primary p-0 me-2" (click)="openDialogUpdate(usuario)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-link text-danger p-0" (click)="openDialogDelete(usuario)">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginação -->
+  <nav *ngIf="totalPaginas > 1" class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="paginaAtual === 1">
+        <button class="page-link" (click)="mudarPagina(paginaAtual - 1)">
+          <i class="bi bi-chevron-left"></i>
+          Anterior
+        </button>
+      </li>
+
+      <li
+        *ngFor="let pagina of paginas"
+        class="page-item"
+        [class.active]="paginaAtual === pagina"
+      >
+        <button class="page-link" (click)="mudarPagina(pagina)">
+          {{ pagina }}
+        </button>
+      </li>
+
+      <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+        <button class="page-link" (click)="mudarPagina(paginaAtual + 1)">
+          Proximo
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</ng-container>
+
+<ng-template #nenhumResultado>
+  <div class="text-center mt-5">
+    <p class="fs-5 text-muted">Nenhum aluno encontrado.</p>
+    <button class="btn btn-outline-primary" (click)="limparPesquisa()">Limpar pesquisa</button>
+  </div>
+</ng-template>
+
+</div>

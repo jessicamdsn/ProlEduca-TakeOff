@@ -51,10 +51,6 @@ form!: FormGroup;
         }
       });
     } else {
-      // Object.keys(this.form.controls).forEach(key => {
-      //           const control = this.form.get(key);
-      //           control?.markAsTouched();
-      //         });
       alert('Preencha todos os campos corretamente.');
     }
   }
@@ -62,7 +58,5 @@ form!: FormGroup;
   onCancel() {
     this.form.reset();
   }
-
-
 
  }
