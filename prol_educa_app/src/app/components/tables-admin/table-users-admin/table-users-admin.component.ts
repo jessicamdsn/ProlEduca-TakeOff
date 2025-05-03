@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule} from '@angular/common';
 
 import { User } from '../../../services/admin-services/users/users.service';
 import { UsersAdminService } from '../../../services/admin-services/users-admin/users-admin.service';
@@ -13,7 +13,7 @@ import { AlertService } from '../../../shared/services/alert/alert.service';
 @Component({
   selector: 'app-table-users-admin',
   standalone: true,
-  imports: [NgFor, NgIf,NgClass,FormsModule],
+  imports: [ CommonModule, FormsModule],
   templateUrl: './table-users-admin.component.html',
   styleUrl: './table-users-admin.component.scss'
 })

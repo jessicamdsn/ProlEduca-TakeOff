@@ -20,7 +20,6 @@ export const routes: Routes = [
       { path: 'cadastro', component: AdminRegistrationComponent },
       { path: 'bolsistas', children: [
           { path: '', component: ViewAdminUsersComponent },
-          { path: 'cadastro', component: ViewAdminUsersComponent }
         ]},
       { path: 'cursos', children: [
           { path: '', component: ViewAdminCoursesComponent },
