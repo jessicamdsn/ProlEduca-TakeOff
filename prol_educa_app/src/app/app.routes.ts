@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { AdminRegistrationComponent } from './pages/admin-registration/admin-registration.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CustomerInterfaceComponent } from './pages/customer-interface/customer-interface.component';
