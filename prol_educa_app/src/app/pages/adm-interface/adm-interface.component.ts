@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataCardComponent } from '../../components/data-card/data-card.component';
 import { WelcomeCardComponent } from '../../layout/welcome-card/welcome-card.component';
-import { SidebarMenuComponent } from '../../layout/sidebar-menu/sidebar-menu.component';
+import { SidebarMenuComponent } from '../../components/sidebar-menu/sidebar-menu.component';
 import { HeaderAdminComponent } from '../../layout/header-admin/header-admin.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { HeaderAdminComponent } from '../../layout/header-admin/header-admin.com
 })
 export class AdmInterfaceComponent {
   isSidebarCollapsed = false;
-
+  
   onSidebarCollapseChange(collapsed: boolean): void {
     this.isSidebarCollapsed = collapsed;
   }
