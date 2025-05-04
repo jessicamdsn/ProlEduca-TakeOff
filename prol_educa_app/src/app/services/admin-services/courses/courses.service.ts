@@ -11,6 +11,7 @@ export interface Course {
   valorOriginal: number;
   valorDesconto: number;
   turno: string;
+  anoBolsa: number;
 }
 
 @Injectable({
