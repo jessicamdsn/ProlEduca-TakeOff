@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../../shared/services/alert/alert.service';
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   Course,
@@ -14,7 +14,7 @@ import {
 @Component({
   selector: 'app-tables-courses',
   standalone: true,
-  imports: [NgIf, NgClass, NgFor, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './tables-courses.component.html',
   styleUrl: './tables-courses.component.scss',
 })
