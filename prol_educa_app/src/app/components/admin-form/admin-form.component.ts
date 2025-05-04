@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.component';
 import { AdmService } from '../../services/adm.service';
+import { AlertService } from '../../shared/services/alert/alert.service';
 
 
 @Component({
@@ -13,12 +16,14 @@ import { AdmService } from '../../services/adm.service';
   styleUrl: './admin-form.component.scss'
 })
 export class AdminFormComponent {
-  
+
 form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private admService: AdmService
+    private admService: AdmService,
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -42,21 +47,22 @@ form!: FormGroup;
       this.admService.createNewAdm(nome, email, senha).subscribe({
         next: (response) => {
           console.log('Administrador criado:', response);
-          alert('Administrador criado com sucesso!');
+          this.alertService.success('Administrador criado com sucesso!');
           this.form.reset();
         },
         error: (error) => {
           console.error('Erro ao criar administrador:', error);
-          alert('Erro ao criar administrador.');
+          this.alertService.error('Erro ao criar administrador.');
         }
       });
     } else {
-      alert('Preencha todos os campos corretamente.');
+      this.alertService.error('Preencha todos os campos corretamente.');
     }
   }
 
   onCancel() {
     this.form.reset();
+    this.router.navigate(['/admin']);
   }
 
  }
