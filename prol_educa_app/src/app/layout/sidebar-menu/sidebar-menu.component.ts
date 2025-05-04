@@ -48,6 +48,20 @@ export class SidebarMenuComponent implements OnInit {
 
   setActiveMenuItem(itemId: string): void {
     this.activeMenuItem = itemId;
+
+    const routeMap: Record<string, string> = {
+      'instituicoes': '/admin/instituicoes',
+      'alunos': '/admin/bolsistas',
+      'cursos': '/admin/cursos',
+      'admin': '/admin'
+    };
+
+    const route = routeMap[itemId];
+    if(route) {
+      this.router.navigate([route]);
+    }else {
+      console.warn('Rota não mapeada para:', itemId)
+    }
   }
 
   logout() {
