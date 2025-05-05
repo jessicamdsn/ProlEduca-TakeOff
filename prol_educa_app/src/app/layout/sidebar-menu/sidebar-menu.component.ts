@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 })
 export class SidebarMenuComponent implements OnInit {
   isCollapsed = false;
-  activeMenuItem = 'instituicoes';
+  activeMenuItem = 'instituicao';
 
 
   menuItems = [
-    { id: 'instituicoes', label: 'Instituições cadastradas', icon: 'school' },
+    { id: 'instituicao', label: 'Instituições cadastradas', icon: 'school' },
     { id: 'alunos', label: 'Alunos cadastrados', icon: 'person' },
     { id: 'cursos', label: 'Cursos Cadastrados', icon: 'book' },
     { id: 'admin', label: 'Usuários Administradores', icon: 'admin_panel_settings' }
@@ -28,7 +28,7 @@ export class SidebarMenuComponent implements OnInit {
 
     const routeMap: any = {
       'bolsistas': 'alunos',
-      'instituicoes': 'instituicoes',
+      'instituicao': 'instituicao',
       'cursos': 'cursos',
       'admin': 'admin'
     };
@@ -50,7 +50,7 @@ export class SidebarMenuComponent implements OnInit {
     this.activeMenuItem = itemId;
 
     const routeMap: Record<string, string> = {
-      'instituicoes': '/admin/instituicoes',
+      'instituicao': '/admin/instituicao',
       'alunos': '/admin/bolsistas',
       'cursos': '/admin/cursos',
       'admin': '/admin'

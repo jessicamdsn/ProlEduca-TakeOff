@@ -1,19 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.component';
+
+import { Router } from '@angular/router';
+import { AlertService } from '../../shared/services/alert/alert.service';
 @Component({
   selector: 'app-institution-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, CardInstituicaoComponent],
-  templateUrl:'./institution-form.component.html',
-  styleUrls: ['./institution-form.component.scss']
+  templateUrl: './institution-form.component.html',
+  styleUrls: ['./institution-form.component.scss'],
 })
 export class InstitutionFormComponent implements OnInit {
   form!: FormGroup;
-  
-  constructor(private fb: FormBuilder) {}
-  
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
+
   ngOnInit(): void {
     // Inicializar o formulário com todos os controles necessários
     this.form = this.fb.group({
@@ -28,15 +40,15 @@ export class InstitutionFormComponent implements OnInit {
       estado: ['', Validators.required],
       status: [''],
       tipo: ['', Validators.required],
-      
+
       // Dados do Responsável
       nomeResponsavel: ['', Validators.required],
       emailResponsavel: ['', [Validators.required, Validators.email]],
       telefoneResponsavel: ['', Validators.required],
-      senhaResponsavel: ['', [Validators.required, Validators.minLength(6)]]
+      senhaResponsavel: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  
+
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -44,19 +56,19 @@ export class InstitutionFormComponent implements OnInit {
       console.log('Arquivo selecionado:', file.name);
     }
   }
-  
+
   onCancel(): void {
     this.form.reset();
-    // Ou navegue para outra página se necessário
+    this.router.navigate(['/admin/instituicao']);
   }
-  
+
   onSubmit(): void {
     if (this.form.valid) {
       console.log('Formulário enviado:', this.form.value);
-      // Lógica para enviar os dados do formulário
+      this.alertService.success('Instituição cadastrada com sucesso!')
     } else {
       // Marcar todos os campos como touched para mostrar erros de validação
-      Object.keys(this.form.controls).forEach(key => {
+      Object.keys(this.form.controls).forEach((key) => {
         const control = this.form.get(key);
         control?.markAsTouched();
       });

@@ -31,6 +31,7 @@ export class CardInstituicaoComponent {
 
   getIconsName() {
     if (this.rotaAtual.includes('/admin/cursos')) return 'book';
+    if (this.rotaAtual.includes('/admin/instituicao')) return 'school';
     if (this.rotaAtual.includes('/admin/bolsistas')) return 'person';
     if (this.rotaAtual.includes('/admin')) return 'admin_panel_settings';
 
