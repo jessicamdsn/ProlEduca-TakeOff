@@ -1,24 +1,46 @@
-<h2 mat-dialog-title>Editar {{ tipo === 'usuario' ? 'Usuário' : 'Curso' }}</h2>
+<h2 class="modal-title mb-3">
+  Editar {{ tipo === 'usuario' ? 'Usuário' : tipo === 'curso' ? 'Curso' : 'Instituição' }}
+</h2>
 
-<form (ngSubmit)="save()">
-  <mat-dialog-content class="mat-typography">
-    <div class="form-grid">
-      <mat-form-field appearance="outline" *ngFor="let campo of campos">
-        <mat-label>{{ campo.label }}</mat-label>
-        <input
-          matInput
-          [type]="campo.type"
-          [(ngModel)]="dados[campo.name]"
-          [name]="campo.name"
-          required
-        />
+<div class="modal-body">
+  <form (ngSubmit)="save()">
+    <div class="row g-3">
+      <ng-container *ngFor="let campo of campos">
 
-      </mat-form-field>
+        <div class="col-md-6" *ngIf="campo.name === 'status' && tipo === 'instituicao'">
+          <label class="form-label">{{ campo.label }}</label>
+          <select
+            class="form-select"
+            [(ngModel)]="dados[campo.name]"
+            [name]="campo.name"
+            required
+          >
+            <option [value]="true">Ativo</option>
+            <option [value]="false">Inativo</option>
+          </select>
+        </div>
+
+        <div class="col-md-6" *ngIf="campo.name === 'courses' && tipo === 'instituicao'">
+          <label class="form-label">{{ campo.label }}</label>
+          <input type="text" class="form-control" [value]="getUltimoCurso()" />
+        </div>
+
+        <div class="col-md-6" *ngIf="campo.name !== 'status' && campo.name !== 'courses'">
+          <label class="form-label">{{ campo.label }}</label>
+          <input
+            [type]="campo.type"
+            class="form-control"
+            [(ngModel)]="dados[campo.name]"
+            [name]="campo.name"
+            required
+          />
+        </div>
+      </ng-container>
     </div>
-  </mat-dialog-content>
 
-  <mat-dialog-actions class="modal-footer" align="end">
-    <button mat-button class="btn btn-secondary" type="button" (click)="cancel()">Cancelar</button>
-    <button mat-button class="btn btn-standard" type="submit">Salvar</button>
-  </mat-dialog-actions>
-</form>
+    <div class="d-flex justify-content-end mt-3">
+      <button type="button" class="btn btn-secondary me-2" (click)="cancel()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+  </form>
+</div>

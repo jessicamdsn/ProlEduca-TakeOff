@@ -9,6 +9,8 @@ import { ViewAdminUsersComponent } from './pages/view-admin-users/view-admin-use
 import { ViewAdminUsersManagerComponent } from './pages/view-admin-users-manager/view-admin-users-manager.component';
 import { ViewAdminCoursesComponent } from './pages/view-admin-courses/view-admin-courses.component';
 import { CourseRegistrationComponent } from './pages/course-registration/course-registration.component';
+import { ViewAdminInstituitionComponent } from './pages/view-admin-instituition/view-admin-instituition.component';
+import { InstitutionRegistrationComponent } from './pages/institution-registration/institution-registration.component';
 
 
 export const routes: Routes = [
@@ -24,6 +26,10 @@ export const routes: Routes = [
       { path: 'cursos', children: [
           { path: '', component: ViewAdminCoursesComponent },
           { path: 'cadastro', component: CourseRegistrationComponent }
+        ]},
+      { path: 'instituicao', children: [
+          { path: '', component: ViewAdminInstituitionComponent },
+          { path: 'cadastro', component: InstitutionRegistrationComponent }
         ]}
     ]
   }

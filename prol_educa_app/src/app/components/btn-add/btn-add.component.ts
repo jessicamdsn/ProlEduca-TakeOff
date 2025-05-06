@@ -20,7 +20,7 @@ export class BtnAddComponent {
     const urlAtual = this.router.url;
 
     const routeMap:{ [key: string]: string } = {
-      'instituicao': '/instituicao',
+      'instituicao': '/admin/instituicao/cadastro',
       'bolsista': 'admin/bolsista/cadastro',
       'cursos': 'admin/cursos/cadastro',
       'admin': 'admin/cadastro'
