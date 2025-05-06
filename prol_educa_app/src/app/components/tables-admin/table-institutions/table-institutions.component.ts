@@ -25,6 +25,7 @@ export class TableInstitutionsComponent {
   filtroNome = '';
   filtroTipo = '';
   filtroStatus = '';
+  filtroCurso = '';
 
   paginaAtual = 1;
   itensPorPagina = 5;
@@ -48,10 +49,15 @@ export class TableInstitutionsComponent {
 
   filtrarInstituicoes() {
     this.instituicoesFiltradas = this.instituicoes.filter((inst) => {
+      const cursoMatch = !this.filtroCurso || inst.courses.some(curso =>
+        curso.toLowerCase().includes(this.filtroCurso.toLowerCase())
+      );
+
       return (
         (!this.filtroNome || inst.name.toLowerCase().includes(this.filtroNome.toLowerCase())) &&
         (!this.filtroTipo || inst.type === this.filtroTipo) &&
-        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)
+        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)&&
+        cursoMatch
       );
     });
     this.paginaAtual = 1;
@@ -111,7 +117,7 @@ export class TableInstitutionsComponent {
   openDialogDelete(instituicao: Institution) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-      data: { mensagem: `Deseja excluir a instituição "${instituicao.name}"?` }
+      data: { mensagem: `Deseja excluir a instituição ${instituicao.name}?` }
     });
 
     dialogRef.afterClosed().subscribe((confirm: boolean) => {

@@ -35,3 +35,27 @@ mat-icon {
   border-color: #0A0A5A;
   color: #fff;
 }
+
+
+// tables styles
+
+.table td,
+.table th {
+  padding: 0.5rem 1rem;
+  vertical-align: middle;
+}
+
+.table p,
+.table div {
+  margin: 0;
+}
+
+.table tbody tr {
+  line-height: 1.2;
+}
+
+td ul {
+  list-style: disc;
+  padding-left: 1rem;
+  margin: 0;
+}
