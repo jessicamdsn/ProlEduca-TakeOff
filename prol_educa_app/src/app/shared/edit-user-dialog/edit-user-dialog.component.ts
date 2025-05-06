@@ -61,7 +61,7 @@ export class EditUserDialogComponent {
       ];
     } else if (this.tipo === 'instituicao') {
       this.campos = [
-        { label: 'Nome da Instituicao', name: 'nome', type: 'text' },
+        { label: 'Nome da Instituicao', name: 'name', type: 'text' },
         { label: 'Status', name: 'status', type: 'boolean' },
         { label: 'Tipo de Ensino', name: 'type', type: 'text' },
         { label: 'Curso', name: 'courses', type: 'text' },
