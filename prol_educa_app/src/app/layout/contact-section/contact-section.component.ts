@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
 export class ContactSectionComponent {
   whatsappNumber = '(81) 9 9129-7982';
   socialLinks = [
-    { name: 'Facebook', url: '#', icon: 'facebook' },
-    { name: 'Instagram', url: '#', icon: 'instagram' },
-    { name: 'LinkedIn', url: '#', icon: 'linkedin' }
+    { name: 'Facebook', url: 'https://www.facebook.com/proleduca/', icon: 'facebook' },
+    { name: 'Instagram', url: 'https://www.instagram.com/proleduca/', icon: 'instagram' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/prol-educa/', icon: 'linkedin' }
   ];
 }
