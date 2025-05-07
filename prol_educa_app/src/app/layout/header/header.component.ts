@@ -1,47 +1,56 @@
-import { Component, OnInit, Inject, PLATFORM_ID, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  PLATFORM_ID,
+  HostListener,
+  Input,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ProfileAvatarComponent } from '../../components/profile-avatar/profile-avatar.component';
 import { CommonModule } from '@angular/common';
+import { ScrollService } from '../../shared/services/scroll/scroll.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [ProfileAvatarComponent, CommonModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isMenuOpen = false
-  screenWidth = 0; // Inicializa com 0 em vez de window.innerWidth
+  isMenuOpen = false;
+  screenWidth = 0;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private scrollService: ScrollService
+  ) {}
 
   @Input() esconderNavbar = false;
 
-
   ngOnInit() {
-    // Verifica se estamos no navegador antes de acessar window
     if (isPlatformBrowser(this.platformId)) {
-      this.screenWidth = window.innerWidth
+      this.screenWidth = window.innerWidth;
     }
   }
 
-  // Detecta mudanças no tamanho da tela
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    // Verifica se estamos no navegador antes de acessar window
     if (isPlatformBrowser(this.platformId)) {
-      this.screenWidth = window.innerWidth
+      this.screenWidth = window.innerWidth;
 
-      // Fecha o menu automaticamente se a tela for redimensionada para desktop
       if (this.screenWidth > 768) {
-        this.isMenuOpen = false
+        this.isMenuOpen = false;
       }
     }
   }
 
-  // Alterna o estado do menu mobile
+  goToContact(): void {
+    this.scrollService.scrollTo('contact');
+  }
+
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
