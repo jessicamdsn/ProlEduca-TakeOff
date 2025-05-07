@@ -1,4 +1,4 @@
-<div class="contact-section">
+<div class="contact-section" id="contact">
     <div class="container">
       <div class="contact-wrapper">
         <div class="contact-info">
@@ -10,12 +10,12 @@
             </div>
           </a>
         </div>
-        
+
         <div class="social-media">
           <h3>Nos siga nas Redes Sociais</h3>
           <div class="social-icons">
-            <a *ngFor="let social of socialLinks" 
-               [href]="social.url" 
+            <a *ngFor="let social of socialLinks"
+               [href]="social.url"
                class="social-icon-link"
                [attr.aria-label]="'Visit our ' + social.name">
               <div class="social-icon {{social.icon}}"></div>

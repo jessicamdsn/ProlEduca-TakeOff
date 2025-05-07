@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { CarouselBannerComponent } from '../../components/carousel-banner/carousel-banner.component';
 import { CursoFilterComponent } from '../../components/curso-filter/curso-filter.component';
-import { ContactSectionComponent } from '../../components/contact-section/contact-section.component';
+import { ContactSectionComponent } from '../../layout/contact-section/contact-section.component';
 import { HeaderComponent } from '../../layout/header/header.component';
 import { FooterComponent } from '../../layout/footer/footer.component';
 
@@ -13,7 +13,7 @@ import { FooterComponent } from '../../layout/footer/footer.component';
   imports: [CarouselBannerComponent, CursoFilterComponent, ContactSectionComponent, HeaderComponent, FooterComponent],
   template: `
     <app-header></app-header>
-    
+
     <div class="container">
       <app-carousel-banner [images]="carouselImages"></app-carousel-banner>
       <app-curso-filter (abaSelecionadaChange)="trocarImagens($event)"></app-curso-filter>
@@ -41,7 +41,7 @@ export class HomePageComponent {
   };
 
   ngOnInit() {
-    this.carouselImages = this.imagensPorAba['escola']; 
+    this.carouselImages = this.imagensPorAba['escola'];
   }
 
   trocarImagens(aba: string) {
