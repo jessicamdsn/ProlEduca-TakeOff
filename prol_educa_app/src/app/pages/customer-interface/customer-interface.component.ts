@@ -7,7 +7,7 @@ import { ContactSectionComponent } from '../../layout/contact-section/contact-se
 @Component({
   selector: 'app-customer-interface',
   standalone: true,
-  imports: [HeaderComponent, BolsasListComponent, ContactSectionComponent, FooterComponent],
+  imports: [HeaderComponent, BolsasListComponent, FooterComponent, ContactSectionComponent],
   templateUrl: './customer-interface.component.html',
   styleUrl: './customer-interface.component.scss'
 })

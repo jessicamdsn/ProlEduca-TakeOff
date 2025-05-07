@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollService } from '../../shared/services/scroll/scroll.service';
 
@@ -29,7 +29,7 @@ export class ContactSectionComponent implements OnInit {
     },
   ];
 
-  constructor(private scrollService: ScrollService, private el: ElementRef) {}
+  constructor(@Inject(String)private scrollService: ScrollService, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.scrollService.scrollToSection$.subscribe((sectionId) => {
