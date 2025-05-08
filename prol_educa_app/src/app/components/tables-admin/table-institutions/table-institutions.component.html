@@ -24,12 +24,12 @@
       </select>
     </div>
     <div class="col-md-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Curso"
-        [(ngModel)]="filtroCurso"
-      />
+      <select class="form-select" [(ngModel)]="filtroCurso">
+        <option value="">Curso</option>
+        <option *ngFor="let curso of filtroCurso" [value]="curso">
+          {{ curso }}
+        </option>
+      </select>
     </div>
     <div class="col-md-4 d-flex gap-2">
       <button class="btn btn-clear" (click)="limparFiltros()">Limpar</button>
@@ -55,17 +55,6 @@
           <td>{{ inst.name }}</td>
           <td>{{ inst.status ? "Ativo" : "Inativo" }}</td>
           <td>{{ inst.type }}</td>
-          <td>
-            <ul class="list-unstyled" *ngIf="inst.courses?.length; else emptyCourses">
-              <li *ngFor="let course of inst.courses">{{ course }}</li>
-            </ul>
-            <ng-template #emptyCourses>
-              <ul>
-                <li>Nenhum curso</li>
-              </ul>
-            </ng-template>
-          </td>
-
           <td>
             <button
               class="btn btn-link text-primary p-0 me-2"

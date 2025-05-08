@@ -29,7 +29,7 @@ export class ContactSectionComponent implements OnInit {
     },
   ];
 
-  constructor(@Inject(String)private scrollService: ScrollService, private el: ElementRef) {}
+  constructor(private scrollService: ScrollService, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.scrollService.scrollToSection$.subscribe((sectionId) => {

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 // src/app/app.component.ts
 
 import { Component } from '@angular/core';
-import { AdmInterfaceComponent } from './pages/adm-interface/adm-interface.component';
 
 import { RouterModule } from '@angular/router';
 
