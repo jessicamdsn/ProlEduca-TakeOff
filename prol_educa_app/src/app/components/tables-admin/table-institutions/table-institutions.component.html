@@ -26,7 +26,7 @@
     <div class="col-md-2">
       <select class="form-select" [(ngModel)]="filtroCurso">
         <option value="">Curso</option>
-        <option *ngFor="let curso of filtroCurso" [value]="curso">
+        <option *ngFor="let curso of cursosDisponiveis" [value]="curso">
           {{ curso }}
         </option>
       </select>
@@ -45,7 +45,6 @@
           <th>Nome</th>
           <th>Status</th>
           <th>Tipo</th>
-          <th>Cursos</th>
           <th>Ações</th>
         </tr>
       </thead>

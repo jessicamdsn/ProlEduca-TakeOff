@@ -26,6 +26,7 @@ export class TableInstitutionsComponent {
   filtroTipo = '';
   filtroStatus = '';
   filtroCurso = '';
+  cursosDisponiveis: string[] = [];
 
   paginaAtual = 1;
   itensPorPagina = 5;
@@ -43,21 +44,19 @@ export class TableInstitutionsComponent {
       this.instituicoes = res;
       this.instituicoesFiltradas = [...res];
       this.tiposEnsino = [...new Set(res.map((i) => i.type))];
+      this.cursosDisponiveis = [...new Set(res.flatMap((i) => i.courses))];
       this.atualizarPaginacao();
     });
   }
 
   filtrarInstituicoes() {
     this.instituicoesFiltradas = this.instituicoes.filter((inst) => {
-      const cursoMatch = !this.filtroCurso || inst.courses.some(curso =>
-        curso.toLowerCase().includes(this.filtroCurso.toLowerCase())
-      );
 
       return (
         (!this.filtroNome || inst.name.toLowerCase().includes(this.filtroNome.toLowerCase())) &&
         (!this.filtroTipo || inst.type === this.filtroTipo) &&
-        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)&&
-        cursoMatch
+        (!this.filtroCurso || inst.courses.includes(this.filtroCurso)) &&
+        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)
       );
     });
     this.paginaAtual = 1;
