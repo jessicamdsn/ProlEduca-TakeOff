@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollService } from '../../shared/services/scroll/scroll.service';
 

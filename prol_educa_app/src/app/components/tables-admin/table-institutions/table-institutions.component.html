@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div class="row mb-3 align-items-end">
+  <div class="row mb-3">
     <div class="col-md-2">
       <input
         type="text"
@@ -23,17 +23,33 @@
         <option value="false">Inativo</option>
       </select>
     </div>
-    <div class="col-md-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Curso"
-        [(ngModel)]="filtroCurso"
-      />
+  <div class="col-md-3">
+    <div class="dropdown">
+      <button
+        class="form-select text-start"
+        type="button"
+        data-bs-toggle="dropdown"
+      >
+        {{ filtroCurso || "Curso" }}
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" (click)="selecionarCurso('')">Curso</a>
+        </li>
+        <li *ngFor="let curso of cursosDisponiveis">
+          <a class="dropdown-item" (click)="selecionarCurso(curso)">
+            {{ curso }}
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="col-md-4 d-flex gap-2">
+  </div>
+
+    <div class="col-md-3 d-flex gap-2">
       <button class="btn btn-clear" (click)="limparFiltros()">Limpar</button>
-      <button class="btn btn-search" (click)="filtrarInstituicoes()">Procurar</button>
+      <button class="btn btn-search" (click)="filtrarInstituicoes()">
+        Procurar
+      </button>
     </div>
   </div>
 
@@ -45,7 +61,6 @@
           <th>Nome</th>
           <th>Status</th>
           <th>Tipo</th>
-          <th>Cursos</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -55,17 +70,6 @@
           <td>{{ inst.name }}</td>
           <td>{{ inst.status ? "Ativo" : "Inativo" }}</td>
           <td>{{ inst.type }}</td>
-          <td>
-            <ul class="list-unstyled" *ngIf="inst.courses?.length; else emptyCourses">
-              <li *ngFor="let course of inst.courses">{{ course }}</li>
-            </ul>
-            <ng-template #emptyCourses>
-              <ul>
-                <li>Nenhum curso</li>
-              </ul>
-            </ng-template>
-          </td>
-
           <td>
             <button
               class="btn btn-link text-primary p-0 me-2"

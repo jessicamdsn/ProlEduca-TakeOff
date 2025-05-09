@@ -8,11 +8,13 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-table-institutions',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './table-institutions.component.html',
   styleUrl: './table-institutions.component.scss'
 })
@@ -26,6 +28,7 @@ export class TableInstitutionsComponent {
   filtroTipo = '';
   filtroStatus = '';
   filtroCurso = '';
+  cursosDisponiveis: string[] = [];
 
   paginaAtual = 1;
   itensPorPagina = 5;
@@ -43,26 +46,29 @@ export class TableInstitutionsComponent {
       this.instituicoes = res;
       this.instituicoesFiltradas = [...res];
       this.tiposEnsino = [...new Set(res.map((i) => i.type))];
+      this.cursosDisponiveis = [...new Set(res.flatMap((i) => i.courses))];
       this.atualizarPaginacao();
     });
   }
 
   filtrarInstituicoes() {
     this.instituicoesFiltradas = this.instituicoes.filter((inst) => {
-      const cursoMatch = !this.filtroCurso || inst.courses.some(curso =>
-        curso.toLowerCase().includes(this.filtroCurso.toLowerCase())
-      );
 
       return (
         (!this.filtroNome || inst.name.toLowerCase().includes(this.filtroNome.toLowerCase())) &&
         (!this.filtroTipo || inst.type === this.filtroTipo) &&
-        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)&&
-        cursoMatch
+        (!this.filtroCurso || inst.courses.includes(this.filtroCurso)) &&
+        (!this.filtroStatus || inst.status.toString() === this.filtroStatus)
       );
     });
     this.paginaAtual = 1;
     this.atualizarPaginacao();
   }
+
+  selecionarCurso(curso: string) {
+    this.filtroCurso = curso;
+  }
+
 
   limparFiltros() {
     this.filtroNome = '';
@@ -70,6 +76,7 @@ export class TableInstitutionsComponent {
     this.filtroStatus = '';
     this.instituicoesFiltradas = [...this.instituicoes];
     this.paginaAtual = 1;
+    this.filtroCurso = '';
     this.atualizarPaginacao();
   }
 

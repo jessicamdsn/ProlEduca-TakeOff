@@ -23,8 +23,7 @@ export class HeaderComponent implements OnInit {
   screenWidth = 0;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private scrollService: ScrollService
+    @Inject(PLATFORM_ID) private platformId: Object,private scrollService: ScrollService
   ) {}
 
   @Input() esconderNavbar = false;
