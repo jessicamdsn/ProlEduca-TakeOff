@@ -8,11 +8,13 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-table-institutions',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './table-institutions.component.html',
   styleUrl: './table-institutions.component.scss'
 })
@@ -63,12 +65,18 @@ export class TableInstitutionsComponent {
     this.atualizarPaginacao();
   }
 
+  selecionarCurso(curso: string) {
+    this.filtroCurso = curso;
+  }
+
+
   limparFiltros() {
     this.filtroNome = '';
     this.filtroTipo = '';
     this.filtroStatus = '';
     this.instituicoesFiltradas = [...this.instituicoes];
     this.paginaAtual = 1;
+    this.filtroCurso = '';
     this.atualizarPaginacao();
   }
 
