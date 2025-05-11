@@ -29,7 +29,6 @@ export class TablesCoursesComponent {
   filtroNome: string = '';
   filtroTurno: string = '';
 
-  termoPesquisa: string = '';
   ordenacaoAsc = true;
 
   paginaAtual = 1;
@@ -72,18 +71,6 @@ export class TablesCoursesComponent {
     this.atualizarPaginacao();
   }
 
-  ordenarPorNome() {
-    this.ordenacaoAsc = !this.ordenacaoAsc;
-    this.cursosFiltrados.sort((a, b) => {
-      const nomeA = a.nome.toLowerCase();
-      const nomeB = b.nome.toLowerCase();
-      if (nomeA < nomeB) return this.ordenacaoAsc ? -1 : 1;
-      if (nomeA > nomeB) return this.ordenacaoAsc ? 1 : -1;
-      return 0;
-    });
-    this.atualizarPaginacao();
-  }
-
   atualizarPaginacao() {
     this.totalPaginas = Math.ceil(
       this.cursosFiltrados.length / this.itensPorPagina
@@ -104,7 +91,6 @@ export class TablesCoursesComponent {
     this.filtroInstituicao = '';
     this.filtroNome = '';
     this.filtroTurno = '';
-    this.termoPesquisa = '';
     this.cursosFiltrados = [...this.cursos];
     this.paginaAtual = 1;
     this.atualizarPaginacao();
