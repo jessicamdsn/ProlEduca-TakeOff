@@ -44,7 +44,7 @@ export class TableUsersComponent implements OnInit {
   ngOnInit() {
     this.userService.getUsers().subscribe((users) => {
       this.user = users;
-      this.usuariosFiltrados = users;
+      this.usuariosFiltrados = [...users];
       this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
       this.atualizarPaginacao();
     });
