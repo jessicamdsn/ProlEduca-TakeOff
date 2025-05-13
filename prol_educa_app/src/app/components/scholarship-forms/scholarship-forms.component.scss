@@ -277,6 +277,16 @@ input:checked + .slider:before {
   font-weight: 500;
 }
 
+.input-error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 
 
 @media (max-width: 768px) {
