@@ -1,66 +1,71 @@
-<div class="container mt-5">
-  <!-- Filtro -->
-  <div class="row mb-3">
-    <div class="col-md-3" style="width: 20%">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Pesquisar pelo nome"
-        [(ngModel)]="termoPesquisa"
-      />
+<div class="main-content">
+  <div class="container mt-5">
+    <!-- Filtro -->
+    <div class="row gx-2 gy-2 mb-3">
+      <div class="col-12 col-sm-6 col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquisar pelo nome"
+          [(ngModel)]="termoPesquisa"
+        />
+      </div>
+      <div class="col-md-3 col-sm-6 d-flex gap-2">
+        <button class="btn btn-clear" (click)="limparPesquisa()">Limpar</button>
+        <button class="btn btn-search" (click)="filtrarUsuarios()">
+          Procurar
+        </button>
+      </div>
     </div>
-    <div class="col-md-3 d-flex gap-2">
-      <button class="btn btn-clear" (click)="limparPesquisa()">Limpar</button>
-      <button class="btn btn-search" (click)="filtrarUsuarios()">
-        Procurar
-      </button>
-    </div>
-  </div>
 
-  <ng-container *ngIf="usuariosPaginados.length > 0" class="mb-4">
-    <!-- Tabela -->
-    <table class="table table-hover align-middle">
-      <thead class="table-light">
-        <tr>
-          <th>Tracking ID</th>
-          <th>CPF</th>
-          <th (click)="ordenarPorNome()" style="cursor: pointer">
-            Nome
-            <i
-              [ngClass]="
-                ordenacaoAsc ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'
-              "
-            ></i>
-          </th>
-          <th>Email</th>
-          <th>Contato</th>
-          <th class="text-center">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let usuario of usuariosPaginados">
-          <td>#{{ usuario.trackingId }}</td>
-          <td>{{ usuario.cpf }}</td>
-          <td>{{ usuario.nome }}</td>
-          <td>{{ usuario.email }}</td>
-          <td>{{ usuario.contato }}</td>
-          <td class="text-center">
-            <button
-              class="btn btn-link text-primary p-0 me-2"
-              (click)="openDialogUpdate(usuario)"
-            >
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button
-              class="btn btn-link text-danger p-0"
-              (click)="openDialogDelete(usuario)"
-            >
-              <i class="bi bi-trash-fill"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div
+      class="table-responsive"
+      *ngIf="usuariosPaginados.length > 0"
+    >
+      <!-- Tabela -->
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Tracking ID</th>
+            <th>CPF</th>
+            <th (click)="ordenarPorNome()" style="cursor: pointer">
+              Nome
+              <i
+                [ngClass]="
+                  ordenacaoAsc ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'
+                "
+              ></i>
+            </th>
+            <th>Email</th>
+            <th>Contato</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosPaginados">
+            <td>#{{ usuario.trackingId }}</td>
+            <td>{{ usuario.cpf }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.contato }}</td>
+            <td class="text-center">
+              <button
+                class="btn btn-link text-primary p-0 me-2"
+                (click)="openDialogUpdate(usuario)"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                class="btn btn-link text-danger p-0"
+                (click)="openDialogDelete(usuario)"
+              >
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Paginação -->
     <nav *ngIf="totalPaginas > 1" class="d-flex justify-content-center">
@@ -90,12 +95,12 @@
         </li>
       </ul>
     </nav>
-  </ng-container>
 
-  <div *ngIf="usuariosPaginados.length === 0" class="text-center mt-5">
-    <p class="fs-5 text-muted">Nenhum adminstrador encontrado.</p>
-    <button class="btn btn-outline-primary" (click)="limparPesquisa()">
-      Limpar filtros
-    </button>
+    <div *ngIf="usuariosPaginados.length === 0" class="text-center mt-5">
+      <p class="fs-5 text-muted">Nenhum adminstrador encontrado.</p>
+      <button class="btn btn-outline-primary" (click)="limparPesquisa()">
+        Limpar filtros
+      </button>
+    </div>
   </div>
 </div>

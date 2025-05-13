@@ -37,3 +37,54 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+
+
+.main-content {
+  &.collapsed {
+    margin-left: 70px;
+  }
+
+  @media (max-width: 800px) {
+    margin-left: 70px;
+    padding: 1rem;
+  }
+}
+
+.filtros-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  .filtro-item {
+    flex: 1 1 100%;
+
+    @media (min-width: 768px) {
+      flex: 1 1 48%;
+    }
+
+    @media (min-width: 992px) {
+      flex: 1 1 20%;
+    }
+  }
+
+  .filtro-botoes {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .btn-search,
+  .btn-clear {
+    flex: 1;
+    min-width: 120px;
+  }
+}

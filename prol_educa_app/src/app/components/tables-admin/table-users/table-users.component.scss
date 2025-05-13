@@ -80,6 +80,11 @@
   &.collapsed {
     margin-left: 70px;
   }
+
+  @media (max-width: 800px) {
+    margin-left: 70px;
+    padding: 1rem;
+  }
 }
 
 .filtros-wrapper {
