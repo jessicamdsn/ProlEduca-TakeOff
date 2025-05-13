@@ -11,12 +11,15 @@ import { ViewAdminCoursesComponent } from './pages/view-admin-courses/view-admin
 import { CourseRegistrationComponent } from './pages/course-registration/course-registration.component';
 import { ViewAdminInstituitionComponent } from './pages/view-admin-instituition/view-admin-instituition.component';
 import { InstitutionRegistrationComponent } from './pages/institution-registration/institution-registration.component';
-
+import { ScholarshipRegistrationComponent } from './pages/scholarship-registration/scholarship-registration.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'cliente', component: CustomerInterfaceComponent },
+  { path: 'cliente', children: [
+    {path: '', component: CustomerInterfaceComponent},
+    {path: 'cadastro', component: ScholarshipRegistrationComponent}
+  ]},
   { path: 'admin', children: [
       { path: '', component: ViewAdminUsersManagerComponent },
       { path: 'cadastro', component: AdminRegistrationComponent },
