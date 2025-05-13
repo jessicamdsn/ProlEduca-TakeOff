@@ -81,7 +81,10 @@
             </div>
 
             <div *ngIf="bolsistaControl" class="switch-container">
-              <label for="bolsista" class="switch-label">Sou o bolsista</label>
+              <label for="bolsista" class="switch-label">
+                Marque se você é o próprio bolsista:
+                <span class="tooltip-icon" title="Marque esta opção apenas se você for o próprio bolsista para preencher alguns de seus dados automaticamente no próximo formulário.">?</span>
+              </label> 
               <label class="switch">
                 <input type="checkbox" id="bolsista" [formControl]="bolsistaControl" (change)="onBolsistaChange($event)">
                 <span class="slider"></span>

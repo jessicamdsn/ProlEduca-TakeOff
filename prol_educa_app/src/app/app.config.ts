@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ScrollService } from './shared/services/scroll/scroll.service';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
   ],
 };
