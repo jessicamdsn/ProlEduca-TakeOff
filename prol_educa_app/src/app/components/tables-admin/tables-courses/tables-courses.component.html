@@ -1,88 +1,95 @@
-<div class="container mt-5">
-  <!-- Filtros -->
-  <div class="row mb-3">
-    <div class="col-md-3">
-      <select class="form-select" [(ngModel)]="filtroInstituicao">
-        <option value="">Instituição</option>
-        <option *ngFor="let instituicao of instituicoes" [value]="instituicao">
-          {{ instituicao }}
-        </option>
-      </select>
+<div class="main-content">
+  <div class="container mt-5">
+    <!-- Filtros -->
+    <div class="filtros-wrapper d-flex flex-wrap gap-3">
+      <div class="filtro-item">
+        <select class="form-select" [(ngModel)]="filtroInstituicao">
+          <option value="">Instituição</option>
+          <option
+            *ngFor="let instituicao of instituicoes"
+            [value]="instituicao"
+          >
+            {{ instituicao }}
+          </option>
+        </select>
+      </div>
+      <div class="filtro-item">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome do curso"
+          [(ngModel)]="filtroNome"
+        />
+      </div>
+      <div class="filtro-item">
+        <select class="form-select" [(ngModel)]="filtroTurno">
+          <option value="">Turno</option>
+          <option value="Matutino">Matutino</option>
+          <option value="Vespertino">Vespertino</option>
+          <option value="Noturno">Noturno</option>
+          <option value="Integral">Integral</option>
+        </select>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-clear me-2" (click)="limparFiltros()">
+          Limpar
+        </button>
+        <button class="btn btn-search" (click)="filtrarCursos()">
+          Procurar
+        </button>
+      </div>
     </div>
-    <div class="col-md-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Nome do curso"
-        [(ngModel)]="filtroNome"
-      />
-    </div>
-    <div class="col-md-3">
-      <select class="form-select" [(ngModel)]="filtroTurno">
-        <option value="">Turno</option>
-        <option value="Matutino">Matutino</option>
-        <option value="Vespertino">Vespertino</option>
-        <option value="Noturno">Noturno</option>
-        <option value="Integral">Integral</option>
-      </select>
-    </div>
-    <div class="col-md-3 d-flex">
-      <button class="btn btn-clear me-2" (click)="limparFiltros()">
-        Limpar
-      </button>
-      <button class="btn btn-search" (click)="filtrarCursos()">Procurar</button>
-    </div>
-  </div>
 
-  <div *ngIf="cursosPaginados.length > 0" class="mb-4">
-    <!-- Tabela de cursos -->
-    <div class="table-responsive">
-      <table class="table table-hover text-center">
-        <thead class="table-light">
-          <tr>
-            <th>Tracking ID</th>
-            <th>Nome</th>
-            <th>Cód. Instituição</th>
-            <th>Vagas</th>
-            <th>Percentual Bolsa</th>
-            <th>Valor Original</th>
-            <th>Valor Desconto</th>
-            <th>Turno</th>
-            <th>Ano da Bolsa</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let curso of cursosPaginados">
-            <td>#{{ curso.trackingId }}</td>
-            <td>{{ curso.nome }}</td>
-            <td>{{ curso.codInstituicao }}</td>
-            <td>{{ curso.vagas }}</td>
-            <td>{{ curso.percentualBolsa }}%</td>
-            <td>R$ {{ curso.valorOriginal }}</td>
-            <td>R$ {{ curso.valorDesconto }}</td>
-            <td>{{ curso.turno }}</td>
-            <td>{{ curso.anoBolsa }}</td>
-            <td>
-              <button
-                class="btn btn-link text-primary p-0 me-2"
-                (click)="openDialogUpdate(curso)"
-              >
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button
-                class="btn btn-link text-danger p-0"
-                (click)="openDialogDelete(curso)"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr *ngIf="cursosPaginados.length === 0">
-            <td colspan="9" class="text-center">Nenhum curso encontrado.</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="cursosPaginados.length > 0" class="table-responsive">
+      <!-- Tabela de cursos -->
+      <div class="table-responsive">
+        <table class="table table-hover text-center">
+          <thead class="table-light">
+            <tr>
+              <th>Tracking ID</th>
+              <th>Nome</th>
+              <th>Cód. Instituição</th>
+              <th>Vagas</th>
+              <th>Percentual Bolsa</th>
+              <th>Valor Original</th>
+              <th>Valor Desconto</th>
+              <th>Turno</th>
+              <th>Ano da Bolsa</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let curso of cursosPaginados">
+              <td>#{{ curso.trackingId }}</td>
+              <td>{{ curso.nome }}</td>
+              <td>{{ curso.codInstituicao }}</td>
+              <td>{{ curso.vagas }}</td>
+              <td>{{ curso.percentualBolsa }}%</td>
+              <td>R$ {{ curso.valorOriginal }}</td>
+              <td>R$ {{ curso.valorDesconto }}</td>
+              <td>{{ curso.turno }}</td>
+              <td>{{ curso.anoBolsa }}</td>
+              <td>
+                <button
+                  class="btn btn-link text-primary p-0 me-2"
+                  (click)="openDialogUpdate(curso)"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button
+                  class="btn btn-link text-danger p-0"
+                  (click)="openDialogDelete(curso)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="cursosPaginados.length === 0">
+              <td colspan="9" class="text-center">Nenhum curso encontrado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Paginação -->
@@ -109,14 +116,14 @@
         </li>
       </ul>
     </nav>
-  </div>
 
-  <div *ngIf="cursosPaginados.length === 0" class="text-center mt-5">
-    <p class="fs-5 text-muted">
-      Nenhum curso encontrado com os filtros selecionados.
-    </p>
-    <button class="btn btn-outline-primary" (click)="limparFiltros()">
-      Limpar filtros
-    </button>
+    <div *ngIf="cursosPaginados.length === 0" class="text-center mt-5">
+      <p class="fs-5 text-muted">
+        Nenhum curso encontrado com os filtros selecionados.
+      </p>
+      <button class="btn btn-outline-primary" (click)="limparFiltros()">
+        Limpar filtros
+      </button>
+    </div>
   </div>
 </div>
