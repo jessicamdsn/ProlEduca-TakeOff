@@ -12,5 +12,9 @@ import { TableInstitutionsComponent } from "../../components/tables-admin/table-
   styleUrl: './view-admin-instituition.component.scss'
 })
 export class ViewAdminInstituitionComponent {
+  isSidebarCollapsed = false;
 
+  onSidebarCollapseChange(collapsed: boolean): void {
+    this.isSidebarCollapsed = collapsed;
+  }
 }

@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <app-sidebar-menu></app-sidebar-menu>
+<div class="container-fluid" [class.sidebar-collapsed]="isSidebarCollapsed" >
+  <app-sidebar-menu (collapsedChange)="onSidebarCollapseChange($event)"></app-sidebar-menu>
   <div class="main-content">
     <app-header-admin></app-header-admin>
     <app-card-instituicao [isAliveBtnAdd]="true" titulo="Cursos cadastrados"></app-card-instituicao>
