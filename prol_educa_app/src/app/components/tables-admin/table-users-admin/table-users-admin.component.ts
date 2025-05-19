@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { User } from '../../../services/admin-services/users/users.service';
 import { UsersAdminService } from '../../../services/admin-services/users-admin/users-admin.service';
@@ -14,15 +14,15 @@ import { AdmService } from '../../../services/adm.service';
 @Component({
   selector: 'app-table-users-admin',
   standalone: true,
-  imports: [ CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './table-users-admin.component.html',
-  styleUrl: './table-users-admin.component.scss'
+  styleUrl: './table-users-admin.component.scss',
 })
 export class TableUsersAdminComponent {
   user: User[] = [];
-  usuariosFiltrados: any[] = [];
-  usuariosPaginados: any[] = [];
-  usuarioSelecionado: any = null;
+  usuariosFiltrados: User[] = [];
+  usuariosPaginados: User[] = [];
+  usuarioSelecionado: User | null = null;
 
   termoPesquisa: string = '';
   ordenacaoAsc = true;
@@ -65,10 +65,10 @@ export class TableUsersAdminComponent {
   }
 
   filtrarUsuarios() {
-    this.usuariosFiltrados = this.usuariosFiltrados.filter((users) => {
-      return users.nome
-        .toLowerCase()
-        .includes(this.termoPesquisa.toLowerCase());
+    this.usuariosFiltrados = this.user.filter((users) => {
+      return this.termoPesquisa
+        ? users.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase())
+        : true;
     });
     this.paginaAtual = 1;
     this.atualizarPaginacao();
@@ -88,28 +88,25 @@ export class TableUsersAdminComponent {
 
   limparPesquisa(): void {
     this.termoPesquisa = '';
-    this.usuariosFiltrados = this.user;
+    this.usuariosFiltrados = [...this.user];
     this.paginaAtual = 1;
     this.atualizarPaginacao();
   }
-
-
-
   atualizarPaginacao() {
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
-    const fim = inicio + this.itensPorPagina;
-    this.usuariosPaginados = this.usuariosFiltrados.slice(inicio, fim);
-
-    this.totalPaginas = Math.ceil(this.usuariosFiltrados.length / this.itensPorPagina);
+    this.totalPaginas = Math.ceil(
+      this.usuariosFiltrados.length / this.itensPorPagina
+    );
     this.paginas = Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
+    this.usuariosPaginados = this.usuariosFiltrados.slice(
+      (this.paginaAtual - 1) * this.itensPorPagina,
+      this.paginaAtual * this.itensPorPagina
+    );
   }
 
   mudarPagina(pagina: number) {
-    if (pagina < 1 || pagina > this.totalPaginas) return;
     this.paginaAtual = pagina;
     this.atualizarPaginacao();
   }
-
 
   // btn Update
   openDialogUpdate(user: User) {
@@ -129,15 +126,17 @@ export class TableUsersAdminComponent {
               (u: User) => u.trackingId === (updatedUser as User).trackingId
             );
             if (index !== -1) {
-              this.usuariosFiltrados[index] = updatedUser;
+              this.usuariosFiltrados[index] = updatedUser as User;
             }
             this.atualizarPaginacao();
             this.alertService.success('Usuário salvo com sucesso!');
           },
           error: (erro) => {
             console.error('Erro ao salvar:', erro);
-            this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
-          }
+            this.alertService.error(
+              'Erro ao salvar o usuário. Tente novamente.'
+            );
+          },
         });
       }
     });

@@ -4,7 +4,6 @@
   [type]="alertType">
 </app-alert>
 
-
 <div class="main-container">
   <div class="titulos">
     <h1>Complete a sua inscrição em poucos cliques</h1>
@@ -13,6 +12,8 @@
 
   <div class="form-container">   
     <div class="form-box">
+
+      <!-- Indicador de etapas -->
       <div class="step-indicator">
         <div class="step-block" [ngClass]="{'active': currentStep === 1}">
           <div class="circle" [ngClass]="{'blue': currentStep === 1}">1</div>
@@ -24,83 +25,129 @@
           <p class="step-label">Dados do Bolsista</p>
         </div>
       </div>
-      <!-- Formulário de Dados do Cliente -->
-      <form [formGroup]="formStep1" *ngIf="currentStep === 1">
-        <h2>Dados do Cliente</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="nome">Nome completo:*</label>
-            <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome">
-          </div>
-          <div class="form-group">
-            <label for="cpf">CPF:*</label>
-            <input type="text" id="cpf" formControlName="cpf" placeholder="Digite seu CPF">
-          </div>
-          <div class="form-group">
-            <label for="nascimento">Data de Nascimento:*</label>
-            <input type="date" id="nascimento" formControlName="nascimento">
-          </div>
-          <div class="form-group">
-            <label for="email">E-mail:*</label>
-            <input type="email" id="email" formControlName="email" placeholder="Digite seu email">
-          </div>
-          <div class="form-group">
-            <label for="telefone">Telefone:*</label>
-            <input type="tel" id="telefone" formControlName="telefone" placeholder="Ex: (81)9999-8888">
-          </div>
-          <div class="form-group">
-            <label for="endereco">Endereço:*</label>
-            <input type="text" id="endereco" formControlName="endereco" placeholder="Digite seu endereço">
-          </div>
-          <div *ngIf="bolsistaControl" class="switch-container">
-            <label for="bolsista" class="switch-label">Sou o bolsista</label>
-            <label class="switch">
-              <input type="checkbox" id="bolsista" [formControl]="bolsistaControl" (change)="onBolsistaChange($event)">
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-        <div class="buttons">
-          <button type="button" class="proximo" (click)="goToNextStep()">Próximo</button>
-        </div>
-      </form>
-      
 
-      <!-- Formulário de Dados do Bolsista -->
-      <form *ngIf="currentStep === 2" [formGroup]="formStep2">
+      <!-- Etapa 1: Dados do Cliente -->
+      <!-- Etapa 1: Dados do Cliente -->
+      <div *ngIf="currentStep === 1">
+        <form [formGroup]="formStep1">
+          <h2>Dados do Cliente</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nome">Nome completo:*</label>
+              <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome">
+              <span class="input-error" *ngIf="formStep1.get('nome')?.touched && formStep1.get('nome')?.invalid">
+                {{ getNomeError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="cpf">CPF:*</label>
+              <input type="text" id="cpf" formControlName="cpf" placeholder="Digite seu CPF">
+              <span class="input-error" *ngIf="formStep1.get('cpf')?.touched && formStep1.get('cpf')?.invalid">
+                {{ getCpfError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="nascimento">Data de Nascimento:*</label>
+              <input type="date" id="nascimento" formControlName="nascimento">
+              <span class="input-error" *ngIf="formStep1.get('nascimento')?.touched && formStep1.get('nascimento')?.invalid">
+                {{ getNascimentoError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail:*</label>
+              <input type="email" id="email" formControlName="email" placeholder="Digite seu email">
+              <span class="input-error" *ngIf="formStep1.get('email')?.touched && formStep1.get('email')?.invalid">
+                {{ getEmailError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="telefone">Telefone:*</label>
+              <input type="tel" id="telefone" formControlName="telefone" placeholder="Ex: (81)99999-8888">
+              <span class="input-error" *ngIf="formStep1.get('telefone')?.touched && formStep1.get('telefone')?.invalid">
+                {{ getTelefoneError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="endereco">Endereço:*</label>
+              <input type="text" id="endereco" formControlName="endereco" placeholder="Digite seu endereço">
+              <span class="input-error" *ngIf="formStep1.get('endereco')?.touched && formStep1.get('endereco')?.invalid">
+                {{ getEnderecoError() }}
+              </span>
+            </div>
+
+            <div *ngIf="bolsistaControl" class="switch-container">
+              <label for="bolsista" class="switch-label">
+                Marque se você é o próprio bolsista:
+                <span class="tooltip-icon" title="Marque esta opção apenas se você for o próprio bolsista para preencher alguns de seus dados automaticamente no próximo formulário.">?</span>
+              </label> 
+              <label class="switch">
+                <input type="checkbox" id="bolsista" [formControl]="bolsistaControl" (change)="onBolsistaChange($event)">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="proximo" (click)="goToNextStep()">Próximo</button>
+          </div>
+        </form>
+      </div>
+      <!-- Etapa 2: Dados do Bolsista -->
+    <div *ngIf="currentStep === 2">
+      <form [formGroup]="formStep2">
         <h2>Dados do Bolsista</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="nomeBolsista">Nome completo do bolsista:</label>
-            <input type="text" id="nomeBolsista" formControlName="nomeBolsista" placeholder="Digite o nome do bolsista">
-          </div>
-          <div class="form-group">
-            <label for="cpfBolsista">CPF do Bolsista:</label>
-            <input type="text" id="cpfBolsista" formControlName="cpfBolsista" placeholder="Digite o nome do CPF do bolsista">
-          </div>
-          <div class="form-group">
-            <label for="dataNascimentoBolsista">Data de Nascimento:</label>
-            <input type="date" id="dataNascimentoBolsista" formControlName="dataNascimentoBolsista">
-          </div>
-          <div class="form-group">
-            <label for="necessidadesEspeciais">Possui necessidades especiais?</label>
-            <select id="necessidadesEspeciais" formControlName="necessidadesEspeciais">
-              <option value="">Selecione</option>
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="racaCor">Selecione sua identificação étnica:</label>
-            <select id="racaCor" formControlName="racaCor">
-              <option value="">Selecione</option>
-              <option value="branco">Branco</option>
-              <option value="pardo">Pardo</option>
-              <option value="amarelo">Amarelo</option>
-              <option value="preto">Preto</option>
-              <option value="indigena">Indígena</option>
-            </select>
-          </div>
+
+        <!-- Só mostra os campos se NÃO for bolsista -->
+        <div class="form-grid grid-cols-2">
+            <div class="form-group" *ngIf="!bolsistaControl.value">
+              <label for="nomeBolsista">Nome completo do bolsista:</label>
+              <input type="text" id="nomeBolsista" formControlName="nomeBolsista" placeholder="Digite o nome do bolsista">
+              <span class="input-error" *ngIf="formStep2.get('nomeBolsista')?.touched && formStep2.get('nomeBolsista')?.invalid">
+                {{ getNomeBolsistaError() }}
+              </span>
+            </div>
+
+            <div class="form-group" *ngIf="!bolsistaControl.value">
+              <label for="cpfBolsista">CPF do Bolsista:</label>
+              <input type="text" id="cpfBolsista" formControlName="cpfBolsista" placeholder="Digite o CPF do bolsista">
+              <span class="input-error" *ngIf="formStep2.get('cpfBolsista')?.touched && formStep2.get('cpfBolsista')?.invalid">
+                {{ getCpfBolsistaError() }}
+              </span>
+            </div>
+
+            <div class="form-group" *ngIf="!bolsistaControl.value">
+              <label for="dataNascimentoBolsista">Data de Nascimento:</label>
+              <input type="date" id="dataNascimentoBolsista" formControlName="dataNascimentoBolsista">
+              <span class="input-error" *ngIf="formStep2.get('dataNascimentoBolsista')?.touched && formStep2.get('dataNascimentoBolsista')?.invalid">
+                {{ getNascimentoBolsistaError() }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="necessidadesEspeciais">Possui necessidades especiais?</label>
+              <select id="necessidadesEspeciais" formControlName="necessidadesEspeciais">
+                <option value="">Selecione</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="racaCor">Identificação étnica:</label>
+              <select id="racaCor" formControlName="racaCor">
+                <option value="">Selecione</option>
+                <option value="branco">Branco</option>
+                <option value="pardo">Pardo</option>
+                <option value="amarelo">Amarelo</option>
+                <option value="preto">Preto</option>
+                <option value="indigena">Indígena</option>
+              </select>
+            </div>
         </div>
 
         <div class="buttons">
@@ -108,6 +155,11 @@
           <button type="button" class="proximo" (click)="finalizarCadastro()">Finalizar</button>
         </div>
       </form>
+    </div>
+
+
+
+
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class BolsasService {
-  private dataUrl: string = 'assets/data/bolsas.json';
+  private dataUrl: string = 'http://localhost:3001/bolsas';
 
   constructor(private http: HttpClient) {}
 
