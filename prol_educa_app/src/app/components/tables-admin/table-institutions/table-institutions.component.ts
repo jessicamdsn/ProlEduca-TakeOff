@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 import { EditUserDialogComponent } from '../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { InstitutionService } from '../../../services/institution.service';
 
 @Component({
   selector: 'app-table-institutions',
@@ -21,7 +22,7 @@ export class TableInstitutionsComponent {
   instituicoesFiltradas: Institution[] = [];
   instituicoesPaginadas: Institution[] = [];
 
-  tiposEnsino: string[] = [];
+  tiposEnsino: any;
   filtroNome = '';
   filtroTipo = '';
   filtroStatus = '';
@@ -32,17 +33,31 @@ export class TableInstitutionsComponent {
   totalPaginas = 0;
   paginas: number[] = [];
 
+
   constructor(
     private instituicoesService: InstituitionsService,
     private alertService: AlertService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private institutionService: InstitutionService
   ) {}
 
   ngOnInit() {
-    this.instituicoesService.getInstitutions().subscribe((res) => {
-      this.instituicoes = res;
-      this.instituicoesFiltradas = [...res];
-      this.tiposEnsino = [...new Set(res.map((i) => i.type))];
+    this.institutionService.getInstitutions().subscribe((res: any) => {
+      console.log(res); 
+      const instituicoes = res.data.map((inst: any) => ({
+        trackingId: inst.id,
+        name: inst.trade_name,
+        status: inst.is_active,
+        type: inst.type,
+        courses: inst.courses || [] 
+      }));
+  
+      this.instituicoes = instituicoes;
+      this.instituicoesFiltradas = [...instituicoes];
+      this.tiposEnsino = [
+        ...new Set(this.instituicoes.map((i: Institution) => i.type)),
+      ];
+      
       this.atualizarPaginacao();
     });
   }

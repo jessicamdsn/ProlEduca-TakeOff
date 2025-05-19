@@ -17,23 +17,23 @@
     <thead class="table-light">
       <tr>
         <th>Tracking ID</th>
-        <th>CPF</th>
+        <!-- <th>CPF</th> -->
         <th (click)="ordenarPorNome()" style="cursor: pointer;">
           Nome
           <i [ngClass]="ordenacaoAsc ? 'bi bi-caret-up-fill' : 'bi bi-caret-down-fill'"></i>
         </th>
         <th>Email</th>
-        <th>Contato</th>
+        <!-- <th>Contato</th> -->
         <th class="text-center">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of usuariosPaginados">
         <td>#{{ usuario.trackingId }}</td>
-        <td>{{ usuario.cpf }}</td>
+        <!-- <td>{{ usuario.cpf }}</td> -->
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.email }}</td>
-        <td>{{ usuario.contato }}</td>
+        <!-- <td>{{ usuario.contato }}</td> -->
         <td class="text-center">
           <button class="btn btn-link text-primary p-0 me-2" (click)="openDialogUpdate(usuario)">
             <i class="bi bi-pencil-square"></i>

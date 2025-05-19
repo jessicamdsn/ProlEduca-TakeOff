@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../shared/services/alert/alert.service';
+import { AdmService } from '../../../services/adm.service';
 
 @Component({
   selector: 'app-table-users-admin',
@@ -36,13 +37,29 @@ export class TableUsersAdminComponent {
     private alertService: AlertService,
     private dialogEditModal: MatDialog,
     private userAdminService: UsersAdminService,
+    private adminService: AdmService,
   ) {}
 
   ngOnInit() {
-    this.userAdminService.getUsers().subscribe((users) => {
-      this.user = users;
-      this.usuariosFiltrados = users;
-      this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
+    // this.userAdminService.getUsers().subscribe((users) => {
+    //   this.user = users;
+    //   this.usuariosFiltrados = users;
+    //   this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
+    //   this.atualizarPaginacao();
+    // });
+    this.adminService.getAdmins().subscribe((response) => {
+      console.log(response); 
+      const admins = response.data.map((admin:any) => ({
+        trackingId: admin.id,
+        cpf: '---',
+        nome: admin.name,
+        email: admin.email,
+        contato: '---', 
+      }));
+  
+      this.user = admins;
+      this.usuariosFiltrados = admins;
+      this.totalPaginas = Math.ceil(admins.length / this.itensPorPagina);
       this.atualizarPaginacao();
     });
   }

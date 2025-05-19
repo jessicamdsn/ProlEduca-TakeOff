@@ -43,12 +43,31 @@ export class TableUsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe((users) => {
+    // this.userService.getUsers().subscribe((users) => {
+    //   this.user = users;
+    //   this.usuariosFiltrados = users;
+    //   this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
+    //   this.atualizarPaginacao();
+    // });
+
+    this.userService.getUsers().subscribe((response) => {
+      const users = response.data.map((user: any) => ({
+        trackingId: user.id,
+        nome: user.full_name,
+        email: user.email,
+        contato: user.phone,
+        cpf: user.cpf,
+        nascimento: user.birth_date,
+        ativo: user.is_active
+      }));
+    
       this.user = users;
       this.usuariosFiltrados = users;
       this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
       this.atualizarPaginacao();
     });
+    
+    
   }
 
   filtrarUsuarios() {

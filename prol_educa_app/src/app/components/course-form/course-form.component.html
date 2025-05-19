@@ -12,10 +12,13 @@
             <label for="instituicaoAssociada" class="form-label">Instituição Associada:</label>
             <select formControlName="instituicaoAssociada" class="form-control" id="instituicaoAssociada">
               <option value="" disabled selected>Selecione a instituição</option>
-              <option value="Instituicao A">Instituição A</option>
-              <option value="Instituicao B">Instituição B</option>
-              <option value="Instituicao C">Instituição C</option>
+              <option *ngFor="let instituicao of instituicoes" [value]="instituicao.id">
+                {{ instituicao.trade_name }}
+              </option>
             </select>
+            <div *ngIf="form.get('instituicaoAssociada')?.invalid && form.get('instituicaoAssociada')?.touched">
+              <small class="text-danger">Este campo é obrigatório</small>
+            </div>
           </div>
         <div class="mb-3">
           <label for="nome" class="form-label">Nome:</label>

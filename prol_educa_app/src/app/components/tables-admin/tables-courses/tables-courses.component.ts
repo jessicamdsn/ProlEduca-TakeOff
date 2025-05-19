@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   Course,
-  CoursesService,
 } from '../../../services/admin-services/courses/courses.service';
+import { CoursesService } from '../../../services/courses.service';
 
 @Component({
   selector: 'app-tables-courses',
@@ -45,7 +45,21 @@ export class TablesCoursesComponent {
   ) {}
 
   ngOnInit() {
-    this.coursesService.getCourses().subscribe((courses) => {
+    this.coursesService.getCourses().subscribe((res) => {
+      console.log(res);
+      const courses = res.data.map((course: any) => ({
+        trackingId: course.id,
+        nome: course.name,
+        codInstituicao: course.type,
+        vagas: course.vacancies,
+        percentualBolsa: course.scholarship_percentage ,
+        valorOriginal: course.original_price,
+        valorDesconto: course.enrollment_discount,
+        turno: course.shift,
+        anoBolsa: course.type,
+      }));
+
+
       this.cursos = courses;
       this.cursosFiltrados = [...courses];
       this.totalPaginas = Math.ceil(courses.length / this.itensPorPagina);
@@ -126,25 +140,25 @@ export class TablesCoursesComponent {
     });
 
     dialogRef.afterClosed().subscribe((cursoAtualizado: Course | undefined) => {
-      if (cursoAtualizado) {
-        this.coursesService.updateCourse(cursoAtualizado).subscribe({
-          next: (updateCourse) => {
-            const index = this.cursosFiltrados.findIndex(
-              (c: Course) =>
-                c.trackingId === (updateCourse as Course).trackingId
-            );
-            if (index !== -1) {
-              this.cursosFiltrados[index] = updateCourse as Course;
-            }
-            this.atualizarPaginacao();
-            this.alertService.success('Curso atualizado com sucesso!');
-          },
-          error: (erro) => {
-            console.error('Erro ao salvar:', erro);
-            this.alertService.error('Erro ao salvar o curso. Tente novamente.');
-          },
-        });
-      }
+      // if (cursoAtualizado) {
+      //   this.coursesService.updateCourse(cursoAtualizado).subscribe({
+      //     next: (updateCourse) => {
+      //       const index = this.cursosFiltrados.findIndex(
+      //         (c: Course) =>
+      //           c.trackingId === (updateCourse as Course).trackingId
+      //       );
+      //       if (index !== -1) {
+      //         this.cursosFiltrados[index] = updateCourse as Course;
+      //       }
+      //       this.atualizarPaginacao();
+      //       this.alertService.success('Curso atualizado com sucesso!');
+      //     },
+      //     error: (erro) => {
+      //       console.error('Erro ao salvar:', erro);
+      //       this.alertService.error('Erro ao salvar o curso. Tente novamente.');
+      //     },
+      //   });
+      // }
     });
   }
 
@@ -168,18 +182,18 @@ export class TablesCoursesComponent {
   }
 
   deleteUser(course: Course) {
-    this.coursesService.deleteCourse(course.trackingId).subscribe({
-      next: () => {
-        this.cursosFiltrados = this.cursosFiltrados.filter(
-          (c: Course) => c.trackingId !== course.trackingId
-        );
-        this.atualizarPaginacao();
-        this.alertService.success('Curso deletado com sucesso!');
-      },
-      error: (error) => {
-        console.error('Erro ao deletar o curso', error);
-        this.alertService.error('Erro ao deletar o curso. Tente novamente.');
-      },
-    });
+    // this.coursesService.deleteCourse(course.trackingId).subscribe({
+    //   next: () => {
+    //     this.cursosFiltrados = this.cursosFiltrados.filter(
+    //       (c: Course) => c.trackingId !== course.trackingId
+    //     );
+    //     this.atualizarPaginacao();
+    //     this.alertService.success('Curso deletado com sucesso!');
+    //   },
+    //   error: (error) => {
+    //     console.error('Erro ao deletar o curso', error);
+    //     this.alertService.error('Erro ao deletar o curso. Tente novamente.');
+    //   },
+    // });
   }
 }

@@ -24,4 +24,10 @@ export class AdmService {
     return this.http.post<any>(url , body);
   }
 
+  getAdmins() {
+    const url = `${this.apiBaseUrl}/administrators`;
+    console.log('Requisição para:', url);
+    return this.http.get<any>(url);
+  }
+
 }
