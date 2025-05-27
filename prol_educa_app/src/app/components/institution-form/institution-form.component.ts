@@ -10,6 +10,8 @@ import { CardInstituicaoComponent } from '../card-instituicao/card-instituicao.c
 
 import { Router } from '@angular/router';
 import { AlertService } from '../../shared/services/alert/alert.service';
+import { InstituitionsService } from '../../services/admin-services/instituitions/instituitions.service';
+import { InstitutionService } from '../../services/institution.service';
 @Component({
   selector: 'app-institution-form',
   standalone: true,
@@ -23,7 +25,8 @@ export class InstitutionFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private institutionService: InstitutionService
   ) {}
 
   ngOnInit(): void {
@@ -63,15 +66,36 @@ export class InstitutionFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // if (this.form.valid) {
+    //   console.log('Formulário enviado:', this.form.value);
+    //   this.alertService.success('Instituição cadastrada com sucesso!')
+    // } else {
+    //   // Marcar todos os campos como touched para mostrar erros de validação
+    //   Object.keys(this.form.controls).forEach((key) => {
+    //     const control = this.form.get(key);
+    //     control?.markAsTouched();
+    //   });
+    // }
+
+console.log(this.form.value);
     if (this.form.valid) {
-      console.log('Formulário enviado:', this.form.value);
-      this.alertService.success('Instituição cadastrada com sucesso!')
+      console.log('entrou no if');
+      this.institutionService.createNewInstitution(this.form.value).subscribe({
+        next: () => {
+          this.alertService.success('Instituição cadastrada com sucesso!');
+          this.router.navigate(['/admin/instituicao']);
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Erro ao cadastrar a instituição');
+        }
+      });
     } else {
-      // Marcar todos os campos como touched para mostrar erros de validação
+      console.log('entrou no else');
       Object.keys(this.form.controls).forEach((key) => {
-        const control = this.form.get(key);
-        control?.markAsTouched();
+        this.form.get(key)?.markAsTouched();
       });
     }
+
   }
 }

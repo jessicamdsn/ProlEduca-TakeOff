@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,11 +13,10 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 import { EditUserDialogComponent } from './../../../shared/edit-user-dialog/edit-user-dialog.component';
 import { AlertService } from '../../../shared/services/alert/alert.service';
 
-
 @Component({
   selector: 'app-table-users',
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './table-users.component.html',
   styleUrl: './table-users.component.scss',
 })
@@ -43,16 +42,35 @@ export class TableUsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe((users) => {
+    // this.userService.getUsers().subscribe((users) => {
+    //   this.user = users;
+    //   this.usuariosFiltrados = users;
+    //   this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
+    //   this.atualizarPaginacao();
+    // });
+
+    this.userService.getUsers().subscribe((response) => {
+      const users = response.data.map((user: any) => ({
+        trackingId: user.id,
+        nome: user.full_name,
+        email: user.email,
+        contato: user.phone,
+        cpf: user.cpf,
+        nascimento: user.birth_date,
+        ativo: user.is_active
+      }));
+    
       this.user = users;
-      this.usuariosFiltrados = users;
+      this.usuariosFiltrados = [...users];
       this.totalPaginas = Math.ceil(users.length / this.itensPorPagina);
       this.atualizarPaginacao();
     });
+    
+    
   }
 
   filtrarUsuarios() {
-    this.usuariosFiltrados = this.usuariosFiltrados.filter((users) => {
+    this.usuariosFiltrados = this.user.filter((users) => {
       return users.nome
         .toLowerCase()
         .includes(this.termoPesquisa.toLowerCase());
@@ -80,14 +98,14 @@ export class TableUsersComponent implements OnInit {
     this.atualizarPaginacao();
   }
 
-
-
   atualizarPaginacao() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
     const fim = inicio + this.itensPorPagina;
     this.usuariosPaginados = this.usuariosFiltrados.slice(inicio, fim);
 
-    this.totalPaginas = Math.ceil(this.usuariosFiltrados.length / this.itensPorPagina);
+    this.totalPaginas = Math.ceil(
+      this.usuariosFiltrados.length / this.itensPorPagina
+    );
     this.paginas = Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
   }
 
@@ -96,7 +114,6 @@ export class TableUsersComponent implements OnInit {
     this.paginaAtual = pagina;
     this.atualizarPaginacao();
   }
-
 
   // btn Update
   openDialogUpdate(user: User) {
@@ -123,8 +140,10 @@ export class TableUsersComponent implements OnInit {
           },
           error: (erro) => {
             console.error('Erro ao salvar:', erro);
-           this.alertService.error('Erro ao salvar o usuário. Tente novamente.');
-          }
+            this.alertService.error(
+              'Erro ao salvar o usuário. Tente novamente.'
+            );
+          },
         });
       }
     });

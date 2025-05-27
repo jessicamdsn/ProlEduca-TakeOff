@@ -1,91 +1,97 @@
-<div class="container mt-5">
-  <div class="row mb-3 align-items-end">
-    <div class="col-md-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Nome da instituição"
-        [(ngModel)]="filtroNome"
-      />
-    </div>
-    <div class="col-md-2">
-      <select class="form-select" [(ngModel)]="filtroTipo">
-        <option value="">Tipo de ensino</option>
-        <option *ngFor="let tipo of tiposEnsino" [value]="tipo">
-          {{ tipo }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <select class="form-select" [(ngModel)]="filtroStatus">
-        <option value="">Status</option>
-        <option value="true">Ativo</option>
-        <option value="false">Inativo</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Curso"
-        [(ngModel)]="filtroCurso"
-      />
-    </div>
-    <div class="col-md-4 d-flex gap-2">
-      <button class="btn btn-clear" (click)="limparFiltros()">Limpar</button>
-      <button class="btn btn-search" (click)="filtrarInstituicoes()">Procurar</button>
-    </div>
-  </div>
+<div class="main-content">
+  <div class="container mt-5">
+    <div class="filtros-wrapper d-flex flex-wrap gap-3">
+      <div class="filtro-item">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome da instituição"
+          [(ngModel)]="filtroNome"
+        />
+      </div>
+      <div class="filtro-item">
+        <select class="form-select" [(ngModel)]="filtroTipo">
+          <option value="">Tipo de ensino</option>
+          <option *ngFor="let tipo of tiposEnsino" [value]="tipo">
+            {{ tipo }}
+          </option>
+        </select>
+      </div>
+      <div class="filtro-item">
+        <select class="form-select" [(ngModel)]="filtroStatus">
+          <option value="">Status</option>
+          <option value="true">Ativo</option>
+          <option value="false">Inativo</option>
+        </select>
+      </div>
+      <div class="filtro-item">
+        <div class="dropdown">
+          <button
+            class="form-select text-start"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+            {{ filtroCurso || "Curso" }}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" (click)="selecionarCurso('')">Curso</a>
+            </li>
+            <li *ngFor="let curso of cursosDisponiveis">
+              <a class="dropdown-item" (click)="selecionarCurso(curso)">
+                {{ curso }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-  <div class="table-responsive" *ngIf="instituicoesPaginadas.length > 0">
-    <table class="table table-hover text-center">
-      <thead class="table-light">
-        <tr>
-          <th>Tracking ID</th>
-          <th>Nome</th>
-          <th>Status</th>
-          <th>Tipo</th>
-          <th>Cursos</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let inst of instituicoesPaginadas">
-          <td>#{{ inst.trackingId }}</td>
-          <td>{{ inst.name }}</td>
-          <td>{{ inst.status ? "Ativo" : "Inativo" }}</td>
-          <td>{{ inst.type }}</td>
-          <td>
-            <ul class="list-unstyled" *ngIf="inst.courses?.length; else emptyCourses">
-              <li *ngFor="let course of inst.courses">{{ course }}</li>
-            </ul>
-            <ng-template #emptyCourses>
-              <ul>
-                <li>Nenhum curso</li>
-              </ul>
-            </ng-template>
-          </td>
+      <div class="d-flex gap-2">
+        <button class="btn btn-clear" (click)="limparFiltros()">Limpar</button>
+        <button class="btn btn-search" (click)="filtrarInstituicoes()">
+          Procurar
+        </button>
+      </div>
+    </div>
 
-          <td>
-            <button
-              class="btn btn-link text-primary p-0 me-2"
-              (click)="openDialogUpdate(inst)"
-            >
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button
-              class="btn btn-link text-danger p-0"
-              (click)="openDialogDelete(inst)"
-            >
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive" *ngIf="instituicoesPaginadas.length > 0">
+      <table class="table table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Tracking ID</th>
+            <th>Nome</th>
+            <th>Status</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inst of instituicoesPaginadas">
+            <td>#{{ inst.trackingId }}</td>
+            <td>{{ inst.name }}</td>
+            <td>{{ inst.status ? "Ativo" : "Inativo" }}</td>
+            <td>{{ inst.type }}</td>
+            <td>
+              <button
+                class="btn btn-link text-primary p-0 me-2"
+                (click)="openDialogUpdate(inst)"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                class="btn btn-link text-danger p-0"
+                (click)="openDialogDelete(inst)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Paginação -->
-    <nav aria-label="Page navigation">
+    <nav *ngIf="totalPaginas > 1" aria-label="Page navigation">
       <ul class="pagination justify-content-center">
         <li class="page-item" [class.disabled]="paginaAtual === 1">
           <button class="page-link" (click)="mudarPagina(paginaAtual - 1)">
@@ -108,14 +114,14 @@
         </li>
       </ul>
     </nav>
-  </div>
 
-  <div *ngIf="instituicoesPaginadas.length === 0" class="text-center mt-5">
-    <p class="fs-5 text-muted">
-      Nenhuma instituição encontrada com os filtros selecionados.
-    </p>
-    <button class="btn btn-outline-primary" (click)="limparFiltros()">
-      Limpar filtros
-    </button>
+    <div *ngIf="instituicoesPaginadas.length === 0" class="text-center mt-5">
+      <p class="no-results-text text-muted">
+        Nenhuma instituição encontrada com os filtros selecionados.
+      </p>
+      <button class="btn btn-outline-primary" (click)="limparFiltros()">
+        Limpar filtros
+      </button>
+    </div>
   </div>
 </div>

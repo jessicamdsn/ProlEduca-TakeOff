@@ -13,8 +13,45 @@
   gap: .5rem;
 }
 .btn-add:hover {
-  color: #0a0a5a;
-  border: 1px solid #0a0a5a;
-  background-color: #fff;
-  transition: all 0.3s ease-in-out;
+  color: #ffffff;
+  background-color: #0a0a5a;
+  border-color: #0a0a5a;
+  box-shadow: 5px 10px 17px -10px rgba(0, 0, 0, 0.4);
 }
+
+@media (max-width: 576px) {
+  .btn-add .btn-text {
+    display: none;
+  }
+  .btn-add {
+    padding: 10px;
+    justify-content: center;
+
+  }
+
+  .btn-icon > i {
+    color: #0a0a5a;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .btn-add:hover {
+    background-color: #e6e6ff;
+    color: #0a0a5a;
+    border-color: #0a0a5a;
+  }
+
+
+}
+
+@media (max-width: 576px) {
+  .btn-add {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+

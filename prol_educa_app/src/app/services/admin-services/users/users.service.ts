@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../enviroment';
 
 export interface User{
   trackingId: string;
@@ -19,9 +20,9 @@ export class UsersService {
 
   private apiUrl = 'http://localhost:3001/alunos';
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
-  }
+  // getUsers(): Observable<User[]> {
+  //   return this.http.get<User[]>(this.apiUrl);
+  // }
 
   updateUser(user: User) {
     return this.http.put(`http://localhost:3001/alunos/${user.trackingId}`, user);
@@ -31,4 +32,13 @@ export class UsersService {
   deleteUser(trackingId: string): Observable<void>{
     return this.http.delete<void>(`${this.apiUrl}/${trackingId}`);
   }
+
+
+  apiBaseUrl: string = environment.apiUrl;
+  
+    getUsers() {
+      const url = `${this.apiBaseUrl}/clients`;
+      console.log('Requisição para:', url);
+      return this.http.get<any>(url);
+    }
 }

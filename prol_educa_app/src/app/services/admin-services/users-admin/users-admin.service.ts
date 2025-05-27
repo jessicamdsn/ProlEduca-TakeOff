@@ -17,7 +17,7 @@ export class UsersAdminService {
   }
 
   updateUser(user: User) {
-    return this.http.put(`http://localhost:3001/admin/${user.trackingId}`, user);
+    return this.http.put(`${this.apiUrl}/${user.trackingId}`, user);
   }
 
 
