@@ -11,9 +11,9 @@
     />
   </div>
 
-  <ng-container *ngIf="usuariosFiltrados.length > 0; else nenhumResultado">
+  <ng-container *ngIf="usuariosFiltrados.length > 0 && usuariosPaginados.length > 0; else nenhumResultado">
   <!-- Tabela -->
-  <table class="table table-hover align-middle"  *ngIf="usuariosPaginados.length > 0">
+  <table class="table table-hover align-middle" >
     <thead class="table-light">
       <tr>
         <th>Tracking ID</th>
