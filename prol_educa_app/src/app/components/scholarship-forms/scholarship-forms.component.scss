@@ -32,8 +32,8 @@
 .form-container {
   display: flex;
   justify-content: center;
-  align-items: start; /* Muda de center para start para subir mais */
-  padding-top: 60px; /* Sobe a caixa para o topo */
+  align-items: start;
+  padding-top: 60px;
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
 }
@@ -47,7 +47,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* <- Aqui: de center para stretch */
+  align-items: stretch; 
   box-sizing: border-box;
 }
 
@@ -70,9 +70,8 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
-  align-self: stretch; /* <- garante que o grid ocupe todo espaço */
+  align-self: stretch; 
 }
-
 
 .form-group {
   display: flex;
@@ -298,26 +297,21 @@ select.ng-invalid.ng-touched {
   background-color: #eee;
 }
 
-
-
 @media (max-width: 768px) {
   .form-container {
-    // flex-direction: column;
     align-items: center;
   }
 
   .form-box {
-    width: 100%; /* Caixa ocupa toda a largura da tela */
+    width: 100%;
     padding: 20px;
   }
 
   .step-indicator {
-    // flex-direction: column;
     align-items: center;
   }
 
   .step-labels {
-    // flex-direction: column;
     gap: 30px;
     margin-top: 20px;
   }
@@ -333,11 +327,10 @@ select.ng-invalid.ng-touched {
   }
 
   .form-grid {
-    grid-template-columns: 1fr; /* Alterando para uma coluna no celular */
+    grid-template-columns: 1fr; 
   }
 
   .buttons {
-    // flex-direction: column;
     align-items: center;
   }
 }
@@ -372,9 +365,7 @@ select.ng-invalid.ng-touched {
   .form-box {
     padding: 15px;
   }
-
   .buttons {
-    // flex-direction: column;
     gap: 10px;
     width: 100%;
   }
