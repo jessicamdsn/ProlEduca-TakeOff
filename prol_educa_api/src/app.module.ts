@@ -10,17 +10,22 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [    
+   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '5432'),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      autoLoadEntities: true,
-      synchronize: process.env.DB_SYNCHRONIZE === 'true', // Configuração dinâmica com base na variável
+    TypeOrmModule.forRootAsync({
+      useFactory: () => {
+        const dbUrl = new URL(process.env.DATABASE_URL!);
+        return {
+          type: 'postgres',
+          host: dbUrl.hostname,
+          port: parseInt(dbUrl.port),
+          username: dbUrl.username,
+          password: dbUrl.password,
+          database: dbUrl.pathname.slice(1),
+          autoLoadEntities: true,
+          synchronize: process.env.DB_SYNCHRONIZE === 'true',
+        };
+      },
     }),
     InstitutionsModule,
     CoursesModule,
@@ -34,4 +39,4 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

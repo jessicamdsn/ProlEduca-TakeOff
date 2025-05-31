@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateAdministratorDto } from './dto/create-administrator.dto';
 import { UpdateAdministratorDto } from './dto/update-administrator.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -39,3 +39,5 @@ export class AdministratorsService {
     return await this.repository.delete(id);
   }
 }
+
+
