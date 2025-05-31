@@ -14,8 +14,8 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-  origin: 'https://proleduca-takeoff.up.railway.app',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  origin: '*',  // permite qualquer origem (pode ser ajustado para um domínio específico)
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   allowedHeaders: ['Content-Type', 'Authorization'],
 });
