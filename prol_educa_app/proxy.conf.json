@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://proleduca-takeoff-production.up.railway.app/",
+    "target": "https://proleduca-takeoff-production.up.railway.app",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
