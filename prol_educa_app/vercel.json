@@ -1,14 +1,10 @@
 {
-  "buildCommand": "ng build",
-  "functions": {
-    "dist/prol_educa_app/server/server.mjs": {
-      "runtime": "nodejs18.x"
-    }
-  },
+  "buildCommand": "ng build --configuration=production --base-href ./",
+  "outputDirectory": "dist/seu-nome-do-projeto",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/ssr"
+      "destination": "/index.html"
     }
   ]
 }
