@@ -10,7 +10,7 @@
     Filtrar
   </button>
 
-  <div class="d-flex justify-content-end" *ngIf="bolsasFiltradas?.length > 0">
+  <div class="d-flex justify-content-end" *ngIf="bolsasFiltradas && bolsasFiltradas.length > 0">
     <button class="btn btn-orden" (click)="ordenarPorPreco()">
       Ordenar por preço
       <i
@@ -223,7 +223,7 @@
     </div>
   </div>
 
-  <div class="no-results-container" *ngIf="bolsasFiltradas?.length === 0">
+  <div class="no-results-container" *ngIf="bolsasFiltradas && bolsasFiltradas.length === 0">
     <p class="no-results-text text-muted">
       Nenhuma bolsa encontrada com os filtros selecionados.
     </p>
@@ -235,7 +235,7 @@
   <div class="container-card-bolsas">
     <div
       class="d-flex justify-content-end mb-1"
-      *ngIf="bolsasFiltradas?.length > 0"
+      *ngIf="bolsasFiltradas && bolsasFiltradas.length > 0"
     >
       <button class="btn btn-orden-normal mb-3" (click)="ordenarPorPreco()">
         Ordenar por preço
@@ -290,8 +290,8 @@
     </div>
 
     <!-- Paginação -->
-    <nav
-      *ngIf="bolsasFiltradas?.length > 0"
+    <nav 
+      *ngIf="bolsasFiltradas && bolsasFiltradas.length > 0"
       aria-label="Page navigation"
       class="mt-4 d-flex justify-content-center"
     >
