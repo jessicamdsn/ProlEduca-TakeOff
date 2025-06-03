@@ -98,8 +98,8 @@ npm run start:dev
 
 ## 🌐 Deploy
 
-- **Frontend:** [Edupass na Vercel](https://seu-link.vercel.app)
-- **Backend:** Hospedado via [Railway](https://railway.app)
+- **Frontend:** [Edupass na Vercel]([https://seu-link.vercel.app](https://prol-educa-take-off.vercel.app/#/))
+- **Backend:** Hospedado via [Railway]([https://railway.app](https://proleduca-takeoff-production.up.railway.app/))
 
 
 
