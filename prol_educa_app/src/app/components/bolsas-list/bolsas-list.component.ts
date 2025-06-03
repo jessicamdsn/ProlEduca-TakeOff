@@ -33,7 +33,7 @@ export class BolsasListComponent implements OnInit {
   serie: string[] = [];
 
   bolsas: any[] = [];
-  bolsasFiltradas: any[] = [];
+  bolsasFiltradas: any;
 
   paginaAtual: number = 1;
   itensPorPagina: number = 4;
@@ -167,7 +167,7 @@ export class BolsasListComponent implements OnInit {
   ordenarPorPreco() {
     this.ordemPrecoAsc = !this.ordemPrecoAsc;
 
-    this.bolsasFiltradas.sort((a, b) => {
+    this.bolsasFiltradas.sort((a:any, b:any) => {
       const precoA = parseFloat(String(a.precoComDesconto).replace(',', '.'));
       const precoB = parseFloat(String(b.precoComDesconto).replace(',', '.'));
       return this.ordemPrecoAsc ? precoA - precoB : precoB - precoA;
