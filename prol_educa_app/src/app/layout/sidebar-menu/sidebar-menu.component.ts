@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Adicione esta importação
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -63,6 +64,19 @@ export class SidebarMenuComponent implements OnInit {
       console.warn('Rota não mapeada para:', itemId)
     }
   }
+  confirmarSaida(): void {
+  Swal.fire({
+    title: 'Tem certeza que deseja sair?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, sair',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.router.navigate(['/']);
+    }
+  });
+}
 
   logout() {
     // Aqui você pode limpar o token, redirecionar, etc.
