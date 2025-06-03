@@ -10,7 +10,7 @@ import { ScrollService } from './shared/services/scroll/scroll.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideClientHydration(),
+    // provideClientHydration(),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),

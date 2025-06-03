@@ -2,19 +2,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      }
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
-      "methods": ["GET", "POST", "PUT", "DELETE"]
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "/"
     }
   ]
 }
