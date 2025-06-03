@@ -1,4 +1,6 @@
 {
+  "buildCommand": "ng build --configuration=production --base-href ./",
+  "outputDirectory": "dist/prol_educa_app",
   "rewrites": [
     {
       "source": "/(.*)",
