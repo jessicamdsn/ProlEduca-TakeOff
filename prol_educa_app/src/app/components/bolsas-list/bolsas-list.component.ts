@@ -33,7 +33,8 @@ export class BolsasListComponent implements OnInit {
   serie: string[] = [];
 
   bolsas: any[] = [];
-  bolsasFiltradas: any;
+  bolsasFiltradas: any[] = [];
+
 
   paginaAtual: number = 1;
   itensPorPagina: number = 4;
@@ -57,12 +58,12 @@ export class BolsasListComponent implements OnInit {
     Integral: false,
   };
 
-  constructor(private bolsaService: BolsasService) {}
+  constructor(private bolsaService: BolsasService) { }
 
   ngOnInit(): void {
     this.bolsaService.getBolsas().subscribe((dados) => {
-      this.bolsas = dados;
-      this.bolsasFiltradas = dados;
+      this.bolsas = Array.isArray(dados) ? dados : [];
+      this.bolsasFiltradas = [...this.bolsas];
 
       this.instituicoes = [...new Set(dados.map((b) => b.instituicao))];
       this.estados = [...new Set(dados.map((b) => b.estado))];
@@ -167,7 +168,7 @@ export class BolsasListComponent implements OnInit {
   ordenarPorPreco() {
     this.ordemPrecoAsc = !this.ordemPrecoAsc;
 
-    this.bolsasFiltradas.sort((a:any, b:any) => {
+    this.bolsasFiltradas.sort((a: any, b: any) => {
       const precoA = parseFloat(String(a.precoComDesconto).replace(',', '.'));
       const precoB = parseFloat(String(b.precoComDesconto).replace(',', '.'));
       return this.ordemPrecoAsc ? precoA - precoB : precoB - precoA;
