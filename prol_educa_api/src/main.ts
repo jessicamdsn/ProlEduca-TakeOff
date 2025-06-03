@@ -18,10 +18,11 @@ origin: ['https://prol-educa-take-off.vercel.app', 'http://localhost:4200'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // Se você precisar enviar cookies ou cabeçalhos de autorização
 });
- app.getHttpAdapter().get('/', (req, res) => {
-    res.send('API online');
-  });
-  
+app.getHttpAdapter().get('/', (req, res) => {
+  res.json({ message: 'API online' });
+});
+
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
