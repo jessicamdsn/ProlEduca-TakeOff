@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../enviroment';
 
 export interface Course {
   trackingId: string;
@@ -18,7 +19,7 @@ export interface Course {
   providedIn: 'root'
 })
 export class CoursesService {
-  private apiUrl = 'http://localhost:3001/courses';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

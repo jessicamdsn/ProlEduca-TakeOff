@@ -18,14 +18,14 @@ export class UsersService {
 
   constructor(private http: HttpClient, ) { }
 
-  private apiUrl = 'http://localhost:3001/alunos';
+  private apiUrl = environment.apiUrl;
 
   // getUsers(): Observable<User[]> {
   //   return this.http.get<User[]>(this.apiUrl);
   // }
 
   updateUser(user: User) {
-    return this.http.put(`http://localhost:3001/alunos/${user.trackingId}`, user);
+    return this.http.put(`${this.apiUrl}/alunos/${user.trackingId}`, user);
   }
 
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../enviroment';
 
 
 export interface Institution {
@@ -18,7 +19,7 @@ export class InstituitionsService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:3001/institutions'
+  private apiUrl = environment.apiUrl;
 
   getInstitutions(): Observable<Institution[]>{
     return this.http.get<Institution[]>(this.apiUrl);
