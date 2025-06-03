@@ -61,27 +61,28 @@ export class BolsasListComponent implements OnInit {
   constructor(private bolsaService: BolsasService) { }
 
   ngOnInit(): void {
-    this.bolsaService.getBolsas().subscribe({
-      next: (dados) => {
-        this.bolsas = Array.isArray(dados) ? dados : [];
-        this.bolsasFiltradas = [...this.bolsas];
+  this.bolsaService.getBolsas().subscribe({
+    next: (dados) => {
+      this.bolsas = Array.isArray(dados) ? dados : [];
+      this.bolsasFiltradas = [...this.bolsas];
 
-        this.instituicoes = [...new Set(dados.map((b) => b.instituicao))];
-        this.estados = [...new Set(dados.map((b) => b.estado))];
-        this.cursos = [...new Set(dados.map((b) => b.curso))];
-        this.cidade = [...new Set(dados.map((b) => b.cidade))];
-        this.bairro = [...new Set(dados.map((b) => b.bairro))];
-        this.modalidade = [...new Set(dados.map((b) => b.modalidade))];
-        this.alt = [...new Set(dados.map((b) => b.alt))];
-        this.serie = [...new Set(dados.map((b) => b.serie))];
-      },
-      error: (err) => {
-        console.error('Erro ao carregar bolsas:', err);
-        this.bolsas = [];
-        this.bolsasFiltradas = [];
-      }
-    });
-  }
+      this.instituicoes = [...new Set(this.bolsas.map((b:any) => b.instituicao))];
+      this.estados = [...new Set(this.bolsas.map((b:any) => b.estado))];
+      this.cursos = [...new Set(this.bolsas.map((b:any) => b.curso))];
+      this.cidade = [...new Set(this.bolsas.map((b:any) => b.cidade))];
+      this.bairro = [...new Set(this.bolsas.map((b:any) => b.bairro))];
+      this.modalidade = [...new Set(this.bolsas.map((b:any) => b.modalidade))];
+      this.alt = [...new Set(this.bolsas.map((b:any) => b.alt))];
+      this.serie = [...new Set(this.bolsas.map((b:any) => b.serie))];
+    },
+    error: (err) => {
+      console.error('Erro ao carregar bolsas:', err);
+      this.bolsas = [];
+      this.bolsasFiltradas = [];
+    }
+  });
+}
+
 
   selecionarFiltro(tipo: Exclude<keyof Filtros, 'turno'>, valor: string) {
     this.filtros[tipo] = valor;
