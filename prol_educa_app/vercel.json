@@ -1,10 +1,8 @@
 {
-  "buildCommand": "ng build --configuration=production",
-  "outputDirectory": "dist/prol_educa_app",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "index.html"
+      "destination": "/index.html"
     }
   ]
 }
