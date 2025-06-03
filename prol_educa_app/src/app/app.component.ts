@@ -15,6 +15,7 @@ import { ViewAdminCoursesComponent } from './pages/view-admin-courses/view-admin
 import { CourseRegistrationComponent } from './pages/course-registration/course-registration.component';
 import { InstitutionRegistrationComponent } from './pages/institution-registration/institution-registration.component';
 import { ViewAdminInstituitionComponent } from './pages/view-admin-instituition/view-admin-instituition.component';
+import { CreateUserComponent } from './pages/create-user/create-user.component';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ import { ViewAdminInstituitionComponent } from './pages/view-admin-instituition/
     CourseRegistrationComponent,
     ViewAdminInstituitionComponent,
     InstitutionRegistrationComponent,
+    CreateUserComponent
   ],
 
   templateUrl: './app.component.html',

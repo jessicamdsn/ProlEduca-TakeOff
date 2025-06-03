@@ -12,10 +12,12 @@ import { CourseRegistrationComponent } from './pages/course-registration/course-
 import { ViewAdminInstituitionComponent } from './pages/view-admin-instituition/view-admin-instituition.component';
 import { InstitutionRegistrationComponent } from './pages/institution-registration/institution-registration.component';
 import { ScholarshipRegistrationComponent } from './pages/scholarship-registration/scholarship-registration.component';
+import { CreateUserComponent } from './pages/create-user/create-user.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'criar-conta', component: CreateUserComponent },
   { path: 'cliente', children: [
     {path: '', component: CustomerInterfaceComponent},
     {path: 'cadastro', component: ScholarshipRegistrationComponent}

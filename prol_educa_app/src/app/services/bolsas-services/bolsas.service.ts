@@ -12,9 +12,9 @@ export class BolsasService {
 
   constructor(private http: HttpClient) {}
 
-  getBolsas(): Observable<any[]> {
-    return this.http.get<any[]>(this.dataUrl);
-  }
+getBolsas(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.dataUrl}/scholars`);
+}
 
   getInstituicoes(): Observable<string[]> {
     return this.getBolsas().pipe(

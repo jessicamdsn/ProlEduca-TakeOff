@@ -1,0 +1,65 @@
+<div class="d-flex w-100" style="height: 100vh;">
+  <!-- Banner lateral -->
+  <div class="w-100 d-none d-md-block">
+    <app-banner-login></app-banner-login>
+  </div>
+
+  <!-- Formulário de criação de conta -->
+  <div class="w-100 w-md-50 d-flex flex-column position-relative p-4">
+    <a routerLink="/login" class="link-voltar-site align-self-start mb-4">Voltar para o login</a>
+
+    <form
+      [formGroup]="createUserForm"
+      (ngSubmit)="onSubmit()"
+      class="mini d-flex flex-column w-100 align-items-center justify-content-center"
+      style="flex: 1;"
+    >
+      <img class="mb-3 logo-edupass" src="../../../assets/logo-edupass.svg" alt="Logo Edu">
+      <h4 class="mb-4">Criar Conta</h4>
+
+      <div class="mb-3 w-75">
+        <label for="name" class="form-label">Nome</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Digite seu nome"
+        />
+        <div *ngIf="createUserForm.get('name')?.touched && createUserForm.get('name')?.invalid" class="text-danger">
+          Nome é obrigatório.
+        </div>
+      </div>
+
+      <div class="mb-3 w-75">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Digite seu email"
+        />
+        <div *ngIf="createUserForm.get('email')?.touched && createUserForm.get('email')?.invalid" class="text-danger">
+          Email inválido.
+        </div>
+      </div>
+
+      <div class="mb-3 w-75">
+        <label for="password" class="form-label">Senha</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Crie uma senha"
+        />
+        <div *ngIf="createUserForm.get('password')?.touched && createUserForm.get('password')?.invalid" class="text-danger">
+          Mínimo 6 caracteres.
+        </div>
+      </div>
+
+      <button class="btn mt-3" type="submit" [disabled]="createUserForm.invalid">Criar Conta</button>
+    </form>
+  </div>
+</div>

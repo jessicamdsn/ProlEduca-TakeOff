@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BannerLoginComponent } from '../../layout/banner-login/banner-login.component';
+import { LoginService } from '../../services/login.service';
+import { AlertService } from '../../shared/services/alert/alert.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [BannerLoginComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -19,7 +22,9 @@ loginForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService,
+    private alertService: AlertService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -32,13 +37,14 @@ loginForm: FormGroup;
 
     const formData = this.loginForm.value;
 
-    this.http.post<any>('https://seu-endpoint.com/login', formData).subscribe({
+    this.loginService.login(formData).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.access_token);
+          this.alertService.success('logado com sucesso!');
         this.router.navigate(['/admin']);
       },
       error: () => {
-        alert('Email ou senha inválidos');
+          this.alertService.error('Email ou senha inválidos');
       }
     });
   }

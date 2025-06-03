@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-curso-filter',
@@ -11,6 +12,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class CursoFilterComponent {
   abaSelecionada = 'escola';
+
+constructor(private router: Router) {}
+  irParaCadastro() {
+  this.router.navigate(['/cliente']);
+}
 
   @Output() abaSelecionadaChange = new EventEmitter<string>();
 

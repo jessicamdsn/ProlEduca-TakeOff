@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BolsasService } from '../../services/bolsas-services/bolsas.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { MOCK_BOLSAS } from '../../../assets/MOCK_BOLSAS';
+import { RouterLink } from '@angular/router';
+
 
 interface Filtros {
   instituicao: string;
@@ -18,7 +21,7 @@ interface Filtros {
 @Component({
   selector: 'app-bolsas-list',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, NgClass],
+  imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink],
   templateUrl: './bolsas-list.component.html',
   styleUrl: './bolsas-list.component.scss',
 })
@@ -63,7 +66,7 @@ export class BolsasListComponent implements OnInit {
   ngOnInit(): void {
   this.bolsaService.getBolsas().subscribe({
     next: (dados) => {
-      this.bolsas = Array.isArray(dados) ? dados : [];
+       this.bolsas = [...MOCK_BOLSAS];
       this.bolsasFiltradas = [...this.bolsas];
 
       this.instituicoes = [...new Set(this.bolsas.map((b:any) => b.instituicao))];

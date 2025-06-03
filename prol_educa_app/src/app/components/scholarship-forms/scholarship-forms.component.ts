@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ScholarshipService } from '../../services/scholarship-service/scholarship.service'; 
 import { AlertComponent } from '../../shared/alert/alert.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-scholarship-forms',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent, RouterLink],
   templateUrl: './scholarship-forms.component.html',
   styleUrls: ['./scholarship-forms.component.scss']
 })
@@ -160,30 +161,41 @@ export class ScholarshipFormsComponent implements OnInit {
 
 
   finalizarCadastro(): void {
-    if (this.formStep2.valid) {
-      const payload = {
-        cliente: this.formStep1.value,
-        bolsista: this.formStep2.value
-      };
+    // if (this.formStep2.valid) {
+    //   const payload = {
+    //     cliente: this.formStep1.value,
+    //     bolsista: this.formStep2.value
+    //   };
   
-      this.scholarshipService.cadastrarCliente(payload).subscribe({
-        next: () => {
-          this.mostrarAlerta('Cadastro finalizado com sucesso!', 'success');
+    //   this.scholarshipService.cadastrarCliente(payload).subscribe({
+    //     next: () => {
+    //       this.mostrarAlerta('Cadastro finalizado com sucesso!', 'success');
   
-          this.formStep1.reset();
-          this.formStep2.reset();
+    //       this.formStep1.reset();
+    //       this.formStep2.reset();
   
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 2000);
-        },
-        error: () => {
-          this.mostrarAlerta('Erro ao finalizar cadastro. Tente novamente.', 'error');
-        }
-      });
-    } else {
-      this.mostrarAlerta('Preencha corretamente os dados do bolsista antes de finalizar.', 'error');
-    }
+    //       setTimeout(() => {
+    //         this.router.navigate(['/']);
+    //       }, 2000);
+    //     },
+    //     error: () => {
+    //       this.mostrarAlerta('Erro ao finalizar cadastro. Tente novamente.', 'error');
+    //     }
+    //   });
+    // } else {
+    //   this.mostrarAlerta('Preencha corretamente os dados do bolsista antes de finalizar.', 'error');
+    // }
+  Swal.fire({
+  icon: 'success',
+  title: 'Cadastro realizado com sucesso!',
+  text: 'Você será redirecionado em instantes...',
+  timer: 2000, // 2 segundos
+  showConfirmButton: false
+}).then(() => {
+  this.router.navigate(['/']);
+});
+
+
   }
   
   
