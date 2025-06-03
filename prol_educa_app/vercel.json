@@ -1,8 +1,14 @@
 {
-  "routes": [
+  "buildCommand": "ng build",
+  "functions": {
+    "dist/prol_educa_app/server/server.mjs": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/(.*)",
+      "destination": "/api/ssr"
     }
   ]
 }
