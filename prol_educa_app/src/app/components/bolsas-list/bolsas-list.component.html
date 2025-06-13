@@ -266,13 +266,13 @@
           </div>
           <div class="discount rounded-pill">
             <p class="p-2 d-flex justify-content-center">
-              Bolsa de {{ bolsa.desconto }}%
+              Bolsa de {{ bolsa.desconto || "50" }}%
             </p>
           </div>
           <p class="color fw-bold text-decoration-line-through fs-6">
-            R${{ bolsa.precoOriginal }},00
+            R${{ bolsa.precoOriginal  || "500,00" }}/mês
           </p>
-          <p class="fs-6 fw-bold">R${{ bolsa.precoComDesconto }},00/mês</p>
+          <p class="fs-6 fw-bold">R${{ bolsa.precoComDesconto }}/mês</p>
           <div class="info-bolsa d-flex flex-row text-secondary">
             <p>Ano da Bolsa: {{ bolsa.ano }}</p>
             <p>Campos: {{ bolsa.cidade }}</p>
@@ -290,7 +290,7 @@
     </div>
 
     <!-- Paginação -->
-    <nav 
+    <nav
       *ngIf="bolsasFiltradas && bolsasFiltradas.length > 0"
       aria-label="Page navigation"
       class="mt-4 d-flex justify-content-center"
